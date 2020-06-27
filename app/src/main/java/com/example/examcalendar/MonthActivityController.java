@@ -1,56 +1,290 @@
 package com.example.examcalendar;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.text.Layout;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.GridView;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import java.time.Year;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.ListIterator;
 
 public class MonthActivityController extends Activity{
 
-    private GridView dayGridView;
+    private MonthActivityModel model;
+
+    private AutoGridView dayGridView;
     private MonthDayGridAdapter dayGridAdapter;
     private GridView weekGridView;
     private MonthWeekGridAdapter weekGridAdapter;
+    private TextView monthTextView, yearTextView;
+    private Button addExamButton, deleteExamButton, addHolidaysButton, deleteHolidaysButton;
+    private Button nextMonthButton, prevMonthButton;
+
+
+    //TODO Hacerlo en resources
+    private static final String[] MONTH_NAMES = {"Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
+            "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"};
+
+    private int year, month;
+    private int representedDays; //number of days that should be represented
+    private int dayOfStart; //1st day of the month
 
     @Override
     protected void onCreate(Bundle savedIntenceState) {
         super.onCreate(savedIntenceState);
         setContentView(R.layout.month_activity);
 
+        model = new MonthActivityModel(this);
+
+        weekGridView = (GridView) findViewById(R.id.WeeksGridView);
+        dayGridView = (AutoGridView) findViewById(R.id.DaysAutoGridView);
+        monthTextView = (TextView)  findViewById(R.id.textViewMonth);
+        yearTextView = (TextView) findViewById(R.id.textViewYear);
+        addExamButton = (Button) findViewById(R.id.bAddExam);
+        deleteExamButton = (Button) findViewById(R.id.bDeleteExam);
+        addHolidaysButton = (Button) findViewById(R.id.bAddHoliday);
+        deleteHolidaysButton = (Button) findViewById(R.id.bDeleteHoliday);
+        nextMonthButton = (Button) findViewById(R.id.bNextMonth);
+        prevMonthButton = (Button) findViewById(R.id.bPrevMonth);
+
+        year = getYear();
+        month = getMonth();
+        dayOfStart = getDayOfWeek(year, month); //The 1st day of the month is monday, tuesday...
+
+
+        drawUI();
+
+        //Set listeners
+        nextMonthButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                nextMonthPressed(view);
+            }
+        });
+        prevMonthButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                previousMonthPressed(view);
+            }
+        });
+
+        addExamButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                addExamPressed(view);
+            }
+        });
+
+         deleteExamButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                deleteExamPressed(view);
+            }
+        });
+
+         addHolidaysButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                addHolidaysPressed(view);
+            }
+        });
+
+        deleteHolidaysButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                deleteHolidaysPressed(view);
+            }
+        });
+
+
+
+    }
+
+    /**
+     * Method that draws the GUI
+     */
+    private void drawUI(){
+        monthTextView.setText(MONTH_NAMES[month]);
+        yearTextView.setText(String.valueOf(year));
+
+        //Number of days and weeks in current month
+        int numberOfDays = getDays(year,month);
+        int numberOfWeeks = getWeeks(year, month);
+
+        //Days to paint since its from Monday to Friday
+        representedDays = ((numberOfDays + dayOfStart) - (2 * numberOfWeeks));
+
+
+        //TODO contar las semanas desde el inicio del curso
         //Creates the list of weeks and inflates de weekGridView
         ArrayList<MonthWeekSquare> weekViews = new ArrayList<>();
         for(int i = 0; i<5; i++){
             MonthWeekSquare ws = new MonthWeekSquare(this,String.valueOf(i));
             weekViews.add(ws);
         }
-
-        weekGridView = (GridView) findViewById(R.id.WeeksGridView);
         weekGridAdapter = new MonthWeekGridAdapter(this, weekViews);
         weekGridView.setAdapter(weekGridAdapter);
 
 
         //Creates the list of days to display and
         //inflates the days grid view
-        ArrayList<MonthDaySquare> dayViews = new ArrayList<>();
-        for(int i = 0; i<20; i++) {
-            int type = 0; //TODO Obtener el tipo de dia
+        ArrayList<MonthDaySquare> dayViews = new ArrayList<>(31);
+        int dayToRepresent = 0;
+        for (int i = 1; (i <=representedDays+dayOfStart) && (dayToRepresent < numberOfDays); i++) { //From 1 to n
+        //for(int i = 0; i<representedDays+dayOfStart; i++) {
+            //The numbers skip 2 positions when it's Saturday or Sunday if i is in position of Friday
+            dayToRepresent++;
+            if(i<dayOfStart) dayToRepresent=0; //to avoid weeks where 1st day is not a Monday
+            if(dayOfStart==7 && i==6) dayToRepresent=2; //control when it starts on sunday
+
+            int type = MonthDaySquare.NORMAL; //TODO Obtener el tipo de dia
+            StringBuilder exam = new StringBuilder("");
+
+
+            String printingDate = new String(year+"-"+month+"-"+dayToRepresent);
+
+            //Checks if the day has any exam
+            ArrayList<String> examList = model.searchExam(printingDate);
+            if(!examList.isEmpty()){
+                ListIterator<String> itr = examList.listIterator();
+                //Add the first exam
+                exam.append(itr.next());
+                //If there are more, add all with a new lane
+                while(itr.hasNext()){
+                    exam.append("\n"+itr.next());
+                }
+                //Sets the day type to exam
+                type = MonthDaySquare.EXAM;
+            }
+
+            //Chechs if the day is holiday! :D
+            boolean isHoliday = model.searchHolidays(printingDate);
+            //If it's holiday, sets de dat type to it
+            if(isHoliday) type = MonthDaySquare.HOLIDAY;
 
             //TODO COMPARAR WIDTH DEL TEXTO CON EL WIDTH DEL CUADRADO Y SI ES MAS GRANDE HACER EL TEXTO MAS PEQUEÑO
-            //TODO de alguna forma averiguar el cuadrado mas grande para que todos sean iguales
-            MonthDaySquare ds = new MonthDaySquare(this, "Examen", String.valueOf(i), type);
-            if(i==5) ds = new MonthDaySquare(this, "HOY NO HAY EXAMEEEN", "Día", type);
-            if(i==13) ds = new MonthDaySquare(this, "", "Día", type);
+            MonthDaySquare ds = new MonthDaySquare(this, exam.toString(), String.valueOf(dayToRepresent), type);
             dayViews.add(ds);
-        }
 
-        /*
-        dayGridView = (GridView) findViewById(R.id.DaysGridview);
+            //Skip counting saturdays and sundays
+            if((i%5 == 0) && (i>=5)){
+                dayToRepresent +=2;
+            }
+        }//for
+
         dayGridAdapter = new MonthDayGridAdapter(this, dayViews);
         dayGridView.setAdapter(dayGridAdapter);
-        */
-        AutoGridView dayGridView = (AutoGridView) findViewById(R.id.DaysAutoGridView);
-        dayGridAdapter = new MonthDayGridAdapter(this, dayViews);
-        dayGridView.setAdapter(dayGridAdapter);
+    }
+
+    /*
+     * Button listeners
+     */
+
+    public void addExamPressed(View view){
+        Intent i = new Intent(this, DialogAddExam.class);
+        i.putExtra("month", Integer.toString(month));
+        i.putExtra("year", Integer.toString(year));
+        startActivity(i);
+    }
+    public void deleteExamPressed(View view){
+        Intent i = new Intent(this, DialogDeleteExam.class);
+        i.putExtra("month", Integer.toString(month));
+        i.putExtra("year", Integer.toString(year));
+        startActivity(i);
+    }
+    public void addHolidaysPressed(View view){
+        Intent i = new Intent(this, DialogAddHolidays.class);
+        i.putExtra("month", Integer.toString(month));
+        i.putExtra("year", Integer.toString(year));
+        startActivity(i);
+    }
+
+
+    public void deleteHolidaysPressed(View view){
+        Intent i = new Intent(this, DialogDeleteHolidays.class);
+        i.putExtra("month", Integer.toString(month));
+        i.putExtra("year", Integer.toString(year));
+        startActivity(i);
+    }
+
+    public void nextMonthPressed(View view){
+        month++;
+        if(month==12){
+            year++;
+            month=0;
+        }
+        dayOfStart = getDayOfWeek(year,month);
+        drawUI();
+    }
+    public void previousMonthPressed(View view){
+        if(month==0){
+            year--;
+            month=11;
+        }else{
+            month--;
+        }
+        dayOfStart = getDayOfWeek(year,month);
+        drawUI();
+    }
+
+
+
+    /*
+     * Help methods to calculate dates
+     */
+
+
+    //get number of days in current month
+    private  int getDays(int year, int month){
+        Calendar myCal = new GregorianCalendar(year, month, 1);
+        int numberOfDays = myCal.getActualMaximum(Calendar.DAY_OF_MONTH);
+        return numberOfDays;
+    }
+
+    //get number of weeks in current month
+    private int getWeeks(int year, int month){
+        Calendar myCal = new GregorianCalendar(year, month, 1);
+        myCal.setMinimalDaysInFirstWeek(1);
+        int weeks = myCal.getActualMaximum(Calendar.WEEK_OF_MONTH);
+        return weeks;
+    }
+
+    //get current year
+    private int getYear(){
+        Calendar myCal = Calendar.getInstance();
+        int year = myCal.get(Calendar.YEAR);
+        return year;
+    }
+
+    //get current month
+    private int getMonth(){
+        Calendar myCal = Calendar.getInstance();
+        int month = myCal.get(Calendar.MONTH);
+        return month;
+    }
+
+    //Get the first day of a week
+    private int getDayOfWeek(int year, int month){
+        Calendar myCal = Calendar.getInstance();
+        myCal.set(Calendar.MONTH, month);
+        myCal.set(Calendar.YEAR, year);
+        myCal.set(Calendar.DAY_OF_MONTH, 1);
+
+        Date firstDay = myCal.getTime();
+        int day = firstDay.getDay();
+        //int day = myCal.get(Calendar.DAY_OF_WEEK);
+        if(day==0)//If it's Sunday then it's the 7th day
+            day=7;
+        return day;
     }
 }

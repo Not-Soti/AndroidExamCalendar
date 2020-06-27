@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:custom="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/MonthActivityGlobalLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
-    android:orientation="horizontal">
+    android:orientation="vertical"
+    android:layout_marginTop="3dp"
+    android:layout_marginLeft="3dp"
+    android:layout_marginRight="3dp">
 
     <!--
     <com.example.examcalendar.DaySquare
@@ -16,21 +20,114 @@
         android:gravity="center"/>
     -->
 
-    <GridView
-        android:id="@+id/WeeksGridView"
-        android:layout_width="62dp"
-        android:layout_height="match_parent"
-        android:numColumns="1"
-        />
-
-    <view
-        android:id="@+id/DaysAutoGridView"
-        class="com.example.examcalendar.AutoGridView"
+    <LinearLayout
+        android:id="@+id/MonthInfoLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:numColumns="@integer/columnsOnDayGrid"
-        android:stretchMode="columnWidth"
-        />
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="0dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/bPrevMonth"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Prev" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textViewMonth"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="TextView" />
+
+            <TextView
+                android:id="@+id/textViewYear"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="TextView" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/bNextMonth"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Next" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/examButtonsLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/MonthInfoLayout"
+        android:layout_marginTop="1dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/bAddExam"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Add\nexam" />
+
+        <Button
+            android:id="@+id/bDeleteExam"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Delete\nExam" />
+
+        <Button
+            android:id="@+id/bAddHoliday"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Add\nholiday" />
+
+        <Button
+            android:id="@+id/bDeleteHoliday"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Delete\nHoliday" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/CalendarGridLayout"
+        android:layout_width="match_parent"
+        android:layout_height="583dp"
+        android:layout_below="@+id/examButtonsLayout"
+        android:layout_marginTop="1dp"
+        android:orientation="horizontal">
+
+        <GridView
+            android:id="@+id/WeeksGridView"
+            android:layout_width="62dp"
+            android:layout_height="match_parent"
+            android:numColumns="1">
+
+        </GridView>
+
+        <view
+            android:id="@+id/DaysAutoGridView"
+            class="com.example.examcalendar.AutoGridView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:numColumns="@integer/columnsOnDayGrid"
+            android:stretchMode="columnWidth" />
+    </LinearLayout>
 
     <!--
     <GridView
@@ -40,4 +137,4 @@
         android:numColumns="5" />
      -->
 
-</LinearLayout>
+</RelativeLayout>

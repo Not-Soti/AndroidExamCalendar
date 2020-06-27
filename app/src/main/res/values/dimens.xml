@@ -11,4 +11,6 @@
     <dimen name="heightMonthButtons">20dp</dimen>
     <dimen name="widthMonthButtons">10dp</dimen>
 
+    <dimen name="dialogMarginLeft">5dp</dimen>
+
 </resources>
