@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="widthButtonMain">150dp</dimen>
+    <dimen name="spaceBetweenMain">12dp</dimen>
+
+    <dimen name="monthLayout"></dimen>
+
+    <integer name="MonthCols">5</integer>
+
+    <dimen name="heightMonthButtons">20dp</dimen>
+    <dimen name="widthMonthButtons">10dp</dimen>
+
+</resources>

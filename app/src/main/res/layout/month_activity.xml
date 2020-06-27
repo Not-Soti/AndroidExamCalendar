@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="horizontal">
+
+    <!--
+    <com.example.examcalendar.DaySquare
+        android:id="@+id/DaySquarePrueba"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center"/>
+    -->
+
+    <GridView
+        android:id="@+id/WeeksGridView"
+        android:layout_width="62dp"
+        android:layout_height="match_parent"
+        android:numColumns="1"
+        />
+
+    <view
+        android:id="@+id/DaysAutoGridView"
+        class="com.example.examcalendar.AutoGridView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:numColumns="@integer/columnsOnDayGrid"
+        android:stretchMode="columnWidth"
+        />
+
+    <!--
+    <GridView
+        android:id="@+id/DaysGridview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:numColumns="5" />
+     -->
+
+</LinearLayout>

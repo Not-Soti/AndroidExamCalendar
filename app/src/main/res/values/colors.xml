@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#008577</color>
+    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorAccent">#D81B60</color>
+
+    <color name="WeekSquare">#FFB2A2</color>
+
+    <color name="NormalBg">#FFFFFF</color>
+    <color name="HolidayBg">#9600FA</color>
+    <color name="ExamBg">#7CFF89</color>
+    <color name="NormalTx">#000000</color>
+    <color name="HolidayTx">#470076</color>
+    <color name="ExamTx">#005208</color>
+</resources>
