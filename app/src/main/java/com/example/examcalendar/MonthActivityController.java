@@ -151,7 +151,7 @@ public class MonthActivityController extends Activity{
             if(i<dayOfStart) dayToRepresent=0; //to avoid weeks where 1st day is not a Monday
             if(dayOfStart==7 && i==6) dayToRepresent=2; //control when it starts on sunday
 
-            int type = MonthDaySquare.NORMAL; //TODO Obtener el tipo de dia
+            int type = MonthDaySquare.NORMAL;
             StringBuilder exam = new StringBuilder("");
 
             int auxMonth = month+1;
@@ -181,7 +181,7 @@ public class MonthActivityController extends Activity{
             }
 
             //Checks if the day is holiday! :D
-            boolean isHoliday = model.searchHolidays(printingDate, this); //todo remove this
+            boolean isHoliday = model.searchHolidays(printingDate);
             //If it's holiday, sets de dat type to it
             if(isHoliday){
                 type = MonthDaySquare.HOLIDAY;

@@ -111,21 +111,64 @@
 
         </GridView>
 
-        <view
-            android:id="@+id/DaysAutoGridView"
-            class="com.example.examcalendar.AutoGridView"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:numColumns="@integer/columnsOnDayGrid"
-            android:stretchMode="columnWidth" />
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/dayNamesGridLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/textViewMonday"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="L" />
+
+                <TextView
+                    android:id="@+id/textViewTuesday"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="M" />
+
+                <TextView
+                    android:id="@+id/textViewWednesday"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="X" />
+
+                <TextView
+                    android:id="@+id/textViewThursday"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="J" />
+
+                <TextView
+                    android:id="@+id/textViewFriday"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="V" />
+            </LinearLayout>
+
+            <view
+                android:id="@+id/DaysAutoGridView"
+                class="com.example.examcalendar.AutoGridView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:numColumns="@integer/columnsOnDayGrid"
+                android:stretchMode="columnWidth" />
+        </LinearLayout>
     </LinearLayout>
-
-    <!--
-    <GridView
-        android:id="@+id/DaysGridview"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:numColumns="5" />
-     -->
-
 </RelativeLayout>
