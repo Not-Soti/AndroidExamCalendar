@@ -78,6 +78,13 @@ public class MonthDaySquare extends LinearLayout {
         return ret;
     }
 
+    public TextView getExamNameTextView(){
+        return examNameTextView;
+    }
+    public TextView getDayTextView(){
+        return dayTextView;
+    }
+
     /**
      * Sets atributes for the exam name and the day
      */

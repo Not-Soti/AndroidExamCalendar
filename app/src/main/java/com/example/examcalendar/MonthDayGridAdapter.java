@@ -45,6 +45,14 @@ public class MonthDayGridAdapter extends BaseAdapter {
         //Get current item to be displayed
         MonthDaySquare ds = (MonthDaySquare) getItem(i);
         view = ds;
+
+        //Disable if the day is 0, which means it has not to be represented
+        String day = ds.getDayTextView().getText().toString();
+        if (day.isEmpty()){
+            ds.setEnabled(false);
+            ds.setBackgroundResource(0);
+        }
+
         return view;
     }
 }

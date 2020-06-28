@@ -11,15 +11,6 @@
     android:layout_marginLeft="3dp"
     android:layout_marginRight="3dp">
 
-    <!--
-    <com.example.examcalendar.DaySquare
-        android:id="@+id/DaySquarePrueba"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:gravity="center"/>
-    -->
-
     <LinearLayout
         android:id="@+id/MonthInfoLayout"
         android:layout_width="match_parent"

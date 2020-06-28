@@ -11,6 +11,8 @@ import android.widget.GridView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.Year;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -63,6 +65,8 @@ public class MonthActivityController extends Activity{
 
 
         drawUI();
+
+
 
         //Set listeners
         nextMonthButton.setOnClickListener(new View.OnClickListener() {
@@ -128,8 +132,8 @@ public class MonthActivityController extends Activity{
         //TODO contar las semanas desde el inicio del curso
         //Creates the list of weeks and inflates de weekGridView
         ArrayList<MonthWeekSquare> weekViews = new ArrayList<>();
-        for(int i = 0; i<5; i++){
-            MonthWeekSquare ws = new MonthWeekSquare(this,String.valueOf(i));
+        for(int i = 0; i<numberOfWeeks; i++){
+            MonthWeekSquare ws = new MonthWeekSquare(this,String.valueOf(i+1));
             weekViews.add(ws);
         }
         weekGridAdapter = new MonthWeekGridAdapter(this, weekViews);
@@ -150,11 +154,20 @@ public class MonthActivityController extends Activity{
             int type = MonthDaySquare.NORMAL; //TODO Obtener el tipo de dia
             StringBuilder exam = new StringBuilder("");
 
-
-            String printingDate = new String(year+"-"+month+"-"+dayToRepresent);
+            int auxMonth = month+1;
+            String printingDateAux = new String(year+"-"+auxMonth+"-"+dayToRepresent);
+            SimpleDateFormat oldFormat = new SimpleDateFormat("yyyy-M-d");
+            SimpleDateFormat newFormat = new SimpleDateFormat("yyyy-MM-dd");
+            String printingDate = null;
+            try{
+                printingDate = newFormat.format(oldFormat.parse(printingDateAux));
+            } catch (ParseException e){
+                e.printStackTrace();
+            }
 
             //Checks if the day has any exam
             ArrayList<String> examList = model.searchExam(printingDate);
+
             if(!examList.isEmpty()){
                 ListIterator<String> itr = examList.listIterator();
                 //Add the first exam
@@ -167,13 +180,17 @@ public class MonthActivityController extends Activity{
                 type = MonthDaySquare.EXAM;
             }
 
-            //Chechs if the day is holiday! :D
-            boolean isHoliday = model.searchHolidays(printingDate);
+            //Checks if the day is holiday! :D
+            boolean isHoliday = model.searchHolidays(printingDate, this); //todo remove this
             //If it's holiday, sets de dat type to it
-            if(isHoliday) type = MonthDaySquare.HOLIDAY;
+            if(isHoliday){
+                type = MonthDaySquare.HOLIDAY;
+
+            }
 
             //TODO COMPARAR WIDTH DEL TEXTO CON EL WIDTH DEL CUADRADO Y SI ES MAS GRANDE HACER EL TEXTO MAS PEQUEÑO
-            MonthDaySquare ds = new MonthDaySquare(this, exam.toString(), String.valueOf(dayToRepresent), type);
+            String dayToDraw = dayToRepresent == 0 ? "" : String.valueOf(dayToRepresent);
+            MonthDaySquare ds = new MonthDaySquare(this, exam.toString(), dayToDraw, type);
             dayViews.add(ds);
 
             //Skip counting saturdays and sundays
@@ -184,6 +201,7 @@ public class MonthActivityController extends Activity{
 
         dayGridAdapter = new MonthDayGridAdapter(this, dayViews);
         dayGridView.setAdapter(dayGridAdapter);
+
     }
 
     /*
@@ -192,19 +210,19 @@ public class MonthActivityController extends Activity{
 
     public void addExamPressed(View view){
         Intent i = new Intent(this, DialogAddExam.class);
-        i.putExtra("month", Integer.toString(month));
+        i.putExtra("month", Integer.toString(month+1));
         i.putExtra("year", Integer.toString(year));
         startActivity(i);
     }
     public void deleteExamPressed(View view){
         Intent i = new Intent(this, DialogDeleteExam.class);
-        i.putExtra("month", Integer.toString(month));
+        i.putExtra("month", Integer.toString(month+1));
         i.putExtra("year", Integer.toString(year));
         startActivity(i);
     }
     public void addHolidaysPressed(View view){
         Intent i = new Intent(this, DialogAddHolidays.class);
-        i.putExtra("month", Integer.toString(month));
+        i.putExtra("month", Integer.toString(month+1));
         i.putExtra("year", Integer.toString(year));
         startActivity(i);
     }
@@ -212,7 +230,7 @@ public class MonthActivityController extends Activity{
 
     public void deleteHolidaysPressed(View view){
         Intent i = new Intent(this, DialogDeleteHolidays.class);
-        i.putExtra("month", Integer.toString(month));
+        i.putExtra("month", Integer.toString(month+1));
         i.putExtra("year", Integer.toString(year));
         startActivity(i);
     }
