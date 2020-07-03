@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"
+    tools:context=".MainActivity.MainActivity"
     >
 
     <LinearLayout
@@ -13,16 +13,6 @@
         android:orientation="vertical"
         tools:layout_editor_absoluteX="310dp"
         android:gravity="center">
-
-        <Button
-            android:id="@+id/bWeek"
-            android:layout_width="@dimen/widthButtonMain"
-            android:layout_height="wrap_content"
-            android:text="Week" />
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/spaceBetweenMain" />
 
         <Button
             android:id="@+id/bMonth"
@@ -36,9 +26,21 @@
             android:layout_height="@dimen/spaceBetweenMain" />
 
         <Button
+            android:id="@+id/bWeek"
+            android:layout_width="@dimen/widthButtonMain"
+            android:layout_height="wrap_content"
+            android:onClick="startWeekActivity"
+            android:text="No pulsar" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/spaceBetweenMain" />
+
+        <Button
             android:id="@+id/bConfig"
             android:layout_width="@dimen/widthButtonMain"
             android:layout_height="wrap_content"
+            android:onClick="startConfigurationActivity"
             android:text="Configuration" />
 
     </LinearLayout>

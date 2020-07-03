@@ -1,19 +1,19 @@
-package com.example.examcalendar;
+package com.example.examcalendar.MonthActivity;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.Layout;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.GridView;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import com.example.examcalendar.HelpClasses.AutoGridView;
+import com.example.examcalendar.MainActivity.MainActivity;
+import com.example.examcalendar.R;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.Year;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -109,8 +109,6 @@ public class MonthActivityController extends Activity{
                 deleteHolidaysPressed(view);
             }
         });
-
-
 
     }
 
@@ -208,6 +206,11 @@ public class MonthActivityController extends Activity{
      * Button listeners
      */
 
+    @Override
+    public void onBackPressed(){
+        startActivity(new Intent(this, MainActivity.class));
+    }
+
     public void addExamPressed(View view){
         Intent i = new Intent(this, DialogAddExam.class);
         i.putExtra("month", Integer.toString(month+1));
@@ -226,8 +229,6 @@ public class MonthActivityController extends Activity{
         i.putExtra("year", Integer.toString(year));
         startActivity(i);
     }
-
-
     public void deleteHolidaysPressed(View view){
         Intent i = new Intent(this, DialogDeleteHolidays.class);
         i.putExtra("month", Integer.toString(month+1));
@@ -260,7 +261,6 @@ public class MonthActivityController extends Activity{
     /*
      * Help methods to calculate dates
      */
-
 
     //get number of days in current month
     private  int getDays(int year, int month){

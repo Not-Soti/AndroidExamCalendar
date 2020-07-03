@@ -9,7 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name=".MainActivity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -17,11 +17,13 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".MonthActivityController"/>
-        <activity android:name=".DialogAddExam"/>
-        <activity android:name=".DialogDeleteExam"/>
-        <activity android:name=".DialogAddHolidays"/>
-        <activity android:name=".DialogDeleteHolidays"/>
+        <activity android:name=".MonthActivity.MonthActivityController"/>
+        <activity android:name=".MonthActivity.DialogAddExam"/>
+        <activity android:name=".MonthActivity.DialogDeleteExam"/>
+        <activity android:name=".MonthActivity.DialogAddHolidays"/>
+        <activity android:name=".MonthActivity.DialogDeleteHolidays"/>
+        <activity android:name=".ConfigurationActivity.ConfigurationActivityController"/>
+        <activity android:name=".WeekActivity.WeekActivityController"/>
 
     </application>
 

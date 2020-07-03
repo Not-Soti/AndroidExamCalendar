@@ -1,4 +1,4 @@
-package com.example.examcalendar;
+package com.example.examcalendar.HelpClasses;
 
 /*
  *  Class that solves the overlapping with the grid veiw items

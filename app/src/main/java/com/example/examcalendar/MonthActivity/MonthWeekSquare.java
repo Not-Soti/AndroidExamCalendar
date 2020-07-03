@@ -1,7 +1,6 @@
-package com.example.examcalendar;
+package com.example.examcalendar.MonthActivity;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
@@ -9,6 +8,9 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
+
+import com.example.examcalendar.MonthActivity.MonthActivityController;
+import com.example.examcalendar.R;
 
 
 public class MonthWeekSquare extends LinearLayout {

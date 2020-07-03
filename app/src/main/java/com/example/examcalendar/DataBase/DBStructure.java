@@ -1,4 +1,4 @@
-package com.example.examcalendar;
+package com.example.examcalendar.DataBase;
 
 public class DBStructure {
 

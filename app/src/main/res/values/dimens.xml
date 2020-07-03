@@ -7,9 +7,9 @@
     <dimen name="monthLayout"></dimen>
 
     <integer name="MonthCols">5</integer>
-
     <dimen name="heightMonthButtons">20dp</dimen>
     <dimen name="widthMonthButtons">10dp</dimen>
+    <dimen name="weekSquaresWidth">62dp</dimen>
 
     <dimen name="dialogMarginLeft">5dp</dimen>
 

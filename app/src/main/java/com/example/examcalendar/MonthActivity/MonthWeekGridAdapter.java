@@ -1,4 +1,4 @@
-package com.example.examcalendar;
+package com.example.examcalendar.MonthActivity;
 
 import android.app.Activity;
 import android.content.Context;
@@ -6,6 +6,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+
+import com.example.examcalendar.R;
 
 import java.util.ArrayList;
 
