@@ -43,6 +43,11 @@ public class DialogAddHolidays extends Activity {
         startYearEditText = (EditText) findViewById(R.id.textAddHolidayStartYear);
         endYearEditText = (EditText) findViewById(R.id.textAddHolidayEndYear);
 
+        String dayAux = bundle.getString("day");
+        if(dayAux!=null){
+            startDayEditText.setText(dayAux);
+            endDayEditText.setText(dayAux);
+        }
         startYearEditText.setText(bundle.getString("year"));
         startMonthEditText.setText(bundle.getString("month"));
         endYearEditText.setText(bundle.getString("year"));

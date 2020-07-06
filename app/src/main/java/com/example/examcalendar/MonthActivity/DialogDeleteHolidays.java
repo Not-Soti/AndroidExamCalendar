@@ -42,6 +42,11 @@ public class DialogDeleteHolidays extends Activity {
         startYearEditText = (EditText) findViewById(R.id.textDelHolidayStartYear);
         endYearEditText = (EditText) findViewById(R.id.textDelHolidayEndYear);
 
+        String dayAux = bundle.getString("day");
+        if(dayAux!=null){
+            startDayEditText.setText(dayAux);
+            endDayEditText.setText(dayAux);
+        }
         startYearEditText.setText(bundle.getString("year"));
         startMonthEditText.setText(bundle.getString("month"));
         endYearEditText.setText(bundle.getString("year"));

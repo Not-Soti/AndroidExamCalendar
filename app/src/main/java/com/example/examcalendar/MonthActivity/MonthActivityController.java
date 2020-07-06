@@ -39,7 +39,7 @@ public class MonthActivityController extends Activity{
     private static final String[] MONTH_NAMES = {"Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
             "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"};
 
-    private int year, month, day;
+    private int year, month;
     private int representedDays; //number of days that should be represented
     private int dayOfStart; //1st day of the month
 
@@ -65,10 +65,7 @@ public class MonthActivityController extends Activity{
         month = getMonth();
         dayOfStart = getDayOfWeek(year, month); //The 1st day of the month is monday, tuesday...
 
-
         drawUI();
-
-
 
         //Set listeners
         nextMonthButton.setOnClickListener(new View.OnClickListener() {
@@ -185,53 +182,14 @@ public class MonthActivityController extends Activity{
             //If it's holiday, sets de dat type to it
             if(isHoliday){
                 type = MonthDaySquare.HOLIDAY;
-
             }
 
             //TODO COMPARAR WIDTH DEL TEXTO CON EL WIDTH DEL CUADRADO Y SI ES MAS GRANDE HACER EL TEXTO MAS PEQUEÑO
             String dayToDraw = dayToRepresent == 0 ? "" : String.valueOf(dayToRepresent);
             MonthDaySquare ds = new MonthDaySquare(this, exam.toString(), dayToDraw, type);
-            /*
-                Adding a click listener to de MonthDaySquare to open the popupMenu
-             */
-            final int finalDayToRepresent = dayToRepresent; // neded to add the day to the intent bundle
-            ds.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    //Creating the instance of PopupMenu
-                    PopupMenu popup = new PopupMenu(MonthActivityController.this, view);
-                    //Inflate the popup xml file
-                    popup.getMenuInflater().inflate(R.menu.month_cell_popup_menu, popup.getMenu());
 
-                    //registering actions on clicking the menu items
-                    popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-                        @Override
-                        public boolean onMenuItemClick(MenuItem menuItem) {
-                            switch (menuItem.getItemId()){
-                                case R.id.addExamPopupMenu:
-                                    Intent i = new Intent(MonthActivityController.this, DialogAddExam.class);
-                                    i.putExtra("day", Integer.toString(finalDayToRepresent));
-                                    i.putExtra("month", Integer.toString(month+1));
-                                    i.putExtra("year", Integer.toString(year));
-                                    startActivity(i);
-                                    return true;
-                                case R.id.deleteExamPopupMenu:
-                                    Intent j = new Intent(MonthActivityController.this, DialogDeleteExam.class);
-                                    j.putExtra("day", Integer.toString(finalDayToRepresent));
-                                    j.putExtra("month", Integer.toString(month+1));
-                                    j.putExtra("year", Integer.toString(year));
-                                    startActivity(j);
-                                    return  true;
-                                default:
-                                    return false;
-                            }
-
-                        }
-                    }); // menu click listener
-                    popup.show();
-                }
-            });//Set on click listener
-
+            //Adding a click listener to de MonthDaySquare to open the popupMenu
+            setDaySquareListener(ds, dayToRepresent);
             dayViews.add(ds);
 
             //Skip counting saturdays and sundays
@@ -239,10 +197,8 @@ public class MonthActivityController extends Activity{
                 dayToRepresent +=2;
             }
         }//for
-
         dayGridAdapter = new MonthDayGridAdapter(this, dayViews);
         dayGridView.setAdapter(dayGridAdapter);
-
     }
 
     /*
@@ -299,7 +255,60 @@ public class MonthActivityController extends Activity{
         drawUI();
     }
 
+    private void setDaySquareListener(MonthDaySquare ds, int dayToRepresent){
+        final int finalDayToRepresent = dayToRepresent;
+        ds.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //Creating the instance of PopupMenu
+                PopupMenu popup = new PopupMenu(MonthActivityController.this, view);
+                //Inflate the popup xml file
+                popup.getMenuInflater().inflate(R.menu.month_cell_popup_menu, popup.getMenu());
 
+                //registering actions on clicking the menu items
+                popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem menuItem) {
+                        Intent i;
+                        switch (menuItem.getItemId()){
+                            case R.id.addExamPopupMenu:
+                                i = new Intent(MonthActivityController.this, DialogAddExam.class);
+                                i.putExtra("day", Integer.toString(finalDayToRepresent));
+                                i.putExtra("month", Integer.toString(month+1));
+                                i.putExtra("year", Integer.toString(year));
+                                startActivity(i);
+                                return true;
+                            case R.id.deleteExamPopupMenu:
+                                i = new Intent(MonthActivityController.this, DialogDeleteExam.class);
+                                i.putExtra("day", Integer.toString(finalDayToRepresent));
+                                i.putExtra("month", Integer.toString(month+1));
+                                i.putExtra("year", Integer.toString(year));
+                                startActivity(i);
+                                return true;
+                            case R.id.addHolidaysPopupMenu:
+                                i = new Intent(MonthActivityController.this, DialogAddHolidays.class);
+                                i.putExtra("day", Integer.toString(finalDayToRepresent));
+                                i.putExtra("month", Integer.toString(month+1));
+                                i.putExtra("year", Integer.toString(year));
+                                startActivity(i);
+                                return true;
+                            case R.id.deleteHolidaysPopupMenu:
+                                i = new Intent(MonthActivityController.this, DialogDeleteHolidays.class);
+                                i.putExtra("day", Integer.toString(finalDayToRepresent));
+                                i.putExtra("month", Integer.toString(month+1));
+                                i.putExtra("year", Integer.toString(year));
+                                startActivity(i);
+                                return true;
+                            default:
+                                return false;
+                        }
+
+                    }
+                }); // menu click listener
+                popup.show();
+            }
+        });
+    }
 
     /*
      * Help methods to calculate dates

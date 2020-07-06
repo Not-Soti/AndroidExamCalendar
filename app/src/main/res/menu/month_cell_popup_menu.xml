@@ -13,4 +13,8 @@
     <item
         android:id="@+id/addHolidaysPopupMenu"
         android:title="Añadir vacaciones" />
+
+    <item
+        android:id="@+id/deleteHolidaysPopupMenu"
+        android:title="Eliminar vacaciones" />
 </menu>
