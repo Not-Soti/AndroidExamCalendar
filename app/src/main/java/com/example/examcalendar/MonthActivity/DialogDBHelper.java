@@ -30,6 +30,55 @@ public class DialogDBHelper {
     }
 
     /**
+     * Method to get exams existing in a determined day
+     */
+    public ArrayList<String> getExistingExams(String date){
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+        ArrayList<String> exams = new ArrayList<>(3);
+
+        // Define a projection that specifies which columns from the database
+        // you will actually use after this query.
+        String[] projection = {
+                DBStructure.COLUMN_NAME_EXAMS //name
+        };
+
+        // Filter results WHERE "title" = 'My Title'
+        String selection = DBStructure.COLUMN_DATE_EXAMS + "= ?";
+        String[] selectionArgs = {date};
+
+        // How you want the results sorted in the resulting Cursor
+        // String sortOrder = FeedEntry.COLUMN_NAME_SUBTITLE + " DESC";
+        try {
+            Cursor cursor = db.query(
+                    DBStructure.TABLE_NAME_EXAMS,   // The table to query
+                    projection,             // The array of columns to return (pass null to get all)
+                    selection,              // The columns for the WHERE clause
+                    selectionArgs,          // The values for the WHERE clause
+                    null,                   // don't group the rows
+                    null,                   // don't filter by row groups
+                    null              // The sort order
+            );
+
+            //Adding results to the exams list
+            if(cursor.moveToFirst()) {
+                do {
+                    exams.add(cursor.getString(0));
+                    Log.println(Log.DEBUG,"CURSOR CAP",String.valueOf(exams.size()));
+                } while (cursor.moveToNext());
+            }
+            cursor.close();
+        }catch (Exception e){
+            e.printStackTrace();
+            //exam=null;
+            exams=null;
+
+        }finally {
+            db.close();
+            return exams;
+        }
+    }
+
+    /**
      * Method to add a holiday range to the DB
      */
     public void addHolidays(String startDate, String endDate){

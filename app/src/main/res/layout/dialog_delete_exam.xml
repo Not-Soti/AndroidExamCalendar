@@ -12,18 +12,14 @@
     android:orientation="vertical"
     android:gravity="center">
 
-    <TextView
-        android:id="@+id/textView11"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Nombre" />
-
+    <!--
     <EditText
         android:id="@+id/textDeleteExamName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="textPersonName" />
+    -->
 
     <TextView
         android:id="@+id/textView8"
@@ -63,6 +59,17 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="number" />
+
+    <TextView
+        android:id="@+id/textView11"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Exámenes programados" />
+
+    <ListView
+        android:id="@+id/listDeleteExamNames"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
     <Button
         android:id="@+id/buttonAcceptDeleteExam"

@@ -215,8 +215,12 @@ public class MonthActivityController extends Activity{
                                     i.putExtra("year", Integer.toString(year));
                                     startActivity(i);
                                     return true;
-                                case R.id.addHolidaysPopupMenu:
-
+                                case R.id.deleteExamPopupMenu:
+                                    Intent j = new Intent(MonthActivityController.this, DialogDeleteExam.class);
+                                    j.putExtra("day", Integer.toString(finalDayToRepresent));
+                                    j.putExtra("month", Integer.toString(month+1));
+                                    j.putExtra("year", Integer.toString(year));
+                                    startActivity(j);
                                     return  true;
                                 default:
                                     return false;

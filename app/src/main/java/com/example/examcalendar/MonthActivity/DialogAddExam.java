@@ -21,6 +21,7 @@ public class DialogAddExam extends Activity {
     private Button accept;
     private EditText dayEditText,monthEditText,yearEditText,nameEditText;
 
+
     DialogDBHelper model;
 
     @Override

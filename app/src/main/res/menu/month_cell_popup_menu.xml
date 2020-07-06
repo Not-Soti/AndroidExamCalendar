@@ -6,6 +6,9 @@
     <item
         android:id="@+id/addExamPopupMenu"
         android:title="Añadir examen" />
+    <item
+        android:id="@+id/deleteExamPopupMenu"
+        android:title="Eliminar examen" />
 
     <item
         android:id="@+id/addHolidaysPopupMenu"
