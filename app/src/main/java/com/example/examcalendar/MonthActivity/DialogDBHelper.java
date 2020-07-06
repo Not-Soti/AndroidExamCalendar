@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
+
 /**
  * Class made to act as the model for adding/deleting exams/holidays dialogs
  */
@@ -120,15 +121,26 @@ public class DialogDBHelper {
                 newEndDateString = formatter.format(cal.getTime());
                 this.addHolidays(newEndDateString, oldEndString);
             }else
-                if((newStartDate.before(oldStartDate)) && (newEndDate.after(oldEndDate)))
-                { //Case 2- newStart before oldStart AND newEnd after oldEnd: delete the old range
+                if( ((newStartDate.before(oldStartDate)) && (newEndDate.after(oldEndDate))) ||
+                        ((newStartDate.equals(oldStartDate))&&(newEndDate.equals(oldEndDate))) ||
+                        ((newStartDate.equals(oldStartDate))&&(newEndDate.after(oldEndDate))) ||
+                        ((newStartDate.before(oldStartDate))&&(newEndDate.equals(oldEndDate))))
+                { /*Case 2- newStart before oldStart AND newEnd after oldEnd: delete the old range
+                    Case 2.1- newStart == oldStart AND newEnd == oldEnd: same as case 2
+                    Case 2.2- newStart == oldStart AND newEnd after oldEnd: same as case 2
+                    Case 2.3- newStart before oldStart AND newEnd == oldEnd: same as case 2
+                  */
                 this.deleteHolidays(oldStartString, oldEndString);
                 }else
-                    if ((newStartDate.before(oldStartDate)) && (newEndDate.before(oldEndDate)))
+                    if (((newStartDate.before(oldStartDate)) && (newEndDate.before(oldEndDate))) ||
+                            ((newStartDate.equals(oldStartDate)) && (newEndDate.before(oldEndDate))))
                     {
                         /*Case 3- newStart before oldStart AND newEnd before oldEnd
                             1) Delete from oldStart to newEnd
                             2) insert new range from newEnd+1 to oldEnd
+
+                          Case 3.1- newStart and oldStart are the same day
+                            Same as case 3
                          */
                         this.deleteHolidays(oldStartString, newEndDateString);
                         //a 1 day to newEnd
@@ -137,11 +149,15 @@ public class DialogDBHelper {
                         newEndDateString = formatter.format(cal.getTime());
                         this.addHolidays(newEndDateString, oldEndString);
                     } else
-                        if ((newStartDate.after(oldStartDate)) && (oldEndDate.before(newEndDate)))
+                        if (((newStartDate.after(oldStartDate)) && (oldEndDate.before(newEndDate))) ||
+                                ((newStartDate.after(oldStartDate)) && (newEndDate.equals(oldEndDate))))
                         {
                             /*Case 4- newStart after oldStart AND newEnd after oldEnd
                                 1) Delete from newStart to oldEnd
                                 2) insert new range from oldStart to newStart-1
+
+                              Case 4.1- newEnd and oldend are the same day
+                                Same as case 4
                              */
                             this.deleteHolidays(newStartDateString, oldEndString);
                             //substracting 1 day to newStart

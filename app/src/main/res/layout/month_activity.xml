@@ -108,6 +108,7 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
+            <!--
             <TextView
                 android:id="@+id/textView19"
                 android:layout_width="@dimen/weekSquaresWidth"
@@ -120,8 +121,9 @@
                 android:layout_width="@dimen/weekSquaresWidth"
                 android:layout_height="match_parent"
                 android:numColumns="1">
-
             </GridView>
+            -->
+
         </LinearLayout>
 
         <LinearLayout

@@ -27,7 +27,7 @@ public class MonthActivityController extends Activity{
     private AutoGridView dayGridView;
     private MonthDayGridAdapter dayGridAdapter;
     private GridView weekGridView;
-    private MonthWeekGridAdapter weekGridAdapter;
+    //private MonthWeekGridAdapter weekGridAdapter;
     private TextView monthTextView, yearTextView;
     private Button addExamButton, deleteExamButton, addHolidaysButton, deleteHolidaysButton;
     private Button nextMonthButton, prevMonthButton;
@@ -48,7 +48,7 @@ public class MonthActivityController extends Activity{
 
         model = new MonthActivityModel(this);
 
-        weekGridView = (GridView) findViewById(R.id.WeeksGridView);
+        //weekGridView = (GridView) findViewById(R.id.WeeksGridView);
         dayGridView = (AutoGridView) findViewById(R.id.DaysAutoGridView);
         monthTextView = (TextView)  findViewById(R.id.textViewMonth);
         yearTextView = (TextView) findViewById(R.id.textViewYear);
@@ -126,7 +126,7 @@ public class MonthActivityController extends Activity{
         //Days to paint since its from Monday to Friday
         representedDays = ((numberOfDays + dayOfStart) - (2 * numberOfWeeks));
 
-
+/*
         //TODO contar las semanas desde el inicio del curso
         //Creates the list of weeks and inflates de weekGridView
         ArrayList<MonthWeekSquare> weekViews = new ArrayList<>();
@@ -136,7 +136,7 @@ public class MonthActivityController extends Activity{
         }
         weekGridAdapter = new MonthWeekGridAdapter(this, weekViews);
         weekGridView.setAdapter(weekGridAdapter);
-
+*/
 
         //Creates the list of days to display and
         //inflates the days grid view
