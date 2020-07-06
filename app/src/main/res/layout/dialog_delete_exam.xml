@@ -9,7 +9,7 @@
     android:layout_marginBottom="5dp"
     android:layout_marginLeft="55dp"
     android:layout_marginRight="55dp"
-    android:orientation="vertical"
+    android:orientation="horizontal"
     android:gravity="center">
 
     <!--
@@ -21,63 +21,70 @@
         android:inputType="textPersonName" />
     -->
 
-    <TextView
-        android:id="@+id/textView8"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Día" />
+        android:orientation="vertical">
 
-    <EditText
-        android:id="@+id/textDeleteExamDay"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="number" />
+        <TextView
+            android:id="@+id/textView8"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Día" />
 
-    <TextView
-        android:id="@+id/textView9"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Mes" />
+        <EditText
+            android:id="@+id/textDeleteExamDay"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="number" />
 
-    <EditText
-        android:id="@+id/textDeleteExamMonth"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="number" />
+        <TextView
+            android:id="@+id/textView9"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Mes" />
 
-    <TextView
-        android:id="@+id/textView10"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Año" />
+        <EditText
+            android:id="@+id/textDeleteExamMonth"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="number" />
 
-    <EditText
-        android:id="@+id/textDeleteExamYear"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="number" />
+        <TextView
+            android:id="@+id/textView10"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Año" />
 
-    <TextView
-        android:id="@+id/textView11"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Exámenes programados" />
+        <EditText
+            android:id="@+id/textDeleteExamYear"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="number" />
 
-    <ListView
-        android:id="@+id/listDeleteExamNames"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        <ListView
+            android:id="@+id/listDeleteExamNames"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
-    <Button
-        android:id="@+id/buttonAcceptDeleteExam"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="bottom|center"
-        android:onClick="acceptExam"
-        android:text="Aceptar" />
+        <TextView
+            android:id="@+id/textView11"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Lista de exámenes programados" />
+
+        <Button
+            android:id="@+id/buttonAcceptDeleteExam"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="bottom|center"
+            android:onClick="acceptExam"
+            android:text="Aceptar" />
+
+    </LinearLayout>
 
 
 </LinearLayout>
