@@ -3,12 +3,17 @@ package com.example.examcalendar.MonthActivity;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 
 import com.example.examcalendar.R;
+
+/**
+ * Class that draws a cell of the MonthActivity grid and its components
+ */
 
 public class MonthDaySquare extends LinearLayout {
 
@@ -86,6 +91,11 @@ public class MonthDaySquare extends LinearLayout {
     public TextView getDayTextView(){
         return dayTextView;
     }
+
+    /**
+     * Overriding the click listener to open a popup menu
+     */
+
 
     /**
      * Sets atributes for the exam name and the day

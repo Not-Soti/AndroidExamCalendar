@@ -37,6 +37,10 @@ public class DialogAddExam extends Activity {
         yearEditText = (EditText) findViewById(R.id.textAddExamYear);
         nameEditText = (EditText) findViewById(R.id.textAddExamName);
 
+        String dayAux = bundle.getString("day");
+        if(dayAux!=null){
+            dayEditText.setText(dayAux);
+        }
         monthEditText.setText(bundle.getString("month"));
         yearEditText.setText(bundle.getString("year"));
 
