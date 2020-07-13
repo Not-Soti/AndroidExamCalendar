@@ -2,6 +2,7 @@ package com.example.examcalendar.MonthActivity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Canvas;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -201,6 +202,8 @@ public class MonthActivityController extends Activity{
         dayGridView.setAdapter(dayGridAdapter);
     }
 
+
+
     /*
      * Button listeners
      */
@@ -273,6 +276,13 @@ public class MonthActivityController extends Activity{
                         switch (menuItem.getItemId()){
                             case R.id.addExamPopupMenu:
                                 i = new Intent(MonthActivityController.this, DialogAddExam.class);
+                                i.putExtra("day", Integer.toString(finalDayToRepresent));
+                                i.putExtra("month", Integer.toString(month+1));
+                                i.putExtra("year", Integer.toString(year));
+                                startActivity(i);
+                                return true;
+                            case R.id.editExamPopupMenu:
+                                i = new Intent(MonthActivityController.this, DialogEditExam.class);
                                 i.putExtra("day", Integer.toString(finalDayToRepresent));
                                 i.putExtra("month", Integer.toString(month+1));
                                 i.putExtra("year", Integer.toString(year));

@@ -11,8 +11,9 @@
         android:id="@+id/ExamNameText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:freezesText="true"
         android:gravity="center"
-        android:textSize="24dp" />
+        android:textSize="@dimen/examTextSizeMonthGrid" />
 
     <TextView
         android:id="@+id/DayText"
@@ -21,5 +22,5 @@
         android:layout_below="@+id/ExamNameText"
         android:layout_marginTop="1dp"
         android:gravity="right"
-        android:textSize="12dp" />
+        android:textSize="@dimen/dayTextSizeMonthGrid" />
 </RelativeLayout>

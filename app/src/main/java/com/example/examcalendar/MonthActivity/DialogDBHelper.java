@@ -267,7 +267,6 @@ public class DialogDBHelper {
     }
 
     /**
-     *
      * Method to get holidays existing that somehow overlap startDate - endDate gap
      */
     private ArrayList<ExistingHolidaysDate> getExistingHolidays(String startDate, String endDate){
@@ -324,6 +323,30 @@ public class DialogDBHelper {
             db.close();
             return holidays;
         }
+    }
+
+    /**
+     * Method to edit an existing exam
+     */
+    public void editExam(String newName, String newDate, String oldName, String oldDate){
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+
+        // New value for one column
+        String title = "MyNewTitle";
+        ContentValues values = new ContentValues();
+        values.put(DBStructure.COLUMN_NAME_EXAMS, newName);
+        values.put(DBStructure.COLUMN_DATE_EXAMS, newDate);
+
+        // Which row to update, based on the title
+        String selection = DBStructure.COLUMN_NAME_EXAMS + " LIKE ? AND " +
+                DBStructure.COLUMN_DATE_EXAMS + " = ?;";
+        String[] selectionArgs = {oldName, oldDate};
+
+        int count = db.update(
+                DBStructure.TABLE_NAME_EXAMS,
+                values,
+                selection,
+                selectionArgs);
     }
 
     //Inner class used to operate when adding and deleting holidays.

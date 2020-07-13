@@ -1,7 +1,9 @@
 package com.example.examcalendar.MonthActivity;
 
 import android.content.Context;
+import android.graphics.Canvas;
 import android.util.AttributeSet;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -84,6 +86,15 @@ public class MonthDaySquare extends LinearLayout {
         }
         return ret;
     }
+
+    /*
+    @Override
+    protected void onDraw(Canvas canvas){
+        super.onDraw(canvas);
+        float textSize = getResources().getDimension(R.dimen.examTextSizeMonthGrid);
+        examNameTextView.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize);
+    }
+    */
 
     public TextView getExamNameTextView(){
         return examNameTextView;
