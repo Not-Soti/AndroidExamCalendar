@@ -10,7 +10,8 @@
     <dimen name="heightMonthButtons">20dp</dimen>
     <dimen name="widthMonthButtons">10dp</dimen>
     <dimen name="weekSquaresWidth">62dp</dimen>
-    <dimen name="examTextSizeMonthGrid">24sp</dimen>
+    <dimen name="dayCellsMinHeight">48dp</dimen>
+    <dimen name="examTextSizeMonthGrid">8sp</dimen>
     <dimen name="dayTextSizeMonthGrid">12sp</dimen>
 
     <dimen name="dialogMarginLeft">5dp</dimen>

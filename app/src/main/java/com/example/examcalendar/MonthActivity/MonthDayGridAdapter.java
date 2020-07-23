@@ -39,7 +39,7 @@ public class MonthDayGridAdapter extends BaseAdapter {
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
         if(view==null){
-            //Inflate the layour
+            //Inflate the layout
             LayoutInflater inf = ((Activity) context).getLayoutInflater();
             view = inf.inflate(R.layout.month_activity,viewGroup, false);
         }

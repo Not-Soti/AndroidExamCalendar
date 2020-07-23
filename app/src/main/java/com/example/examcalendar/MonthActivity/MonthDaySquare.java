@@ -47,6 +47,8 @@ public class MonthDaySquare extends LinearLayout {
     public static final int EXAM = 1;
     public static final int HOLIDAY = 2;
 
+    private float textSize; //text size from the resources
+
     public MonthDaySquare(Context context) {
         super(context);
         this.context = context;
@@ -61,6 +63,8 @@ public class MonthDaySquare extends LinearLayout {
         this.type = type;
         this.month = month;
         this.year = year;
+
+        textSize = getResources().getDimension(R.dimen.examTextSizeMonthGrid);
 
         initializeViews(context);
     }
@@ -99,11 +103,15 @@ public class MonthDaySquare extends LinearLayout {
         for(String exam : examListStr){
             //TextView examView = new TextView(context);
             AutofitTextView examView = new AutofitTextView(context); //Class from the maven repo
-            examView.setMaxTextSize(TypedValue.COMPLEX_UNIT_SP, 24);
-            //examView.setMinTextSize(10);
+
+
+            examView.setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize);
+            examView.setMaxTextSize(TypedValue.COMPLEX_UNIT_SP, textSize);
+            int minTextSize = (int)(24*75/100); //75% of the value
+            examView.setMinTextSize(minTextSize);
 
             examView.setLayoutParams(new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-            examView.setMaxLines(1);
+            examView.setMaxLines(2);
             examView.setText(exam);
 
             examNameLinearLayout.addView(examView);

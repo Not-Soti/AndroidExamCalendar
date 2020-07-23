@@ -177,13 +177,25 @@
                     android:text="V" />
             </LinearLayout>
 
+
             <view
                 android:id="@+id/DaysAutoGridView"
                 class="com.example.examcalendar.HelpClasses.AutoGridView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:numColumns="@integer/columnsOnDayGrid"
-                android:stretchMode="columnWidth" />
+                android:stretchMode="columnWidth"
+                />
+
+
+            <GridView
+                android:id="@+id/DaysGridView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:numColumns="@integer/columnsOnDayGrid"
+                android:stretchMode="columnWidth"
+                />
+
         </LinearLayout>
     </LinearLayout>
 </RelativeLayout>

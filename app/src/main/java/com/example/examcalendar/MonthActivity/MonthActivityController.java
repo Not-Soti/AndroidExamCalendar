@@ -28,8 +28,9 @@ public class MonthActivityController extends Activity{
     private MonthActivityModel model;
 
     private AutoGridView dayGridView;
+    //private GridView dayGridView;
     private MonthDayGridAdapter dayGridAdapter;
-    private GridView weekGridView;
+    //private GridView weekGridView;
     //private MonthWeekGridAdapter weekGridAdapter;
     private TextView monthTextView, yearTextView;
     private Button addExamButton, deleteExamButton, addHolidaysButton, deleteHolidaysButton;
@@ -53,6 +54,7 @@ public class MonthActivityController extends Activity{
 
         //weekGridView = (GridView) findViewById(R.id.WeeksGridView);
         dayGridView = (AutoGridView) findViewById(R.id.DaysAutoGridView);
+        //dayGridView = findViewById(R.id.DaysGridView);
         monthTextView = (TextView)  findViewById(R.id.textViewMonth);
         yearTextView = (TextView) findViewById(R.id.textViewYear);
         addExamButton = (Button) findViewById(R.id.bAddExam);
