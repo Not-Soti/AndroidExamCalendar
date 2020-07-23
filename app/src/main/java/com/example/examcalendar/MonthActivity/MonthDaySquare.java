@@ -8,9 +8,11 @@ import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.PopupMenu;
 import android.widget.TextView;
@@ -30,7 +32,8 @@ public class MonthDaySquare extends LinearLayout {
 
     private Context context;
     //private TextView examNameTextView;
-    private ListView examNameListView;
+    //private ListView examNameListView;
+    private LinearLayout examNameLinearLayout;
     private TextView dayTextView;
     //private String examStr;
     private ArrayList<String> examListStr;
@@ -79,13 +82,26 @@ public class MonthDaySquare extends LinearLayout {
         inflater.inflate(R.layout.day_square, this);
 
         //examNameTextView = (TextView) this.findViewById(R.id.ExamNameText);
-        examNameListView = this.findViewById(R.id.ExamNameList);
-        dayTextView = (TextView) this.findViewById(R.id.DayText);
+        //examNameListView = this.findViewById(R.id.ExamNameList);
+        examNameLinearLayout = this.findViewById(R.id.LinearLayoutExamNames);
+        dayTextView = this.findViewById(R.id.DayText);
 
         //examNameTextView.setText(examStr);
         //Add exams to the list
-        ArrayAdapter<String> listAdapter = new ArrayAdapter<>(context, android.R.layout.simple_list_item_1, examListStr);
-        examNameListView.setAdapter(listAdapter);
+        //ArrayAdapter<String> listAdapter = new ArrayAdapter<>(context, android.R.layout.simple_list_item_1, examListStr);
+        //examNameListView.setAdapter(listAdapter);
+        //setListViewHeightBasedOnItems(examNameListView); //sets the heigth so it's not scrollable
+
+        //adding exams to the linear layout
+        for(String exam : examListStr){
+            TextView examView = new TextView(context);
+            examView.setText(exam);
+            //TODO examView.setTextSize() ?
+            //examView.setAutoSizeTextTypeWithDefaults(TextView.AUTO_SIZE_TEXT_TYPE_UNIFORM);
+            examView.setLayoutParams(new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+            examNameLinearLayout.addView(examView);
+        }
+
         dayTextView.setText(dayStr);
 
         //Sets the background as defined by /res/drawable/month_week_square
@@ -99,6 +115,8 @@ public class MonthDaySquare extends LinearLayout {
                 setMenuFunctionallity(auxContext, view);
             }
         });
+
+        /*
         //Setting the same click listener so clicking the list of exams also works
         examNameListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -106,13 +124,13 @@ public class MonthDaySquare extends LinearLayout {
                 setMenuFunctionallity(MonthDaySquare.this.context, view);
             }
         });
+        */
+
     }
 
     /**
      * Method to set the same click listener
      * on this view and on the list
-     *
-     * @param auxContext
      */
     private void setMenuFunctionallity(final Context auxContext, View view) {
         //Creating the instance of PopupMenu
@@ -201,9 +219,10 @@ public class MonthDaySquare extends LinearLayout {
     public TextView getExamNameTextView(){
         return examNameTextView;
     }*/
+    /*
     public ListView getExamNameListView() {
         return examNameListView;
-    }
+    }*/
 
     public TextView getDayTextView() {
         return dayTextView;
@@ -221,69 +240,47 @@ public class MonthDaySquare extends LinearLayout {
         dayTextView.setText(dayStr);
     }
     */
+
+
+    /**
+     * COPIED FROM https://stackoverflow.com/questions/1778485/android-listview-display-all-available-items-without-scroll-with-static-header
+     * Sets ListView height dynamically based on the height of the items.
+     *
+     * @param listView to be resized
+     * @return true if the listView is successfully resized, false otherwise
+     */
     /*
-        private void setDaySquareListener() {
-            //final int finalDayToRepresent = Integer.parseInt(dayStr);
-            this.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    //Creating the instance of PopupMenu
-                    PopupMenu popup = new PopupMenu(context, view);
-                    //Inflate the popup xml file
-                    popup.getMenuInflater().inflate(R.menu.month_cell_popup_menu, popup.getMenu());
+    public static boolean setListViewHeightBasedOnItems(ListView listView) {
 
-                    //registering actions on clicking the menu items
-                    popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-                        @Override
-                        public boolean onMenuItemClick(MenuItem menuItem) {
-                            Intent i;
-                            switch (menuItem.getItemId()) {
-                                case R.id.addExamPopupMenu:
-                                    i = new Intent(context, DialogAddExam.class);
-                                    i.putExtra("day", dayStr);
-                                    i.putExtra("month", Integer.toString(month + 1));
-                                    i.putExtra("year", Integer.toString(year));
-                                    context.startActivity(i);
-                                    return true;
-                                case R.id.editExamPopupMenu:
-                                    i = new Intent(context, DialogEditExam.class);
-                                    i.putExtra("day", dayStr);
-                                    i.putExtra("month", Integer.toString(month + 1));
-                                    i.putExtra("year", Integer.toString(year));
-                                    context.startActivity(i);
-                                    return true;
-                                case R.id.deleteExamPopupMenu:
-                                    i = new Intent(context, DialogDeleteExam.class);
-                                    i.putExtra("day", dayStr);
-                                    i.putExtra("month", Integer.toString(month + 1));
-                                    i.putExtra("year", Integer.toString(year));
-                                    context.startActivity(i);
-                                    return true;
-                                case R.id.addHolidaysPopupMenu:
-                                    i = new Intent(context, DialogAddHolidays.class);
-                                    i.putExtra("day", dayStr);
-                                    i.putExtra("month", Integer.toString(month + 1));
-                                    i.putExtra("year", Integer.toString(year));
-                                    context.startActivity(i);
-                                    return true;
-                                case R.id.deleteHolidaysPopupMenu:
-                                    i = new Intent(context, DialogDeleteHolidays.class);
-                                    i.putExtra("day", dayStr);
-                                    i.putExtra("month", Integer.toString(month + 1));
-                                    i.putExtra("year", Integer.toString(year));
-                                    context.startActivity(i);
-                                    return true;
-                                default:
-                                    return false;
-                            }
+        ListAdapter listAdapter = listView.getAdapter();
+        if (listAdapter != null) {
 
-                        }
-                    }); // menu click listener
-                    popup.show();
-                }
-            });
+            int numberOfItems = listAdapter.getCount();
+
+            // Get total height of all items.
+            int totalItemsHeight = 0;
+            for (int itemPos = 0; itemPos < numberOfItems; itemPos++) {
+                View item = listAdapter.getView(itemPos, null, listView);
+                item.measure(0, 0);
+                totalItemsHeight += item.getMeasuredHeight();
+            }
+
+            // Get total height of all item dividers.
+            int totalDividersHeight = listView.getDividerHeight() *
+                    (numberOfItems - 1);
+
+            // Set list height.
+            ViewGroup.LayoutParams params = listView.getLayoutParams();
+            params.height = totalItemsHeight + totalDividersHeight;
+            listView.setLayoutParams(params);
+            listView.requestLayout();
+
+            return true;
+
+        } else {
+            return false;
         }
 
-     */
-
+    }
+*/
 }
