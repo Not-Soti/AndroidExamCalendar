@@ -24,6 +24,9 @@ import com.example.examcalendar.R;
 import java.time.Month;
 import java.util.ArrayList;
 
+import me.grantland.widget.AutofitHelper;
+import me.grantland.widget.AutofitTextView;
+
 /**
  * Class that draws a cell of the MonthActivity grid and its components
  */
@@ -94,11 +97,15 @@ public class MonthDaySquare extends LinearLayout {
 
         //adding exams to the linear layout
         for(String exam : examListStr){
-            TextView examView = new TextView(context);
-            examView.setText(exam);
-            //TODO examView.setTextSize() ?
-            //examView.setAutoSizeTextTypeWithDefaults(TextView.AUTO_SIZE_TEXT_TYPE_UNIFORM);
+            //TextView examView = new TextView(context);
+            AutofitTextView examView = new AutofitTextView(context); //Class from the maven repo
+            examView.setMaxTextSize(TypedValue.COMPLEX_UNIT_SP, 24);
+            //examView.setMinTextSize(10);
+
             examView.setLayoutParams(new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+            examView.setMaxLines(1);
+            examView.setText(exam);
+
             examNameLinearLayout.addView(examView);
         }
 
