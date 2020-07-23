@@ -150,7 +150,7 @@ public class MonthActivityController extends Activity{
             if(dayOfStart==7 && i==6) dayToRepresent=2; //control when it starts on sunday
 
             int type = MonthDaySquare.NORMAL;
-            StringBuilder exam = new StringBuilder("");
+
 
             int auxMonth = month+1;
             String printingDateAux = new String(year+"-"+auxMonth+"-"+dayToRepresent);
@@ -165,7 +165,11 @@ public class MonthActivityController extends Activity{
 
             //Checks if the day has any exam
             ArrayList<String> examList = model.searchExam(printingDate);
+            //If there adre exams sets the day type to exam
+            if(!examList.isEmpty()) type = MonthDaySquare.EXAM;
 
+            /*
+            StringBuilder exam = new StringBuilder("");
             if(!examList.isEmpty()){
                 ListIterator<String> itr = examList.listIterator();
                 //Add the first exam
@@ -178,6 +182,8 @@ public class MonthActivityController extends Activity{
                 type = MonthDaySquare.EXAM;
             }
 
+             */
+
             //Checks if the day is holiday! :D
             boolean isHoliday = model.searchHolidays(printingDate);
             //If it's holiday, sets de dat type to it
@@ -187,10 +193,11 @@ public class MonthActivityController extends Activity{
 
             //TODO COMPARAR WIDTH DEL TEXTO CON EL WIDTH DEL CUADRADO Y SI ES MAS GRANDE HACER EL TEXTO MAS PEQUEÑO
             String dayToDraw = dayToRepresent == 0 ? "" : String.valueOf(dayToRepresent);
-            MonthDaySquare ds = new MonthDaySquare(this, exam.toString(), dayToDraw, type);
+            //MonthDaySquare ds = new MonthDaySquare(this, exam.toString(), dayToDraw, type);
+            MonthDaySquare ds = new MonthDaySquare(this, examList, dayToDraw, type, month, year);
 
             //Adding a click listener to de MonthDaySquare to open the popupMenu
-            setDaySquareListener(ds, dayToRepresent);
+            //setDaySquareListener(ds, dayToRepresent);
             dayViews.add(ds);
 
             //Skip counting saturdays and sundays
@@ -258,67 +265,6 @@ public class MonthActivityController extends Activity{
         drawUI();
     }
 
-    private void setDaySquareListener(MonthDaySquare ds, int dayToRepresent){
-        final int finalDayToRepresent = dayToRepresent;
-        ds.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //Creating the instance of PopupMenu
-                PopupMenu popup = new PopupMenu(MonthActivityController.this, view);
-                //Inflate the popup xml file
-                popup.getMenuInflater().inflate(R.menu.month_cell_popup_menu, popup.getMenu());
-
-                //registering actions on clicking the menu items
-                popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-                    @Override
-                    public boolean onMenuItemClick(MenuItem menuItem) {
-                        Intent i;
-                        switch (menuItem.getItemId()){
-                            case R.id.addExamPopupMenu:
-                                i = new Intent(MonthActivityController.this, DialogAddExam.class);
-                                i.putExtra("day", Integer.toString(finalDayToRepresent));
-                                i.putExtra("month", Integer.toString(month+1));
-                                i.putExtra("year", Integer.toString(year));
-                                startActivity(i);
-                                return true;
-                            case R.id.editExamPopupMenu:
-                                i = new Intent(MonthActivityController.this, DialogEditExam.class);
-                                i.putExtra("day", Integer.toString(finalDayToRepresent));
-                                i.putExtra("month", Integer.toString(month+1));
-                                i.putExtra("year", Integer.toString(year));
-                                startActivity(i);
-                                return true;
-                            case R.id.deleteExamPopupMenu:
-                                i = new Intent(MonthActivityController.this, DialogDeleteExam.class);
-                                i.putExtra("day", Integer.toString(finalDayToRepresent));
-                                i.putExtra("month", Integer.toString(month+1));
-                                i.putExtra("year", Integer.toString(year));
-                                startActivity(i);
-                                return true;
-                            case R.id.addHolidaysPopupMenu:
-                                i = new Intent(MonthActivityController.this, DialogAddHolidays.class);
-                                i.putExtra("day", Integer.toString(finalDayToRepresent));
-                                i.putExtra("month", Integer.toString(month+1));
-                                i.putExtra("year", Integer.toString(year));
-                                startActivity(i);
-                                return true;
-                            case R.id.deleteHolidaysPopupMenu:
-                                i = new Intent(MonthActivityController.this, DialogDeleteHolidays.class);
-                                i.putExtra("day", Integer.toString(finalDayToRepresent));
-                                i.putExtra("month", Integer.toString(month+1));
-                                i.putExtra("year", Integer.toString(year));
-                                startActivity(i);
-                                return true;
-                            default:
-                                return false;
-                        }
-
-                    }
-                }); // menu click listener
-                popup.show();
-            }
-        });
-    }
 
     /*
      * Help methods to calculate dates
