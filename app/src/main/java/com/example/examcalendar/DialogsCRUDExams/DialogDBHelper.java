@@ -1,4 +1,4 @@
-package com.example.examcalendar.MonthActivity;
+package com.example.examcalendar.DialogsCRUDExams;
 
 import android.content.ContentValues;
 import android.content.Context;

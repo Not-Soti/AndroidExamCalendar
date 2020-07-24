@@ -2,15 +2,15 @@ package com.example.examcalendar.MonthActivity;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Canvas;
 import android.os.Bundle;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.GridView;
-import android.widget.PopupMenu;
 import android.widget.TextView;
 
+import com.example.examcalendar.DialogsCRUDExams.DialogAddExam;
+import com.example.examcalendar.DialogsCRUDExams.DialogAddHolidays;
+import com.example.examcalendar.DialogsCRUDExams.DialogDeleteExam;
+import com.example.examcalendar.DialogsCRUDExams.DialogDeleteHolidays;
 import com.example.examcalendar.HelpClasses.AutoGridView;
 import com.example.examcalendar.MainActivity.MainActivity;
 import com.example.examcalendar.R;
@@ -21,7 +21,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
-import java.util.ListIterator;
 
 public class MonthActivityController extends Activity{
 
@@ -170,22 +169,6 @@ public class MonthActivityController extends Activity{
             ArrayList<String> examList = model.searchExam(printingDate);
             //If there adre exams sets the day type to exam
             if(!examList.isEmpty()) type = MonthDaySquare.EXAM;
-
-            /*
-            StringBuilder exam = new StringBuilder("");
-            if(!examList.isEmpty()){
-                ListIterator<String> itr = examList.listIterator();
-                //Add the first exam
-                exam.append(itr.next());
-                //If there are more, add all with a new lane
-                while(itr.hasNext()){
-                    exam.append("\n"+itr.next());
-                }
-                //Sets the day type to exam
-                type = MonthDaySquare.EXAM;
-            }
-
-             */
 
             //Checks if the day is holiday! :D
             boolean isHoliday = model.searchHolidays(printingDate);

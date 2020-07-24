@@ -12,7 +12,10 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
 import android.widget.GridView;
+import android.widget.LinearLayout;
 import android.widget.ListAdapter;
+
+import com.example.examcalendar.MonthActivity.MonthDaySquare;
 
 /**
  * Automatically calculates the ideal for each row
@@ -107,8 +110,8 @@ public class AutoGridView extends GridView {
      * Sets the height of each view in a row equal to the height of the tallest view in this row.
      * firstVisible The first visible position (adapter order)
      * <p>
-     * MY ADAPTATION: this checks for the min height too, so if a cell will have the min height,
-     * it will be the half of the max height so it doesn't look ugly
+     * MY ADAPTATION: this checks for the child's linear layout too, so it makes it bigger too
+     * even if it's empty.
      */
     private void setHeights() {
 
@@ -120,34 +123,40 @@ public class AutoGridView extends GridView {
             for (int i = 0; i < getChildCount(); i += numColumns) {
                 // Determine the maximum height for this row
                 int maxHeight = 0;
+                int maxExamNameLinearLayoutHeight = 0; //Saves the height of the layout
 
                 for (int j = i; j < i + numColumns; j++) {
-                    View view = getChildAt(j);
+                    View view = getChildAt(j); //is a MonthDaySquare object
+
+                    LinearLayout examNameLinearLayout = view == null ? null : ((MonthDaySquare)view).getExamNameLinearLayout();
                     if (view != null && view.getHeight() > maxHeight) {
                         maxHeight = view.getHeight();
                     }
+                    if ((examNameLinearLayout != null) && (examNameLinearLayout.getHeight() > maxExamNameLinearLayoutHeight)){
+                        maxExamNameLinearLayoutHeight = examNameLinearLayout.getHeight(); //also update the child layout max height
+                    }
                 }
 
-                //Log.d(TAG, "Max height for row #" + i/numColumns + ": " + maxHeight);
+                Log.d(TAG, "Max height for row #" + i/numColumns + ": " + maxHeight);
 
                 // Set max height for each element in this row
                 if (maxHeight > 0) {
                     for (int j = i; j < i + numColumns; j++) {
                         View view = getChildAt(j);
+
+                        LinearLayout examNameLinearLayout = view == null ? null : ((MonthDaySquare)view).getExamNameLinearLayout();
+
+                        //setting the same height for each child linearLayout in the row
+                        if((examNameLinearLayout != null) && (examNameLinearLayout.getHeight() != maxExamNameLinearLayoutHeight)){
+                            examNameLinearLayout.setMinimumHeight(maxExamNameLinearLayoutHeight);
+                        }
+
                         if (view != null && view.getHeight() != maxHeight) {
                             view.setMinimumHeight(maxHeight);
                         }
                     }
                 }
             }
-
-            /*
-            for(int i=0; i<getChildCount(); i++){
-                View view = getChildAt(i);
-                view.setMinimumHeight(getMeasuredHeight()/5);
-            }
-
-             */
         }
     }
 

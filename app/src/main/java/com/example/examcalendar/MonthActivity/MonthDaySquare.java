@@ -2,29 +2,27 @@ package com.example.examcalendar.MonthActivity;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Canvas;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
-import android.widget.ListAdapter;
-import android.widget.ListView;
 import android.widget.PopupMenu;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 
+import com.example.examcalendar.DialogsCRUDExams.DialogAddExam;
+import com.example.examcalendar.DialogsCRUDExams.DialogAddHolidays;
+import com.example.examcalendar.DialogsCRUDExams.DialogDeleteExam;
+import com.example.examcalendar.DialogsCRUDExams.DialogDeleteHolidays;
+import com.example.examcalendar.DialogsCRUDExams.DialogEditExam;
 import com.example.examcalendar.R;
 
-import java.time.Month;
 import java.util.ArrayList;
 
-import me.grantland.widget.AutofitHelper;
 import me.grantland.widget.AutofitTextView;
 
 /**
@@ -34,11 +32,8 @@ import me.grantland.widget.AutofitTextView;
 public class MonthDaySquare extends LinearLayout {
 
     private Context context;
-    //private TextView examNameTextView;
-    //private ListView examNameListView;
     private LinearLayout examNameLinearLayout;
     private TextView dayTextView;
-    //private String examStr;
     private ArrayList<String> examListStr;
     private String dayStr; //Strings to set on the view after inflating
     private int type; //Tells if a particular day is normal, a exam one or a holiday one
@@ -88,16 +83,8 @@ public class MonthDaySquare extends LinearLayout {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         inflater.inflate(R.layout.day_square, this);
 
-        //examNameTextView = (TextView) this.findViewById(R.id.ExamNameText);
-        //examNameListView = this.findViewById(R.id.ExamNameList);
         examNameLinearLayout = this.findViewById(R.id.LinearLayoutExamNames);
         dayTextView = this.findViewById(R.id.DayText);
-
-        //examNameTextView.setText(examStr);
-        //Add exams to the list
-        //ArrayAdapter<String> listAdapter = new ArrayAdapter<>(context, android.R.layout.simple_list_item_1, examListStr);
-        //examNameListView.setAdapter(listAdapter);
-        //setListViewHeightBasedOnItems(examNameListView); //sets the heigth so it's not scrollable
 
         //adding exams to the linear layout
         for(String exam : examListStr){
@@ -130,17 +117,6 @@ public class MonthDaySquare extends LinearLayout {
                 setMenuFunctionallity(auxContext, view);
             }
         });
-
-        /*
-        //Setting the same click listener so clicking the list of exams also works
-        examNameListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                setMenuFunctionallity(MonthDaySquare.this.context, view);
-            }
-        });
-        */
-
     }
 
     /**
@@ -230,72 +206,11 @@ public class MonthDaySquare extends LinearLayout {
     }
     */
 
-    /*
-    public TextView getExamNameTextView(){
-        return examNameTextView;
-    }*/
-    /*
-    public ListView getExamNameListView() {
-        return examNameListView;
-    }*/
 
     public TextView getDayTextView() {
         return dayTextView;
     }
+    public LinearLayout getExamNameLinearLayout(){return examNameLinearLayout;}
 
 
-    /**
-     * Sets atributes for the exam name and the day
-     */
-    /* NO FUNCIONA
-    @Override
-    protected void onFinishInflate(){
-        super.onFinishInflate();
-        examNameTextView.setText(examStr);
-        dayTextView.setText(dayStr);
-    }
-    */
-
-
-    /**
-     * COPIED FROM https://stackoverflow.com/questions/1778485/android-listview-display-all-available-items-without-scroll-with-static-header
-     * Sets ListView height dynamically based on the height of the items.
-     *
-     * @param listView to be resized
-     * @return true if the listView is successfully resized, false otherwise
-     */
-    /*
-    public static boolean setListViewHeightBasedOnItems(ListView listView) {
-
-        ListAdapter listAdapter = listView.getAdapter();
-        if (listAdapter != null) {
-
-            int numberOfItems = listAdapter.getCount();
-
-            // Get total height of all items.
-            int totalItemsHeight = 0;
-            for (int itemPos = 0; itemPos < numberOfItems; itemPos++) {
-                View item = listAdapter.getView(itemPos, null, listView);
-                item.measure(0, 0);
-                totalItemsHeight += item.getMeasuredHeight();
-            }
-
-            // Get total height of all item dividers.
-            int totalDividersHeight = listView.getDividerHeight() *
-                    (numberOfItems - 1);
-
-            // Set list height.
-            ViewGroup.LayoutParams params = listView.getLayoutParams();
-            params.height = totalItemsHeight + totalDividersHeight;
-            listView.setLayoutParams(params);
-            listView.requestLayout();
-
-            return true;
-
-        } else {
-            return false;
-        }
-
-    }
-*/
 }

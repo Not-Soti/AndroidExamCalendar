@@ -7,44 +7,22 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <!--
-    <TextView
-        android:id="@+id/ExamNameText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:freezesText="true"
-        android:gravity="center"
-        android:textSize="@dimen/examTextSizeMonthGrid" />
-        -->
-
-   <!-- <TextView
-
-        android:id="@+id/ExamNameText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:freezesText="true"
-        android:gravity="center"
-        android:autoSizeTextType="uniform"
-        android:autoSizeMaxTextSize="24sp"
-        android:autoSizeMinTextSize="12sp"
-        /> -->
-<!--
-    <ListView
-        android:id="@+id/ExamNameList"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
--->
-
     <LinearLayout
         android:id="@+id/LinearLayoutExamNames"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginStart="2dp"
-        android:layout_marginEnd="2dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="1dp"
+        android:minHeight="@dimen/dayCellsMinHeight"
         android:orientation="vertical"
-        android:minHeight="@dimen/dayCellsMinHeight"/>
+        tools:layout_conversion_absoluteHeight="48dp"
+        tools:layout_conversion_absoluteWidth="408dp"
+        tools:layout_editor_absoluteX="2dp"
+        tools:layout_editor_absoluteY="0dp" />
 
     <TextView
         android:id="@+id/DayText"
@@ -52,9 +30,12 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/LinearLayoutExamNames"
         android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginEnd="2dp"
-        android:layout_marginBottom="2dp"
-        android:textSize="@dimen/dayTextSizeMonthGrid" />
+        android:layout_marginEnd="1dp"
+        android:text="aaaa"
+        android:textSize="@dimen/dayTextSizeMonthGrid"
+        tools:layout_conversion_absoluteHeight="682dp"
+        tools:layout_conversion_absoluteWidth="0dp"
+        tools:layout_editor_absoluteX="410dp"
+        tools:layout_editor_absoluteY="48dp" />
 
 </RelativeLayout>

@@ -1,8 +1,7 @@
-package com.example.examcalendar.MonthActivity;
+package com.example.examcalendar.DialogsCRUDExams;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
@@ -12,8 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.examcalendar.DataBase.DBHelper;
-import com.example.examcalendar.DataBase.DBStructure;
+import com.example.examcalendar.MonthActivity.MonthActivityController;
 import com.example.examcalendar.R;
 
 import java.text.ParseException;
