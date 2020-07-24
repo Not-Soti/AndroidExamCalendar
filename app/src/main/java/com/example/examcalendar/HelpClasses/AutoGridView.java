@@ -128,13 +128,19 @@ public class AutoGridView extends GridView {
                 for (int j = i; j < i + numColumns; j++) {
                     View view = getChildAt(j); //is a MonthDaySquare object
 
-                    LinearLayout examNameLinearLayout = view == null ? null : ((MonthDaySquare)view).getExamNameLinearLayout();
+                    LinearLayout examNameLinearLayout = null;
+                    if(view instanceof MonthDaySquare) { //Controlling the case this is on the MonthActivity day grid
+                        examNameLinearLayout = view == null ? null : ((MonthDaySquare) view).getExamNameLinearLayout();
+
+                        if ((examNameLinearLayout != null) && (examNameLinearLayout.getHeight() > maxExamNameLinearLayoutHeight)) {
+                            maxExamNameLinearLayoutHeight = examNameLinearLayout.getHeight(); //also update the child layout max height
+                        }
+                    }
+
                     if (view != null && view.getHeight() > maxHeight) {
                         maxHeight = view.getHeight();
                     }
-                    if ((examNameLinearLayout != null) && (examNameLinearLayout.getHeight() > maxExamNameLinearLayoutHeight)){
-                        maxExamNameLinearLayoutHeight = examNameLinearLayout.getHeight(); //also update the child layout max height
-                    }
+
                 }
 
                 Log.d(TAG, "Max height for row #" + i/numColumns + ": " + maxHeight);
@@ -144,11 +150,13 @@ public class AutoGridView extends GridView {
                     for (int j = i; j < i + numColumns; j++) {
                         View view = getChildAt(j);
 
-                        LinearLayout examNameLinearLayout = view == null ? null : ((MonthDaySquare)view).getExamNameLinearLayout();
-
-                        //setting the same height for each child linearLayout in the row
-                        if((examNameLinearLayout != null) && (examNameLinearLayout.getHeight() != maxExamNameLinearLayoutHeight)){
-                            examNameLinearLayout.setMinimumHeight(maxExamNameLinearLayoutHeight);
+                        //Case this is calculating the MonthActivity day grid size
+                        if(view instanceof MonthDaySquare) {
+                            LinearLayout examNameLinearLayout = view == null ? null : ((MonthDaySquare) view).getExamNameLinearLayout();
+                            //setting the same height for each child linearLayout in the row
+                            if ((examNameLinearLayout != null) && (examNameLinearLayout.getHeight() != maxExamNameLinearLayoutHeight)) {
+                                examNameLinearLayout.setMinimumHeight(maxExamNameLinearLayoutHeight);
+                            }
                         }
 
                         if (view != null && view.getHeight() != maxHeight) {
