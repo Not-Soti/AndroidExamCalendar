@@ -58,6 +58,7 @@
 
     </LinearLayout>
 
+    <!--
     <LinearLayout
         android:id="@+id/examButtonsLayout"
         android:layout_width="match_parent"
@@ -94,12 +95,14 @@
             android:layout_weight="1"
             android:text="Delete\nHoliday" />
     </LinearLayout>
+-->
 
+    <!-- Moved from below examButtonsLayout to below MonthInfoLayout-->
     <LinearLayout
         android:id="@+id/CalendarGridLayout"
         android:layout_width="match_parent"
         android:layout_height="583dp"
-        android:layout_below="@+id/examButtonsLayout"
+        android:layout_below="@+id/MonthInfoLayout"
         android:layout_marginTop="1dp"
         android:orientation="horizontal">
 
@@ -194,6 +197,7 @@
                 android:layout_height="match_parent"
                 android:numColumns="@integer/columnsOnDayGrid"
                 android:stretchMode="columnWidth"
+
                 />
 
         </LinearLayout>

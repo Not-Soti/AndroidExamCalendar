@@ -16,5 +16,7 @@
 
     <dimen name="dialogMarginLeft">5dp</dimen>
 
+    <dimen name="monthGridCornerRound">3dp</dimen>
+
 
 </resources>

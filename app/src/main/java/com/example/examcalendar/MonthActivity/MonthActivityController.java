@@ -33,7 +33,7 @@ public class MonthActivityController extends Activity{
     //private GridView weekGridView;
     //private MonthWeekGridAdapter weekGridAdapter;
     private TextView monthTextView, yearTextView;
-    private Button addExamButton, deleteExamButton, addHolidaysButton, deleteHolidaysButton;
+    //private Button addExamButton, deleteExamButton, addHolidaysButton, deleteHolidaysButton;
     private Button nextMonthButton, prevMonthButton;
 
 
@@ -57,10 +57,10 @@ public class MonthActivityController extends Activity{
         //dayGridView = findViewById(R.id.DaysGridView);
         monthTextView = (TextView)  findViewById(R.id.textViewMonth);
         yearTextView = (TextView) findViewById(R.id.textViewYear);
-        addExamButton = (Button) findViewById(R.id.bAddExam);
-        deleteExamButton = (Button) findViewById(R.id.bDeleteExam);
-        addHolidaysButton = (Button) findViewById(R.id.bAddHoliday);
-        deleteHolidaysButton = (Button) findViewById(R.id.bDeleteHoliday);
+        //addExamButton = (Button) findViewById(R.id.bAddExam);
+        //deleteExamButton = (Button) findViewById(R.id.bDeleteExam);
+        //addHolidaysButton = (Button) findViewById(R.id.bAddHoliday);
+        //deleteHolidaysButton = (Button) findViewById(R.id.bDeleteHoliday);
         nextMonthButton = (Button) findViewById(R.id.bNextMonth);
         prevMonthButton = (Button) findViewById(R.id.bPrevMonth);
 
@@ -84,6 +84,7 @@ public class MonthActivityController extends Activity{
             }
         });
 
+        /*
         addExamButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -111,7 +112,7 @@ public class MonthActivityController extends Activity{
                 deleteHolidaysPressed(view);
             }
         });
-
+        */
     }
 
     /**
