@@ -65,7 +65,10 @@ public class MainActivity extends AppCompatActivity {
 
     //Se abre la actividad de configuracion
     public void startConfigurationActivity(View view){
-        Toast.makeText(this, String.valueOf(++contadorPulsacionesCofiguracion), Toast.LENGTH_SHORT).show();
+       // Toast.makeText(this, String.valueOf(++contadorPulsacionesCofiguracion), Toast.LENGTH_SHORT).show();
+        Intent i = new Intent(this, ConfigurationActivityController.class);
+
+        startActivity(i);
     }
 
 }

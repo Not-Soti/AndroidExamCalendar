@@ -2,6 +2,11 @@ package com.example.examcalendar.MonthActivity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.GradientDrawable;
+import android.preference.PreferenceManager;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
@@ -108,6 +113,19 @@ public class MonthDaySquare extends LinearLayout {
 
         //Sets the background as defined by /res/drawable/month_week_square
         this.setBackgroundResource(checkTypeForBackground(this.type));
+
+        //Getting de BG color from the user settings
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
+        if(type == MonthDaySquare.EXAM) {
+            int bgcolor = preferences.getInt("bgColorExamDay", getResources().getColor(R.color.ExamBg));
+            ((GradientDrawable) this.getBackground()).setColor(bgcolor);
+        }else if(type == MonthDaySquare.HOLIDAY){
+            int bgcolor = preferences.getInt("bgColorHolidayDay", getResources().getColor(R.color.HolidayBg));
+            ((GradientDrawable) this.getBackground()).setColor(bgcolor);
+        }else if(type == MonthDaySquare.NORMAL){
+            int bgcolor = preferences.getInt("bgColorNormalDay", getResources().getColor(R.color.NormalBg));
+            ((GradientDrawable) this.getBackground()).setColor(bgcolor);
+        }
 
         //Setting click listeners for the view
         final Context auxContext = context;
