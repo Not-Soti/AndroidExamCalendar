@@ -5,9 +5,10 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.examcalendar.DialogsCRUDExams.DialogAddExam;
@@ -20,7 +21,6 @@ import com.example.examcalendar.R;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -38,7 +38,8 @@ public class MonthActivityController extends Activity{
     private TextView monthTextView, yearTextView;
     //private Button addExamButton, deleteExamButton, addHolidaysButton, deleteHolidaysButton;
     private Button nextMonthButton, prevMonthButton;
-
+    private RelativeLayout globalLayout;
+    private LinearLayout calendarLinearLayout;
 
     //TODO Hacerlo en resources
     private static final String[] MONTH_NAMES = {"Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
@@ -56,15 +57,17 @@ public class MonthActivityController extends Activity{
         model = new MonthActivityModel(this);
 
         //weekGridView = (GridView) findViewById(R.id.WeeksGridView);
-        dayGridView = (AutoGridView) findViewById(R.id.DaysAutoGridView);
-        monthTextView = (TextView)  findViewById(R.id.textViewMonth);
-        yearTextView = (TextView) findViewById(R.id.textViewYear);
+        dayGridView = (AutoGridView) findViewById(R.id.MonthAct_DaysAutoGridView);
+        monthTextView = (TextView)  findViewById(R.id.MonthAct_MonthTextView);
+        yearTextView = (TextView) findViewById(R.id.MonthAct_YearTextView);
         //addExamButton = (Button) findViewById(R.id.bAddExam);
         //deleteExamButton = (Button) findViewById(R.id.bDeleteExam);
         //addHolidaysButton = (Button) findViewById(R.id.bAddHoliday);
         //deleteHolidaysButton = (Button) findViewById(R.id.bDeleteHoliday);
-        nextMonthButton = (Button) findViewById(R.id.bNextMonth);
-        prevMonthButton = (Button) findViewById(R.id.bPrevMonth);
+        nextMonthButton = (Button) findViewById(R.id.MonthAct_NextMonthButton);
+        prevMonthButton = (Button) findViewById(R.id.MonthAct_PrevMonthButton);
+        globalLayout = findViewById(R.id.MonthAct_GlobalLayout);
+        calendarLinearLayout = findViewById(R.id.MonthAct_CalendarLinearLayout);
 
         year = getYear();
         month = getMonth();
@@ -76,13 +79,13 @@ public class MonthActivityController extends Activity{
         nextMonthButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                nextMonthPressed(view);
+                nextMonthPressed();
             }
         });
         prevMonthButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                previousMonthPressed(view);
+                previousMonthPressed();
             }
         });
 
@@ -169,8 +172,8 @@ public class MonthActivityController extends Activity{
             }
 
             //Checks if the printing date is today
-            //String today = newFormat.format(new Date()); //TODO usar este
-            String today = "2020-07-27";
+            String today = newFormat.format(new Date()); //TODO usar este
+            //String today = "2020-07-27";
             boolean isToday = today.equals(printingDate);
 
             //Checks if the day has any exam
@@ -217,6 +220,7 @@ public class MonthActivityController extends Activity{
         startActivity(new Intent(this, MainActivity.class));
     }
 
+
     public void addExamPressed(View view){
         Intent i = new Intent(this, DialogAddExam.class);
         i.putExtra("month", Integer.toString(month+1));
@@ -242,7 +246,7 @@ public class MonthActivityController extends Activity{
         startActivity(i);
     }
 
-    public void nextMonthPressed(View view){
+    public void nextMonthPressed(){
         month++;
         if(month==12){
             year++;
@@ -251,7 +255,7 @@ public class MonthActivityController extends Activity{
         dayOfStart = getDayOfWeek(year,month);
         drawUI();
     }
-    public void previousMonthPressed(View view){
+    public void previousMonthPressed(){
         if(month==0){
             year--;
             month=11;

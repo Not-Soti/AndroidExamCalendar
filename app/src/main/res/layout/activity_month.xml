@@ -2,193 +2,198 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:custom="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/MonthActivityGlobalLayout"
+    android:id="@+id/MonthAct_GlobalLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
-    android:orientation="vertical"
-    android:layout_marginTop="3dp"
     android:layout_marginLeft="3dp"
-    android:layout_marginRight="3dp">
+    android:layout_marginTop="3dp"
+    android:layout_marginRight="3dp"
+    android:gravity="center"
+    android:orientation="vertical">
 
-    <LinearLayout
-        android:id="@+id/MonthInfoLayout"
+    <view
+        class="com.example.examcalendar.MonthActivity.SwipeRelativeLayoutMonthActivity"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="0dp"
-        android:orientation="horizontal">
-
-        <Button
-            android:id="@+id/bPrevMonth"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/previous" />
+        android:layout_height="match_parent">
 
         <LinearLayout
+            android:id="@+id/MonthAct_InfoLayout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:orientation="vertical">
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="0dp"
+            android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/textViewMonth"
+            <Button
+                android:id="@+id/MonthAct_PrevMonthButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:gravity="center"/>
+                android:text="@string/previous" />
 
-            <TextView
-                android:id="@+id/textViewYear"
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/MonthAct_MonthTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center" />
+
+                <TextView
+                    android:id="@+id/MonthAct_YearTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center" />
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/MonthAct_NextMonthButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:gravity="center"/>
+                android:text="@string/next" />
+
         </LinearLayout>
-
-        <Button
-            android:id="@+id/bNextMonth"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/next" />
-
-    </LinearLayout>
-
-    <!--
-    <LinearLayout
-        android:id="@+id/examButtonsLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/MonthInfoLayout"
-        android:layout_marginTop="1dp"
-        android:orientation="horizontal">
-
-        <Button
-            android:id="@+id/bAddExam"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Add\nexam" />
-
-        <Button
-            android:id="@+id/bDeleteExam"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Delete\nExam" />
-
-        <Button
-            android:id="@+id/bAddHoliday"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Add\nholiday" />
-
-        <Button
-            android:id="@+id/bDeleteHoliday"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Delete\nHoliday" />
-    </LinearLayout>
--->
-
-    <!-- Moved from below examButtonsLayout to below MonthInfoLayout-->
-    <LinearLayout
-        android:id="@+id/CalendarGridLayout"
-        android:layout_width="match_parent"
-        android:layout_height="583dp"
-        android:layout_below="@+id/MonthInfoLayout"
-        android:layout_marginTop="1dp"
-        android:orientation="horizontal">
 
         <!--
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:id="@+id/examButtonsLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/MonthInfoLayout"
+            android:layout_marginTop="1dp"
+            android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/textView19"
-                android:layout_width="@dimen/weekSquaresWidth"
+            <Button
+                android:id="@+id/bAddExam"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="Semana" />
+                android:layout_weight="1"
+                android:text="Add\nexam" />
 
-            <GridView
-                android:id="@+id/WeeksGridView"
-                android:layout_width="@dimen/weekSquaresWidth"
-                android:layout_height="match_parent"
-                android:numColumns="1">
-            </GridView>
+            <Button
+                android:id="@+id/bDeleteExam"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Delete\nExam" />
 
+            <Button
+                android:id="@+id/bAddHoliday"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Add\nholiday" />
+
+            <Button
+                android:id="@+id/bDeleteHoliday"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Delete\nHoliday" />
         </LinearLayout>
-        -->
+    -->
 
+        <!-- Moved from below examButtonsLayout to below MonthInfoLayout-->
         <LinearLayout
+            android:id="@+id/MonthAct_CalendarLinearLayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:layout_below="@+id/MonthAct_InfoLayout"
+            android:layout_marginTop="1dp"
+            android:orientation="horizontal">
+
+            <!--
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textView19"
+                    android:layout_width="@dimen/weekSquaresWidth"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="Semana" />
+
+                <GridView
+                    android:id="@+id/WeeksGridView"
+                    android:layout_width="@dimen/weekSquaresWidth"
+                    android:layout_height="match_parent"
+                    android:numColumns="1">
+                </GridView>
+
+            </LinearLayout>
+            -->
 
             <LinearLayout
-                android:id="@+id/dayNamesGridLayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <TextView
-                    android:id="@+id/textViewMonday"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="L" />
-
-                <TextView
-                    android:id="@+id/textViewTuesday"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="M" />
-
-                <TextView
-                    android:id="@+id/textViewWednesday"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="X" />
-
-                <TextView
-                    android:id="@+id/textViewThursday"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="J" />
-
-                <TextView
-                    android:id="@+id/textViewFriday"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="V" />
-            </LinearLayout>
-
-
-            <view
-                android:id="@+id/DaysAutoGridView"
-                class="com.example.examcalendar.HelpClasses.AutoGridView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:numColumns="@integer/columnsOnDayGrid"
-                android:stretchMode="columnWidth"
-                />
+                android:orientation="vertical">
 
+                <LinearLayout
+                    android:id="@+id/MonthAct_DayNamesGridLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/textViewMonday"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="L" />
+
+                    <TextView
+                        android:id="@+id/textViewTuesday"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="M" />
+
+                    <TextView
+                        android:id="@+id/textViewWednesday"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="X" />
+
+                    <TextView
+                        android:id="@+id/textViewThursday"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="J" />
+
+                    <TextView
+                        android:id="@+id/textViewFriday"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="V" />
+                </LinearLayout>
+
+
+                <view
+                    android:id="@+id/MonthAct_DaysAutoGridView"
+                    class="com.example.examcalendar.HelpClasses.AutoGridView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:numColumns="@integer/columnsOnDayGrid"
+                    android:stretchMode="columnWidth" />
+
+            </LinearLayout>
         </LinearLayout>
-    </LinearLayout>
+    </view>
 </RelativeLayout>

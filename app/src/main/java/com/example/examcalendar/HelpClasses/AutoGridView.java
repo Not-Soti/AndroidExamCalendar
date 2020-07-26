@@ -60,7 +60,7 @@ public class AutoGridView extends GridView {
                 }
             }
         }
-        Log.d(TAG, "numColumns set to: " + numColumns);
+        //Log.d(TAG, "numColumns set to: " + numColumns);
     }
 
 
@@ -77,7 +77,7 @@ public class AutoGridView extends GridView {
         this.numColumns = numColumns;
         super.setNumColumns(numColumns);
 
-        Log.d(TAG, "setSelection --> " + previousFirstVisible);
+        //Log.d(TAG, "setSelection --> " + previousFirstVisible);
         setSelection(previousFirstVisible);
     }
 
@@ -143,7 +143,7 @@ public class AutoGridView extends GridView {
 
                 }
 
-                Log.d(TAG, "Max height for row #" + i/numColumns + ": " + maxHeight);
+               //Log.d(TAG, "Max height for row #" + i/numColumns + ": " + maxHeight);
 
                 // Set max height for each element in this row
                 if (maxHeight > 0) {
