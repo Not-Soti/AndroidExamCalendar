@@ -18,7 +18,6 @@ import com.example.examcalendar.WeekActivity.WeekActivityController;
 public class MainActivity extends AppCompatActivity {
 
     private static int numeroTroll = 0;
-    private static int contadorPulsacionesCofiguracion = 0;
 
 
     @Override
@@ -65,9 +64,7 @@ public class MainActivity extends AppCompatActivity {
 
     //Se abre la actividad de configuracion
     public void startConfigurationActivity(View view){
-       // Toast.makeText(this, String.valueOf(++contadorPulsacionesCofiguracion), Toast.LENGTH_SHORT).show();
         Intent i = new Intent(this, ConfigurationActivityController.class);
-
         startActivity(i);
     }
 

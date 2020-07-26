@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.preference.PreferenceManager;
@@ -48,7 +49,7 @@ public class MonthDaySquare extends LinearLayout {
     public static final int HOLIDAY = 2;
 
     private int examTextSize;
-
+    private boolean isToday;
 
     public MonthDaySquare(Context context) {
         super(context);
@@ -56,7 +57,7 @@ public class MonthDaySquare extends LinearLayout {
         initializeViews(context);
     }
 
-    public MonthDaySquare(Context context, ArrayList<String> examStr, String dayStr, int type, int month, int year, int textSize) {
+    public MonthDaySquare(Context context, ArrayList<String> examStr, String dayStr, int type, int month, int year, int textSize, boolean isToday) {
         super(context);
         this.context = context;
         this.examListStr = examStr;
@@ -65,6 +66,7 @@ public class MonthDaySquare extends LinearLayout {
         this.month = month;
         this.year = year;
         this.examTextSize = textSize;
+        this.isToday = isToday;
 
         initializeViews(context);
     }
@@ -135,6 +137,13 @@ public class MonthDaySquare extends LinearLayout {
         }else if(type == MonthDaySquare.NORMAL){
             int bgcolor = preferences.getInt("bgColorNormalDay", getResources().getColor(R.color.NormalBg));
             ((GradientDrawable) this.getBackground()).setColor(bgcolor);
+        }
+
+        //Changing the color for the day if it's today
+        if(isToday){
+            dayTextView.setTypeface(dayTextView.getTypeface(), Typeface.BOLD);
+            dayTextView.setTextColor(getResources().getColor(R.color.todayDay));
+            dayTextView.setBackgroundColor(getResources().getColor(R.color.todayDayBg));
         }
 
         //Setting click listeners for the view

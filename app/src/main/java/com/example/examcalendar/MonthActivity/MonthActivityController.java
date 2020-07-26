@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -19,6 +20,7 @@ import com.example.examcalendar.R;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -55,7 +57,6 @@ public class MonthActivityController extends Activity{
 
         //weekGridView = (GridView) findViewById(R.id.WeeksGridView);
         dayGridView = (AutoGridView) findViewById(R.id.DaysAutoGridView);
-        //dayGridView = findViewById(R.id.DaysGridView);
         monthTextView = (TextView)  findViewById(R.id.textViewMonth);
         yearTextView = (TextView) findViewById(R.id.textViewYear);
         //addExamButton = (Button) findViewById(R.id.bAddExam);
@@ -167,6 +168,11 @@ public class MonthActivityController extends Activity{
                 e.printStackTrace();
             }
 
+            //Checks if the printing date is today
+            //String today = newFormat.format(new Date()); //TODO usar este
+            String today = "2020-07-27";
+            boolean isToday = today.equals(printingDate);
+
             //Checks if the day has any exam
             ArrayList<String> examList = model.searchExam(printingDate);
             //If there adre exams sets the day type to exam
@@ -185,7 +191,7 @@ public class MonthActivityController extends Activity{
             SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
             int examFontSize = preferences.getInt("fontSizeExamTextView", R.integer.examTextSizeMonthGrid);
 
-            MonthDaySquare ds = new MonthDaySquare(this, examList, dayToDraw, type, month, year, examFontSize);
+            MonthDaySquare ds = new MonthDaySquare(this, examList, dayToDraw, type, month, year, examFontSize, isToday);
 
             //Adding a click listener to de MonthDaySquare to open the popupMenu
             //setDaySquareListener(ds, dayToRepresent);

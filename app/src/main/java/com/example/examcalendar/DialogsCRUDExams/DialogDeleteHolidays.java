@@ -22,14 +22,14 @@ public class DialogDeleteHolidays extends Activity {
     private Button accept;
     private EditText startDayEditText, endDayEditText, startMonthEditText, endMonthEditText, startYearEditText, endYearEditText;
 
-    DialogDBHelper model;
+    DialogModel model;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.dialog_delete_holiday);
 
-        model = new DialogDBHelper(this);
+        model = new DialogModel(this);
         Bundle bundle = getIntent().getExtras(); //Get info from previous Activity
 
         accept = (Button) findViewById(R.id.buttonDeleteHoliday);

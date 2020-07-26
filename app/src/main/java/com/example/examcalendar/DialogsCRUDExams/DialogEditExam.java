@@ -29,7 +29,7 @@ public class DialogEditExam extends Activity {
     private static String examToEdit, oldDate; //used to get the exam selected from the ListView
 
 
-    DialogDBHelper model;
+    DialogModel model;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -38,7 +38,7 @@ public class DialogEditExam extends Activity {
 
         examToEdit = new String();
         oldDate = new String();
-        model = new DialogDBHelper(this);
+        model = new DialogModel(this);
         Bundle bundle = getIntent().getExtras(); //Get info from previous Activity
 
         accept = findViewById(R.id.buttonAcceptEditExam);

@@ -19,14 +19,14 @@ public class DialogAddExam extends Activity {
     private EditText dayEditText,monthEditText,yearEditText,nameEditText;
 
 
-    DialogDBHelper model;
+    DialogModel model;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.dialog_add_exam);
 
-        model = new DialogDBHelper(this);
+        model = new DialogModel(this);
         Bundle bundle = getIntent().getExtras(); //Get info from previous Activity
 
         accept = (Button) findViewById(R.id.buttonAcceptAddExam);

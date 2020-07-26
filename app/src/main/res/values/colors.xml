@@ -12,4 +12,6 @@
     <color name="NormalTx">#000000</color>
     <color name="HolidayTx">#470076</color>
     <color name="ExamTx">#005208</color>
+    <color name="todayDay">#000000</color>
+    <color name="todayDayBg">#bababa</color>
 </resources>

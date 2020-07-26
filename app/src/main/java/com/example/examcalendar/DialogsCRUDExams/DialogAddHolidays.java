@@ -21,7 +21,7 @@ import java.util.Date;
 public class DialogAddHolidays extends Activity {
     private Button accept;
     private EditText startDayEditText, endDayEditText, startMonthEditText, endMonthEditText, startYearEditText, endYearEditText;
-    private DialogDBHelper model;
+    private DialogModel model;
 
 
     @Override
@@ -29,7 +29,7 @@ public class DialogAddHolidays extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.dialog_add_holiday);
 
-        model = new DialogDBHelper(this);
+        model = new DialogModel(this);
         Bundle bundle = getIntent().getExtras(); //Get info from previous Activity
 
         accept = (Button) findViewById(R.id.buttonAddHoliday);

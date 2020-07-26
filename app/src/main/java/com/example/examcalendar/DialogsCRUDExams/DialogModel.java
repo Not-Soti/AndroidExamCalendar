@@ -20,12 +20,12 @@ import java.util.Date;
 /**
  * Class made to act as the model for adding/deleting exams/holidays dialogs
  */
-public class DialogDBHelper {
+public class DialogModel {
 
     DBHelper dbHelper;
     String tag = "DialogDBHelper";
 
-    public DialogDBHelper(Context con){
+    public DialogModel(Context con){
         this.dbHelper = new DBHelper(con);
     }
 

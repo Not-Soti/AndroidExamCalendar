@@ -27,7 +27,7 @@ public class DialogDeleteExam extends Activity {
     private ListView examListView;
     private static String examToDelete; //used to get the exam selected from the ListView
 
-    DialogDBHelper model;
+    DialogModel model;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -35,7 +35,7 @@ public class DialogDeleteExam extends Activity {
         setContentView(R.layout.dialog_delete_exam);
 
         examToDelete = new String();
-        model = new DialogDBHelper(this);
+        model = new DialogModel(this);
         Bundle bundle = getIntent().getExtras(); //Get info from previous Activity
 
         accept = findViewById(R.id.buttonAcceptDeleteExam);
