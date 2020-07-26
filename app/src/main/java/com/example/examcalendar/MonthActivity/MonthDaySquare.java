@@ -47,7 +47,8 @@ public class MonthDaySquare extends LinearLayout {
     public static final int EXAM = 1;
     public static final int HOLIDAY = 2;
 
-    private float textSize; //text size from the resources
+    private int examTextSize;
+
 
     public MonthDaySquare(Context context) {
         super(context);
@@ -55,7 +56,7 @@ public class MonthDaySquare extends LinearLayout {
         initializeViews(context);
     }
 
-    public MonthDaySquare(Context context, ArrayList<String> examStr, String dayStr, int type, int month, int year) {
+    public MonthDaySquare(Context context, ArrayList<String> examStr, String dayStr, int type, int month, int year, int textSize) {
         super(context);
         this.context = context;
         this.examListStr = examStr;
@@ -63,8 +64,7 @@ public class MonthDaySquare extends LinearLayout {
         this.type = type;
         this.month = month;
         this.year = year;
-
-        textSize = getResources().getDimension(R.dimen.examTextSizeMonthGrid);
+        this.examTextSize = textSize;
 
         initializeViews(context);
     }
@@ -96,10 +96,20 @@ public class MonthDaySquare extends LinearLayout {
             //TextView examView = new TextView(context);
             AutofitTextView examView = new AutofitTextView(context); //Class from the maven repo
 
+            /*TODO Arreglar que se pueda cambiar el tamaño de la letra.
+                Entiendo que lo que pasa es que como son pixeles escalados, al hacer el setTextSize
+                aquí le pregunta a la auto grid view la medida, y ésta le pregunta al propio textView la medida,
+                creandose un bucle infinito de preguntarse. Vamos, digo yo.
+             */
+            //Getting the text size from the preferences
+            examView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 24);
+            examView.setMaxTextSize(TypedValue.COMPLEX_UNIT_SP, 24);
+            //examView.setTextSize(TypedValue.COMPLEX_UNIT_PX, examTextSize);
+            //examView.setMaxTextSize(TypedValue.COMPLEX_UNIT_PX, examTextSize);
 
-            examView.setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize);
-            examView.setMaxTextSize(TypedValue.COMPLEX_UNIT_SP, textSize);
-            int minTextSize = (int)(24*75/100); //75% of the value
+
+            int minTextSize = Math.round(24*75/100); //75% of the value
+            //int minTextSize = 12;
             examView.setMinTextSize(minTextSize);
 
             examView.setLayoutParams(new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));

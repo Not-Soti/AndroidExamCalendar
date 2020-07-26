@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <integer name="columnsOnDayGrid">5</integer>
+
+    <integer name="examTextSizeMonthGrid">20</integer>
+    <integer name="dayTextSizeMonthGrid">12</integer>
 </resources>

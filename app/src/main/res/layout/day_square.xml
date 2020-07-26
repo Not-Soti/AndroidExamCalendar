@@ -31,8 +31,6 @@
         android:layout_below="@id/LinearLayoutExamNames"
         android:layout_alignParentEnd="true"
         android:layout_marginEnd="1dp"
-        android:text="aaaa"
-        android:textSize="@dimen/dayTextSizeMonthGrid"
         tools:layout_conversion_absoluteHeight="682dp"
         tools:layout_conversion_absoluteWidth="0dp"
         tools:layout_editor_absoluteX="410dp"

@@ -3,6 +3,7 @@
 
     <dimen name="widthButtonMain">150dp</dimen>
     <dimen name="spaceBetweenMain">12dp</dimen>
+    <dimen name="spaceOnExamCrudDialogs">30dp</dimen>
 
     <dimen name="monthLayout"></dimen>
 
@@ -11,12 +12,16 @@
     <dimen name="widthMonthButtons">10dp</dimen>
     <dimen name="weekSquaresWidth">62dp</dimen>
     <dimen name="dayCellsMinHeight">48dp</dimen>
+
+    <!-- on integers.xml because it's easier to manipulate
     <dimen name="examTextSizeMonthGrid">8sp</dimen>
     <dimen name="dayTextSizeMonthGrid">12sp</dimen>
+    -->
 
     <dimen name="dialogMarginLeft">5dp</dimen>
 
     <dimen name="monthGridCornerRound">3dp</dimen>
 
-
+    <!-- Configuration activity -->
+    <dimen name="ConfigurationActivity_FontSizeComponentsHeight">70dp</dimen>
 </resources>

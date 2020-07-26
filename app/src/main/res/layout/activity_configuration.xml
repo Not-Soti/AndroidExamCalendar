@@ -5,27 +5,91 @@
     android:orientation="vertical">
 
     <Button
-        android:id="@+id/colorPickerNormalButton"
+        android:id="@+id/ConfigAct_ColorPickerNormalButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Cambiar color basico" />
+        android:text="@string/change_basic_color" />
 
     <Button
-        android:id="@+id/colorPickerHolidayButton"
+        android:id="@+id/ConfigAct_ColorPickerExamButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Cambiar color vacaciones" />
+        android:text="@string/change_exam_color" />
 
     <Button
-        android:id="@+id/colorPickerExamButton"
+        android:id="@+id/ConfigAct_ColorPickerHolidayButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Cambiar color examenes" />
+        android:text="@string/change_holiday_color" />
 
+    <!--
+    <RelativeLayout
+        android:id="@+id/ConfigAct_FontSizeLinearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/textView15"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/ConfigurationActivity_FontSizeComponentsHeight"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="5dp"
+            android:gravity="center"
+            android:text="Tamaño de la letra:" />
+
+        <TextView
+            android:id="@+id/ConfigAct_FontSizeNumberTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/ConfigurationActivity_FontSizeComponentsHeight"
+            android:layout_marginStart="5dp"
+            android:layout_toEndOf="@+id/textView15"
+            android:gravity="center"
+            android:text="20"
+            />
+
+        <LinearLayout
+            android:id="@+id/ConfigAct_FontSizeButtonsLinearLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/ConfigurationActivity_FontSizeComponentsHeight"
+            android:layout_marginStart="2dp"
+            android:layout_toEndOf="@+id/ConfigAct_FontSizeNumberTextView"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/ConfigAct_BiggerFontButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="+" />
+
+            <Button
+                android:id="@+id/ConfigAct_SmallerFontButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="-" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/ConfigAct_FontSizeExampleTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/ConfigurationActivity_FontSizeComponentsHeight"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="50dp"
+            android:layout_toEndOf="@+id/ConfigAct_FontSizeButtonsLinearLayout"
+            android:background="@color/ExamBg"
+            android:gravity="center"
+            android:text="Ejemplo: HOLA"
+            android:textColor="#000000"/>
+    </RelativeLayout>
+    -->
     <Button
-        android:id="@+id/configAcceptButton"
+        android:id="@+id/ConfigAct_ConfigAcceptButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Aceptar" />
+        android:text="@string/accept" />
+
 </LinearLayout>
 

@@ -21,7 +21,7 @@
             android:id="@+id/textView14"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Nombre" />
+            android:text="@string/name" />
 
         <EditText
             android:id="@+id/textEditExamName"
@@ -32,7 +32,7 @@
             android:id="@+id/textView8"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Día" />
+            android:text="@string/day" />
 
         <EditText
             android:id="@+id/textEditExamDay"
@@ -45,7 +45,7 @@
             android:id="@+id/textView9"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Mes" />
+            android:text="@string/month" />
 
         <EditText
             android:id="@+id/textEditExamMonth"
@@ -58,7 +58,7 @@
             android:id="@+id/textView10"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Año" />
+            android:text="@string/year" />
 
         <EditText
             android:id="@+id/textEditExamYear"
@@ -71,7 +71,7 @@
             android:id="@+id/textView11"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Lista de exámenes programados" />
+            android:text="@string/programmedExamList" />
 
         <ListView
             android:id="@+id/listEditExamNames"
@@ -83,8 +83,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="bottom|center"
-            android:onClick="editExam"
-            android:text="Aceptar" />
+            android:text="@string/accept" />
 
     </LinearLayout>
 

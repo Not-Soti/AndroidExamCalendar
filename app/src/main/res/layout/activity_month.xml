@@ -21,13 +21,13 @@
 
         <Button
             android:id="@+id/bPrevMonth"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Anterior" />
+            android:text="@string/previous" />
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
@@ -35,26 +35,25 @@
 
             <TextView
                 android:id="@+id/textViewMonth"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:gravity="center"
-                android:text="TextView" />
+                android:gravity="center"/>
 
             <TextView
                 android:id="@+id/textViewYear"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="TextView" />
+                android:gravity="center"/>
         </LinearLayout>
 
         <Button
             android:id="@+id/bNextMonth"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Siguiente" />
+            android:text="@string/next" />
 
     </LinearLayout>
 
@@ -106,12 +105,12 @@
         android:layout_marginTop="1dp"
         android:orientation="horizontal">
 
+        <!--
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <!--
             <TextView
                 android:id="@+id/textView19"
                 android:layout_width="@dimen/weekSquaresWidth"
@@ -125,9 +124,9 @@
                 android:layout_height="match_parent"
                 android:numColumns="1">
             </GridView>
-            -->
 
         </LinearLayout>
+        -->
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -188,16 +187,6 @@
                 android:layout_height="match_parent"
                 android:numColumns="@integer/columnsOnDayGrid"
                 android:stretchMode="columnWidth"
-                />
-
-
-            <GridView
-                android:id="@+id/DaysGridView"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:numColumns="@integer/columnsOnDayGrid"
-                android:stretchMode="columnWidth"
-
                 />
 
         </LinearLayout>

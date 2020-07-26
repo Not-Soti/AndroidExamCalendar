@@ -2,7 +2,9 @@ package com.example.examcalendar.MonthActivity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -180,7 +182,10 @@ public class MonthActivityController extends Activity{
             //TODO COMPARAR WIDTH DEL TEXTO CON EL WIDTH DEL CUADRADO Y SI ES MAS GRANDE HACER EL TEXTO MAS PEQUEÑO
             String dayToDraw = dayToRepresent == 0 ? "" : String.valueOf(dayToRepresent);
             //MonthDaySquare ds = new MonthDaySquare(this, exam.toString(), dayToDraw, type);
-            MonthDaySquare ds = new MonthDaySquare(this, examList, dayToDraw, type, month, year);
+            SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+            int examFontSize = preferences.getInt("fontSizeExamTextView", R.integer.examTextSizeMonthGrid);
+
+            MonthDaySquare ds = new MonthDaySquare(this, examList, dayToDraw, type, month, year, examFontSize);
 
             //Adding a click listener to de MonthDaySquare to open the popupMenu
             //setDaySquareListener(ds, dayToRepresent);

@@ -5,9 +5,10 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
+import android.widget.TextView;
 
 import com.example.examcalendar.MainActivity.MainActivity;
 import com.example.examcalendar.MonthActivity.MonthDaySquare;
@@ -19,6 +20,9 @@ import yuku.ambilwarna.AmbilWarnaDialog;
 public class ConfigurationActivityController extends Activity {
 
     private Button configAcceptButton, colorPickerExamButton, colorPickerHolidayButton, colorPickerNormalButton;
+
+    //private TextView fontSizeExampleTextView, fontSizeNumberTextView;
+    //private Button biggerFontSizeButton, smallerFontSizeButton;
     //private EditText colorEditText;
 
     @Override
@@ -26,13 +30,20 @@ public class ConfigurationActivityController extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_configuration);
 
+        final SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
 
-        configAcceptButton = findViewById(R.id.configAcceptButton);
-        colorPickerExamButton = findViewById(R.id.colorPickerExamButton);
-        colorPickerNormalButton = findViewById(R.id.colorPickerNormalButton);
-        colorPickerHolidayButton = findViewById(R.id.colorPickerHolidayButton);
+        configAcceptButton = findViewById(R.id.ConfigAct_ConfigAcceptButton);
+        colorPickerExamButton = findViewById(R.id.ConfigAct_ColorPickerExamButton);
+        colorPickerNormalButton = findViewById(R.id.ConfigAct_ColorPickerNormalButton);
+        colorPickerHolidayButton = findViewById(R.id.ConfigAct_ColorPickerHolidayButton);
 
-        //final SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        /*
+        fontSizeNumberTextView = findViewById(R.id.ConfigAct_FontSizeNumberTextView);
+        fontSizeExampleTextView = findViewById(R.id.ConfigAct_FontSizeExampleTextView);
+        biggerFontSizeButton = findViewById(R.id.ConfigAct_BiggerFontButton);
+        smallerFontSizeButton = findViewById(R.id.ConfigAct_SmallerFontButton);
+        */
+
         final int colorExamBg = getColorFromPreferences(MonthDaySquare.EXAM);
         final int colorHolidayBg = getColorFromPreferences(MonthDaySquare.HOLIDAY);
         final int colorNormalBg = getColorFromPreferences(MonthDaySquare.NORMAL);
@@ -42,37 +53,71 @@ public class ConfigurationActivityController extends Activity {
         colorPickerNormalButton.setBackgroundColor(colorNormalBg);
 
 
+        /*
+        //Set the font size in the example TextViews
+        int fontSize = preferences.getInt("fontSizeExamTextView", R.integer.examTextSizeMonthGrid);
+        fontSizeExampleTextView.setTextSize(fontSize);
+        fontSizeExampleTextView.setText("Ejemplo: HOLA");
+        fontSizeNumberTextView.setText(fontSize);
+        Log.d("CONFIG:", "font size int = " + fontSize);
+        */
+
         //Color chooser buttons
         colorPickerExamButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                openColorPicker(colorExamBg, MonthDaySquare.EXAM);
+                openColorPicker(colorExamBg, MonthDaySquare.EXAM, preferences);
             }
         });
         colorPickerHolidayButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                openColorPicker(colorHolidayBg, MonthDaySquare.HOLIDAY);
+                openColorPicker(colorHolidayBg, MonthDaySquare.HOLIDAY, preferences);
             }
         });
         colorPickerNormalButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                openColorPicker(colorNormalBg, MonthDaySquare.NORMAL);
+                openColorPicker(colorNormalBg, MonthDaySquare.NORMAL, preferences);
             }
         });
 
+        /*
+        //Font size buttons
+        biggerFontSizeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int fontSizeAux = Integer.parseInt(fontSizeNumberTextView.getText().toString());
+                fontSizeAux++;
+                fontSizeExampleTextView.setTextSize(fontSizeAux);
+                fontSizeNumberTextView.setText(String.valueOf(fontSizeAux));
+            }
+        });
+        smallerFontSizeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int fontSizeAux = Integer.parseInt(fontSizeNumberTextView.getText().toString());
+                fontSizeAux--;
+                fontSizeExampleTextView.setTextSize(fontSizeAux);
+                fontSizeNumberTextView.setText(String.valueOf(fontSizeAux));
+            }
+        });
+         */
         //Accept button
         configAcceptButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //SharedPreferences.Editor editor = preferences.edit();
+                //int newFontSize = Integer.parseInt(fontSizeNumberTextView.getText().toString());
+                //editor.putInt("fontSizeExamTextView", newFontSize); //Override the font size
+
                 Intent i = new Intent(ConfigurationActivityController.this, MainActivity.class);
                 startActivity(i);
             }
         });
     }
 
-    private void openColorPicker(final int defColor, final int type) {
+    private void openColorPicker(final int defColor, final int type, final SharedPreferences preferences) {
         AmbilWarnaDialog colorPicker = new AmbilWarnaDialog(this, defColor, new AmbilWarnaDialog.OnAmbilWarnaListener() {
             int newColor = defColor;
 
@@ -82,7 +127,7 @@ public class ConfigurationActivityController extends Activity {
 
             @Override
             public void onOk(AmbilWarnaDialog dialog, int color) {
-                final SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(ConfigurationActivityController.this);
+                //final SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(ConfigurationActivityController.this);
                 SharedPreferences.Editor editor = preferences.edit();
                 newColor = color;
                 switch (type) {
