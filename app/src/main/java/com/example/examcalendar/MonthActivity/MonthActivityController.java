@@ -47,7 +47,7 @@ public class MonthActivityController extends Activity{
     @Override
     protected void onCreate(Bundle savedIntenceState) {
         super.onCreate(savedIntenceState);
-        setContentView(R.layout.month_activity);
+        setContentView(R.layout.activity_month);
 
         model = new MonthActivityModel(this);
 

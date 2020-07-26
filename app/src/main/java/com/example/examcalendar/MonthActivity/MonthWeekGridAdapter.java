@@ -42,7 +42,7 @@ public class MonthWeekGridAdapter extends BaseAdapter {
         if(view==null){
             //Inflate the layour
             LayoutInflater inf = ((Activity) context).getLayoutInflater();
-            view = inf.inflate(R.layout.month_activity,viewGroup, false);
+            view = inf.inflate(R.layout.activity_month,viewGroup, false);
         }
 
         //Get current item to be displayed
