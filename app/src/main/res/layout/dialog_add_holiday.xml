@@ -10,14 +10,14 @@
         android:id="@+id/textView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/start"
+        android:text="@string/DialogsCRUD_Start"
         android:textSize="24dp" />
 
     <TextView
         android:id="@+id/textView4"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/day" />
+        android:text="@string/DialogsCRUD_Day" />
 
     <EditText
         android:id="@+id/textAddHolidayStartDay"
@@ -31,7 +31,7 @@
         android:id="@+id/textView5"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/month" />
+        android:text="@string/DialogsCRUD_Month" />
 
     <EditText
         android:id="@+id/textAddHolidayStartMonth"
@@ -45,7 +45,7 @@
         android:id="@+id/textView3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/year" />
+        android:text="@string/DialogsCRUD_Year" />
 
     <EditText
         android:id="@+id/textAddHolidayStartYear"
@@ -63,14 +63,14 @@
         android:id="@+id/textView2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/end"
+        android:text="@string/DialogsCRUD_End"
         android:textSize="24dp" />
 
     <TextView
         android:id="@+id/textView12"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/day" />
+        android:text="@string/DialogsCRUD_Day" />
 
     <EditText
         android:id="@+id/textAddHolidayEndDay"
@@ -84,7 +84,7 @@
         android:id="@+id/textView6"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/month" />
+        android:text="@string/DialogsCRUD_Month" />
 
     <EditText
         android:id="@+id/textAddHolidayEndMonth"
@@ -98,7 +98,7 @@
         android:id="@+id/textView7"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/year" />
+        android:text="@string/DialogsCRUD_Year" />
 
     <EditText
         android:id="@+id/textAddHolidayEndYear"

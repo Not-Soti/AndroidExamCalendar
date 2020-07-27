@@ -19,7 +19,7 @@
             android:layout_width="@dimen/widthButtonMain"
             android:layout_height="wrap_content"
             android:onClick="startMonthActivity"
-            android:text="@string/calendar" />
+            android:text="@string/MainAct_Calendar" />
 
         <Space
             android:layout_width="match_parent"
@@ -41,7 +41,7 @@
             android:layout_width="@dimen/widthButtonMain"
             android:layout_height="wrap_content"
             android:onClick="startConfigurationActivity"
-            android:text="@string/configuration" />
+            android:text="@string/MainAct_Configuration" />
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -24,4 +24,9 @@
 
     <!-- Configuration activity -->
     <dimen name="ConfigurationActivity_FontSizeComponentsHeight">70dp</dimen>
+
+    <!-- Config color activity -->
+    <dimen name="ConfColorAct_TextViewSize">20sp</dimen>
+    <dimen name="ConfColorAct__ColorPaletteImageSize">100dp</dimen>
+
 </resources>

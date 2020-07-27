@@ -215,10 +215,6 @@ public class DialogModel {
                             newStartDateString = formatter.format(cal.getTime());
                             this.addHolidays(oldStartString, newStartDateString);
                         }
-                        /*TODO seguir añadiendo casos donde oldStart == newStart y oldEnd == newEnd
-                         */
-
-
             } catch (ParseException e) {
                 e.printStackTrace();
             } catch (NullPointerException e){

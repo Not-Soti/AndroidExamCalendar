@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:layout_marginTop="5dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/ConfColorAct_Table_palette_title"
+            android:textColor="@color/black"
+            android:textSize="@dimen/ConfColorAct_TextViewSize"/>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:layout_marginTop="20dp">
+
+            <LinearLayout
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center">
+            <ImageButton
+                android:id="@+id/ColorAct_Palette1ImageButton"
+                android:layout_width="@dimen/ConfColorAct__ColorPaletteImageSize"
+                android:layout_height="@dimen/ConfColorAct__ColorPaletteImageSize"
+                android:src="@drawable/palette_1"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="Paleta 1"
+                    android:gravity="center"/>
+            </LinearLayout>
+            <Space
+                android:layout_width="100dp"
+                android:layout_height="100dp"/>
+            <LinearLayout
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center">
+                <ImageButton
+                    android:id="@+id/ColorAct_Palette2ImageButton"
+                    android:layout_width="@dimen/ConfColorAct__ColorPaletteImageSize"
+                    android:layout_height="@dimen/ConfColorAct__ColorPaletteImageSize"
+                    android:src="@drawable/palette_2"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="Paleta 2"
+                    android:gravity="center"/>
+            </LinearLayout>
+        </TableRow>
+    </TableLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_weight="1">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Personalizar colores:"
+            android:textSize="@dimen/ConfColorAct_TextViewSize"
+            android:textColor="@color/black"/>
+        <Button
+            android:id="@+id/ColorAct_ColorPickerNormalButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/ConfColorAct_Change_basic_color" />
+
+        <Button
+            android:id="@+id/ColorAct_ColorPickerExamButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/ConfColorAct_Change_exam_color" />
+
+        <Button
+            android:id="@+id/ColorAct_ColorPickerHolidayButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/ConfColorAct_Change_holiday_color" />
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/ColorAct_ConfigAcceptButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/accept" />
+</LinearLayout>

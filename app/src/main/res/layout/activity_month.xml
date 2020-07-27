@@ -29,7 +29,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="@string/previous" />
+                android:text="@string/MonthAct_Previous" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -58,7 +58,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="@string/next" />
+                android:text="@string/MonthAct_Next" />
 
         </LinearLayout>
 

@@ -25,6 +25,7 @@
         <activity android:name=".DialogsCRUDExams.DialogDeleteHolidays"/>
         <activity android:name=".ConfigurationActivity.ConfigurationActivityController"/>
         <activity android:name=".WeekActivity.WeekActivityController"/>
+        <activity android:name=".ConfigurationActivity.ConfigColorActivity"/>
 
     </application>
 

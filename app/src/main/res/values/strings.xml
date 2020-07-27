@@ -6,27 +6,31 @@
 
 
     <!-- Main activity -->
-    <string name="configuration">Configuración</string>
-    <string name="calendar">Calendario</string>
+    <string name="MainAct_Configuration">Configuración</string>
+    <string name="MainAct_Calendar">Calendario</string>
 
     <!-- Month activity -->
-    <string name="previous">Anterior</string>
-    <string name="next">Siguiente</string>
+    <string name="MonthAct_Previous">Anterior</string>
+    <string name="MonthAct_Next">Siguiente</string>
 
     <!-- Exam and holiday CRUD dialogs -->
-    <string name="name">Nombre</string>
-    <string name="day">Día</string>
-    <string name="month">Mes</string>
-    <string name="year">Año</string>
+    <string name="DialogsCRUD_Name">Nombre</string>
+    <string name="DialogsCRUD_Day">Día</string>
+    <string name="DialogsCRUD_Month">Mes</string>
+    <string name="DialogsCRUD_Year">Año</string>
 
-    <string name="start">Inicio</string>
-    <string name="end">Fin</string>
+    <string name="DialogsCRUD_Start">Inicio</string>
+    <string name="DialogsCRUD_End">Fin</string>
 
-    <string name="programmedExamList">Exámenes fechados:</string>
+    <string name="DialogsCRUD_ProgrammedExamList">Exámenes fechados:</string>
 
 
     <!-- Configuration activity -->
-    <string name="change_basic_color">Cambiar color básico</string>
-    <string name="change_exam_color">Cambiar color exmámenes</string>
-    <string name="change_holiday_color">Cambiar color vacaciones</string>
+    <string name="ConfigAct_Change_colors_button">Cambiar paleta de colores</string>
+
+    <!-- Config color activity -->
+    <string name="ConfColorAct_Table_palette_title">Colores predefinidos:</string>
+    <string name="ConfColorAct_Change_basic_color">Cambiar color base</string>
+    <string name="ConfColorAct_Change_exam_color">Cambiar color exmámenes</string>
+    <string name="ConfColorAct_Change_holiday_color">Cambiar color vacaciones</string>
 </resources>

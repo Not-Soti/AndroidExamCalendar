@@ -101,9 +101,6 @@ public class DialogDeleteHolidays extends Activity {
     /**
      * Method to delete a holiday period if the inserted date is holiday
      */
-    /*TODO      Hacer que se divida si existen ej: existe del 24/01 al 12/02, y se quiere borrar el dia 27/01,
-     *TODO      pues que haya un periodo del 24/01 al 26/01 y otro del 28/01 al 12/02
-     */
     protected void deleteHolidays(){
 
         //Get the values

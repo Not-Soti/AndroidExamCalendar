@@ -4,24 +4,13 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <Button
-        android:id="@+id/ConfigAct_ColorPickerNormalButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/change_basic_color" />
+
 
     <Button
-        android:id="@+id/ConfigAct_ColorPickerExamButton"
+        android:id="@+id/ConfigAct_ChoosheColorButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/change_exam_color" />
-
-    <Button
-        android:id="@+id/ConfigAct_ColorPickerHolidayButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/change_holiday_color" />
-
+        android:text="@string/ConfigAct_Change_colors_button"/>
     <!--
     <RelativeLayout
         android:id="@+id/ConfigAct_FontSizeLinearLayout"

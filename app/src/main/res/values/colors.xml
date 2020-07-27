@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <color name="black">#000000</color>
+
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
@@ -14,4 +16,15 @@
     <color name="ExamTx">#005208</color>
     <color name="todayDay">#000000</color>
     <color name="todayDayBg">#bababa</color>
+
+    <!-- Color palettes -->
+    <!-- Platette 1 -->
+    <color name="P1NormalBg">#edf6f9</color>
+    <color name="P1ExamBg">#83c5be</color>
+    <color name="P1HolidayBg">#ffddd2</color>
+
+    <!-- Platette 2 -->
+    <color name="P2NormalBg">#d7ffe1</color>
+    <color name="P2ExamBg">#ffadad</color>
+    <color name="P2HolidayBg">#afcfff</color>
 </resources>
