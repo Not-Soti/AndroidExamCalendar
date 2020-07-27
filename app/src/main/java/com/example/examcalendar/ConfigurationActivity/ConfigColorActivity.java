@@ -17,8 +17,8 @@ import yuku.ambilwarna.AmbilWarnaDialog;
 
 public class ConfigColorActivity extends Activity {
     private Button configAcceptButton, colorPickerExamButton, colorPickerHolidayButton, colorPickerNormalButton;
-    private ImageButton palette1ImageButton, palette2ImageButton;
-    int prevColorNormal, prevColorExam, prevColorHoliday; //used to save colors setted when the activity starts
+    private ImageButton palette1ImageButton, palette2ImageButton, palette3ImageButton;
+    int prevColorNormal, prevColorExam, prevColorHoliday, prevColorActivity; //used to save colors setted when the activity starts
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,15 +34,19 @@ public class ConfigColorActivity extends Activity {
 
         palette1ImageButton = findViewById(R.id.ColorAct_Palette1ImageButton);
         palette2ImageButton = findViewById(R.id.ColorAct_Palette2ImageButton);
+        palette3ImageButton = findViewById(R.id.ColorAct_Palette3ImageButton);
+
 
         //Setting color from preferences
         final int colorExamBg = getColorFromPreferences(MonthDaySquare.EXAM);
         final int colorHolidayBg = getColorFromPreferences(MonthDaySquare.HOLIDAY);
         final int colorNormalBg = getColorFromPreferences(MonthDaySquare.NORMAL);
+        final int colorActivityBg = getColorFromPreferences(10);
 
         prevColorExam = colorExamBg;
         prevColorHoliday = colorHolidayBg;
         prevColorNormal = colorNormalBg;
+        prevColorActivity = colorActivityBg;
 
         colorPickerExamButton.setBackgroundColor(colorExamBg);
         colorPickerHolidayButton.setBackgroundColor(colorHolidayBg);
@@ -59,6 +63,12 @@ public class ConfigColorActivity extends Activity {
             @Override
             public void onClick(View view) {
                 setColorFromPalette(2);
+            }
+        });
+        palette3ImageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                setColorFromPalette(3);
             }
         });
 
@@ -137,6 +147,9 @@ public class ConfigColorActivity extends Activity {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
         int color = 0;
         switch (type) {
+            case 10: //Getting the background color for the activity
+                color = preferences.getInt("bgColorActivity", 0xFFFFFF); //white if it doesn't exist
+                break;
             case MonthDaySquare.NORMAL:
                 color = preferences.getInt("bgColorNormalDay", getResources().getColor(R.color.NormalBg));
                 break;
@@ -173,27 +186,35 @@ public class ConfigColorActivity extends Activity {
         int normalColor = prevColorNormal;
         int examColor = prevColorExam;
         int holidayColor = prevColorHoliday;
+        int bgActivityColor = prevColorActivity;
         switch (type) {
             case 1: //palette 1 chosen
                 normalColor = getResources().getColor(R.color.P1NormalBg);
                 examColor = getResources().getColor(R.color.P1ExamBg);
                 holidayColor = getResources().getColor(R.color.P1HolidayBg);
-
+                bgActivityColor = getResources().getColor(R.color.P1ActivityBg);
                 break;
             case 2:
                 normalColor = getResources().getColor(R.color.P2NormalBg);
                 examColor = getResources().getColor(R.color.P2ExamBg);
                 holidayColor = getResources().getColor(R.color.P2HolidayBg);
-
+                bgActivityColor = getResources().getColor(R.color.P2ActivityBg);
+                break;
+            case 3:
+                normalColor = getResources().getColor(R.color.P3NormalBg);
+                examColor = getResources().getColor(R.color.P3ExamBg);
+                holidayColor = getResources().getColor(R.color.P3HolidayBg);
+                bgActivityColor = getResources().getColor(R.color.P3ActivityBg);
                 break;
         }
         editor.putInt("bgColorNormalDay", normalColor);
         editor.putInt("bgColorExamDay", examColor);
         editor.putInt("bgColorHolidayDay", holidayColor);
+        editor.putInt("bgColorActivity", bgActivityColor);
         //Repaint the buttons
-        colorPickerExamButton.setBackgroundColor(normalColor);
-        colorPickerHolidayButton.setBackgroundColor(examColor);
-        colorPickerNormalButton.setBackgroundColor(holidayColor);
+        colorPickerNormalButton.setBackgroundColor(normalColor);
+        colorPickerExamButton.setBackgroundColor(examColor);
+        colorPickerHolidayButton.setBackgroundColor(holidayColor);
         editor.apply();
     }
 }

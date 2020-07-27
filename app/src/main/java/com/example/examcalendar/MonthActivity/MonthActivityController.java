@@ -29,17 +29,12 @@ import java.util.GregorianCalendar;
 public class MonthActivityController extends Activity{
 
     private MonthActivityModel model;
-
     private AutoGridView dayGridView;
-    //private GridView dayGridView;
     private MonthDayGridAdapter dayGridAdapter;
-    //private GridView weekGridView;
-    //private MonthWeekGridAdapter weekGridAdapter;
     private TextView monthTextView, yearTextView;
-    //private Button addExamButton, deleteExamButton, addHolidaysButton, deleteHolidaysButton;
     private Button nextMonthButton, prevMonthButton;
     private RelativeLayout globalLayout;
-    private LinearLayout calendarLinearLayout;
+
 
     //TODO Hacerlo en resources
     private static final String[] MONTH_NAMES = {"Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
@@ -56,18 +51,12 @@ public class MonthActivityController extends Activity{
 
         model = new MonthActivityModel(this);
 
-        //weekGridView = (GridView) findViewById(R.id.WeeksGridView);
         dayGridView = (AutoGridView) findViewById(R.id.MonthAct_DaysAutoGridView);
         monthTextView = (TextView)  findViewById(R.id.MonthAct_MonthTextView);
         yearTextView = (TextView) findViewById(R.id.MonthAct_YearTextView);
-        //addExamButton = (Button) findViewById(R.id.bAddExam);
-        //deleteExamButton = (Button) findViewById(R.id.bDeleteExam);
-        //addHolidaysButton = (Button) findViewById(R.id.bAddHoliday);
-        //deleteHolidaysButton = (Button) findViewById(R.id.bDeleteHoliday);
         nextMonthButton = (Button) findViewById(R.id.MonthAct_NextMonthButton);
         prevMonthButton = (Button) findViewById(R.id.MonthAct_PrevMonthButton);
         globalLayout = findViewById(R.id.MonthAct_GlobalLayout);
-        calendarLinearLayout = findViewById(R.id.MonthAct_CalendarLinearLayout);
 
         year = getYear();
         month = getMonth();
@@ -124,6 +113,12 @@ public class MonthActivityController extends Activity{
      * Method that draws the GUI
      */
     private void drawUI(){
+        //Setting background color to the activity
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        int bgColor = preferences.getInt("bgColorActivity", 0xFFFFFF);
+        View root = globalLayout.getRootView();
+        root.setBackgroundColor(bgColor);
+
         monthTextView.setText(MONTH_NAMES[month]);
         yearTextView.setText(String.valueOf(year));
 
@@ -172,8 +167,7 @@ public class MonthActivityController extends Activity{
             }
 
             //Checks if the printing date is today
-            String today = newFormat.format(new Date()); //TODO usar este
-            //String today = "2020-07-27";
+            String today = newFormat.format(new Date());
             boolean isToday = today.equals(printingDate);
 
             //Checks if the day has any exam
@@ -188,10 +182,8 @@ public class MonthActivityController extends Activity{
                 type = MonthDaySquare.HOLIDAY;
             }
 
-            //TODO COMPARAR WIDTH DEL TEXTO CON EL WIDTH DEL CUADRADO Y SI ES MAS GRANDE HACER EL TEXTO MAS PEQUEÑO
             String dayToDraw = dayToRepresent == 0 ? "" : String.valueOf(dayToRepresent);
             //MonthDaySquare ds = new MonthDaySquare(this, exam.toString(), dayToDraw, type);
-            SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
             int examFontSize = preferences.getInt("fontSizeExamTextView", R.integer.examTextSizeMonthGrid);
 
             MonthDaySquare ds = new MonthDaySquare(this, examList, dayToDraw, type, month, year, examFontSize, isToday);

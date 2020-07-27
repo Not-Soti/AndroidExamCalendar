@@ -19,6 +19,7 @@ import android.widget.PopupMenu;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
+import androidx.core.graphics.ColorUtils;
 
 import com.example.examcalendar.DialogsCRUDExams.DialogAddExam;
 import com.example.examcalendar.DialogsCRUDExams.DialogAddHolidays;
@@ -128,22 +129,29 @@ public class MonthDaySquare extends LinearLayout {
 
         //Getting de BG color from the user settings
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
+        int bgColor = 0xFFFFFF;
+
         if(type == MonthDaySquare.EXAM) {
-            int bgcolor = preferences.getInt("bgColorExamDay", getResources().getColor(R.color.ExamBg));
-            ((GradientDrawable) this.getBackground()).setColor(bgcolor);
+            bgColor = preferences.getInt("bgColorExamDay", getResources().getColor(R.color.ExamBg));
         }else if(type == MonthDaySquare.HOLIDAY){
-            int bgcolor = preferences.getInt("bgColorHolidayDay", getResources().getColor(R.color.HolidayBg));
-            ((GradientDrawable) this.getBackground()).setColor(bgcolor);
+            bgColor = preferences.getInt("bgColorHolidayDay", getResources().getColor(R.color.HolidayBg));
         }else if(type == MonthDaySquare.NORMAL){
-            int bgcolor = preferences.getInt("bgColorNormalDay", getResources().getColor(R.color.NormalBg));
-            ((GradientDrawable) this.getBackground()).setColor(bgcolor);
+            bgColor = preferences.getInt("bgColorNormalDay", getResources().getColor(R.color.NormalBg));
         }
+
+        //Make today color more intense
+        if(isToday){
+            float[] colorHSL = new float[3];
+            ColorUtils.colorToHSL(bgColor, colorHSL);
+            colorHSL[2] *= 0.8f; //adding brightness to the color
+            bgColor = ColorUtils.HSLToColor(colorHSL);
+        }
+        ((GradientDrawable) this.getBackground()).setColor(bgColor);
 
         //Changing the color for the day if it's today
         if(isToday){
             dayTextView.setTypeface(dayTextView.getTypeface(), Typeface.BOLD);
             dayTextView.setTextColor(getResources().getColor(R.color.todayDay));
-            dayTextView.setBackgroundColor(getResources().getColor(R.color.todayDayBg));
         }
 
         //Setting click listeners for the view

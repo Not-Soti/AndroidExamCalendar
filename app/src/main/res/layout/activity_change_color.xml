@@ -61,13 +61,39 @@
                     android:gravity="center"/>
             </LinearLayout>
         </TableRow>
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:layout_marginTop="20dp">
+
+            <LinearLayout
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center">
+                <ImageButton
+                    android:id="@+id/ColorAct_Palette3ImageButton"
+                    android:layout_width="@dimen/ConfColorAct__ColorPaletteImageSize"
+                    android:layout_height="@dimen/ConfColorAct__ColorPaletteImageSize"
+                    android:src="@drawable/palette_3"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="Paleta 3"
+                    android:gravity="center"/>
+            </LinearLayout>
+
+        </TableRow>
+
     </TableLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:layout_weight="1">
+        android:layout_weight="1"
+        android:layout_marginTop="20dp">
 
         <TextView
             android:layout_width="wrap_content"

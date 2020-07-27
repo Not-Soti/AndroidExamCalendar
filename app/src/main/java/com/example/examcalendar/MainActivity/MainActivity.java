@@ -35,13 +35,13 @@ public class MainActivity extends AppCompatActivity {
     //Starts the month activity
     public void startMonthActivity(View view){
         Intent i = new Intent(this, MonthActivityController.class);
-
         startActivity(i);
     }
 
     //Al pinchar en el boton prohibido, se muestran 2 mensajes y luego se abre
     //la foto de trolleo
     public void startWeekActivity(View view){
+        /*
         switch (numeroTroll){
             case 0:
                 Toast.makeText(this, "AH WACHON TE DIJE QUE NO PULSASES", Toast.LENGTH_LONG).show();
@@ -58,8 +58,7 @@ public class MainActivity extends AppCompatActivity {
                 break;
             default:
                 numeroTroll=0;
-        }
-
+        }*/
     }
 
     //Se abre la actividad de configuracion
