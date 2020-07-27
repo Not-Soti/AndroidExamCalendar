@@ -3,6 +3,7 @@ package com.example.examcalendar.MonthActivity;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.View;
@@ -115,7 +116,7 @@ public class MonthActivityController extends Activity{
     private void drawUI(){
         //Setting background color to the activity
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
-        int bgColor = preferences.getInt("bgColorActivity", 0xFFFFFF);
+        int bgColor = preferences.getInt("bgColorActivity", Color.WHITE);
         View root = globalLayout.getRootView();
         root.setBackgroundColor(bgColor);
 
@@ -129,21 +130,9 @@ public class MonthActivityController extends Activity{
         //Days to paint since its from Monday to Friday
         representedDays = ((numberOfDays + dayOfStart) - (2 * numberOfWeeks));
 
-/*
-        //TODO contar las semanas desde el inicio del curso
-        //Creates the list of weeks and inflates de weekGridView
-        ArrayList<MonthWeekSquare> weekViews = new ArrayList<>();
-        for(int i = 0; i<numberOfWeeks; i++){
-            MonthWeekSquare ws = new MonthWeekSquare(this,String.valueOf(i+1));
-            weekViews.add(ws);
-        }
-        weekGridAdapter = new MonthWeekGridAdapter(this, weekViews);
-        weekGridView.setAdapter(weekGridAdapter);
-*/
-
         //Creates the list of days to display and
         //inflates the days grid view
-        ArrayList<MonthDaySquare> dayViews = new ArrayList<>(31);
+        ArrayList<MonthDaySquare> dayViews = new ArrayList<>(representedDays);
         int dayToRepresent = 0;
         for (int i = 1; (i <=representedDays+dayOfStart) && (dayToRepresent < numberOfDays); i++) { //From 1 to n
         //for(int i = 0; i<representedDays+dayOfStart; i++) {
