@@ -24,14 +24,14 @@
         <Space
             android:layout_width="match_parent"
             android:layout_height="@dimen/spaceBetweenMain" />
-
+<!--
         <Button
             android:id="@+id/bWeek"
             android:layout_width="@dimen/widthButtonMain"
             android:layout_height="wrap_content"
             android:onClick="startWeekActivity"
             android:text="No pulsar" />
-
+-->
         <Space
             android:layout_width="match_parent"
             android:layout_height="@dimen/spaceBetweenMain" />
