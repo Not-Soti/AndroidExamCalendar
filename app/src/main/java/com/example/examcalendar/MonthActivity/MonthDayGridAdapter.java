@@ -51,8 +51,9 @@ public class MonthDayGridAdapter extends BaseAdapter {
         //Disable if the day is 0, which means it has not to be represented
         String day = ds.getDayTextView().getText().toString();
         if (day.isEmpty()){
-            ds.setEnabled(false);
-            ds.setBackgroundResource(0);
+            view.setVisibility(View.INVISIBLE);
+            //ds.setEnabled(false);
+            //ds.setBackgroundResource(0);
         }
 
         return view;

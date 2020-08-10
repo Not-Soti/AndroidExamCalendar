@@ -183,35 +183,35 @@ public class MonthDaySquare extends LinearLayout {
                     case R.id.addExamPopupMenu:
                         i = new Intent(auxContext, DialogAddExam.class);
                         i.putExtra("day", dayStr);
-                        i.putExtra("month", Integer.toString(month + 1));
+                        i.putExtra("month", Integer.toString(month));
                         i.putExtra("year", Integer.toString(year));
                         auxContext.startActivity(i);
                         return true;
                     case R.id.editExamPopupMenu:
                         i = new Intent(auxContext, DialogEditExam.class);
                         i.putExtra("day", dayStr);
-                        i.putExtra("month", Integer.toString(month + 1));
+                        i.putExtra("month", Integer.toString(month));
                         i.putExtra("year", Integer.toString(year));
                         auxContext.startActivity(i);
                         return true;
                     case R.id.deleteExamPopupMenu:
                         i = new Intent(auxContext, DialogDeleteExam.class);
                         i.putExtra("day", dayStr);
-                        i.putExtra("month", Integer.toString(month + 1));
+                        i.putExtra("month", Integer.toString(month));
                         i.putExtra("year", Integer.toString(year));
                         auxContext.startActivity(i);
                         return true;
                     case R.id.addHolidaysPopupMenu:
                         i = new Intent(auxContext, DialogAddHolidays.class);
                         i.putExtra("day", dayStr);
-                        i.putExtra("month", Integer.toString(month + 1));
+                        i.putExtra("month", Integer.toString(month));
                         i.putExtra("year", Integer.toString(year));
                         auxContext.startActivity(i);
                         return true;
                     case R.id.deleteHolidaysPopupMenu:
                         i = new Intent(auxContext, DialogDeleteHolidays.class);
                         i.putExtra("day", dayStr);
-                        i.putExtra("month", Integer.toString(month + 1));
+                        i.putExtra("month", Integer.toString(month));
                         i.putExtra("year", Integer.toString(year));
                         auxContext.startActivity(i);
                         return true;

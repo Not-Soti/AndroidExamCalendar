@@ -1,87 +1,101 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/linearLayout2"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
 
     <TableLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:layout_marginTop="5dp">
+        android:id="@+id/tableLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="2dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="2dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/ConfColorAct_Table_palette_title"
             android:textColor="@color/black"
-            android:textSize="@dimen/ConfColorAct_TextViewSize"/>
+            android:textSize="@dimen/ConfColorAct_TextViewSize" />
 
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="center"
-            android:layout_marginTop="20dp">
+            android:layout_marginTop="20dp"
+            android:gravity="center">
 
             <LinearLayout
-                android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
-                android:orientation="vertical"
-                android:gravity="center">
-            <ImageButton
-                android:id="@+id/ColorAct_Palette1ImageButton"
-                android:layout_width="@dimen/ConfColorAct__ColorPaletteImageSize"
-                android:layout_height="@dimen/ConfColorAct__ColorPaletteImageSize"
-                android:src="@drawable/palette_1"/>
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageButton
+                    android:id="@+id/ColorAct_Palette1ImageButton"
+                    android:layout_width="@dimen/ConfColorAct__ColorPaletteImageSize"
+                    android:layout_height="@dimen/ConfColorAct__ColorPaletteImageSize"
+                    android:src="@drawable/palette_1" />
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:text="Paleta 1"
-                    android:gravity="center"/>
+                    android:gravity="center"
+                    android:text="Paleta 1" />
             </LinearLayout>
+
             <Space
                 android:layout_width="100dp"
-                android:layout_height="100dp"/>
+                android:layout_height="100dp" />
+
             <LinearLayout
-                android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
-                android:orientation="vertical"
-                android:gravity="center">
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical">
+
                 <ImageButton
                     android:id="@+id/ColorAct_Palette2ImageButton"
                     android:layout_width="@dimen/ConfColorAct__ColorPaletteImageSize"
                     android:layout_height="@dimen/ConfColorAct__ColorPaletteImageSize"
-                    android:src="@drawable/palette_2"/>
+                    android:src="@drawable/palette_2" />
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:text="Paleta 2"
-                    android:gravity="center"/>
+                    android:gravity="center"
+                    android:text="Paleta 2" />
             </LinearLayout>
         </TableRow>
+
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="center"
-            android:layout_marginTop="20dp">
+            android:layout_marginTop="20dp"
+            android:gravity="center">
 
             <LinearLayout
-                android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
-                android:orientation="vertical"
-                android:gravity="center">
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical">
+
                 <ImageButton
                     android:id="@+id/ColorAct_Palette3ImageButton"
                     android:layout_width="@dimen/ConfColorAct__ColorPaletteImageSize"
                     android:layout_height="@dimen/ConfColorAct__ColorPaletteImageSize"
-                    android:src="@drawable/palette_3"/>
+                    android:src="@drawable/palette_3" />
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:text="Paleta 3"
-                    android:gravity="center"/>
+                    android:gravity="center"
+                    android:text="Paleta 3" />
             </LinearLayout>
 
         </TableRow>
@@ -89,18 +103,24 @@
     </TableLayout>
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:id="@+id/linearLayout3"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="2dp"
+        android:layout_marginEnd="2dp"
+        android:layout_marginBottom="5dp"
         android:orientation="vertical"
-        android:layout_weight="1"
-        android:layout_marginTop="20dp">
+        app:layout_constraintBottom_toTopOf="@+id/ColorAct_ConfigAcceptButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Personalizar colores:"
-            android:textSize="@dimen/ConfColorAct_TextViewSize"
-            android:textColor="@color/black"/>
+            android:textColor="@color/black"
+            android:textSize="@dimen/ConfColorAct_TextViewSize" />
+
         <Button
             android:id="@+id/ColorAct_ColorPickerNormalButton"
             android:layout_width="match_parent"
@@ -123,7 +143,13 @@
 
     <Button
         android:id="@+id/ColorAct_ConfigAcceptButton"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="@string/accept" />
-</LinearLayout>
+        android:layout_marginStart="2dp"
+        android:layout_marginEnd="2dp"
+        android:layout_marginBottom="2dp"
+        android:text="@string/accept"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>
