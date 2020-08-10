@@ -49,8 +49,8 @@ public class MonthDaySquare extends LinearLayout {
     public static final int EXAM = 1;
     public static final int HOLIDAY = 2;
 
-    private int examTextSize;
     private boolean isToday;
+    private boolean isCurrentMonth; //To check if the day displayed is the main displayed month
 
     public MonthDaySquare(Context context) {
         super(context);
@@ -58,7 +58,7 @@ public class MonthDaySquare extends LinearLayout {
         initializeViews(context);
     }
 
-    public MonthDaySquare(Context context, ArrayList<String> examStr, String dayStr, int type, int month, int year, int textSize, boolean isToday) {
+    public MonthDaySquare(Context context, ArrayList<String> examStr, String dayStr, int type, int month, int year, boolean isToday, boolean isCurrentMonth) {
         super(context);
         this.context = context;
         this.examListStr = examStr;
@@ -66,8 +66,8 @@ public class MonthDaySquare extends LinearLayout {
         this.type = type;
         this.month = month;
         this.year = year;
-        this.examTextSize = textSize;
         this.isToday = isToday;
+        this.isCurrentMonth = isCurrentMonth;
 
         initializeViews(context);
     }
@@ -119,6 +119,10 @@ public class MonthDaySquare extends LinearLayout {
             examView.setMaxLines(2);
             examView.setText(exam);
 
+            if(!isCurrentMonth){
+                examView.setTextColor((0x00000000 & 0x00FFFFFF) |0x40000000);
+            }
+
             examNameLinearLayout.addView(examView);
         }
 
@@ -145,14 +149,19 @@ public class MonthDaySquare extends LinearLayout {
             ColorUtils.colorToHSL(bgColor, colorHSL);
             colorHSL[2] *= 0.8f; //adding brightness to the color
             bgColor = ColorUtils.HSLToColor(colorHSL);
-        }
-        ((GradientDrawable) this.getBackground()).setColor(bgColor);
-
-        //Changing the color for the day if it's today
-        if(isToday){
             dayTextView.setTypeface(dayTextView.getTypeface(), Typeface.BOLD);
             dayTextView.setTextColor(getResources().getColor(R.color.todayDay));
         }
+        if(!isCurrentMonth){
+            //Make the color more transparent from the normal color
+            bgColor = preferences.getInt("bgColorNormalDay", getResources().getColor(R.color.NormalBg));
+            bgColor = (bgColor & 0x00FFFFFF) |0x40000000; //First byte is the transparecy, using 25% of current
+            int dayColor = (getResources().getColor(R.color.todayDay));
+            dayColor = (dayColor & 0x00FFFFFF) |0x40000000;
+            dayTextView.setTextColor(dayColor);
+        }
+        ((GradientDrawable) this.getBackground()).setColor(bgColor);
+
 
         //Setting click listeners for the view
         final Context auxContext = context;
@@ -229,13 +238,13 @@ public class MonthDaySquare extends LinearLayout {
     private int checkTypeForBackground(int i) {
         int ret = 0;
         switch (i) {
-            case 0:
+            case MonthDaySquare.NORMAL:
                 ret = R.drawable.month_day_square_normal;
                 break;
-            case 1:
+            case MonthDaySquare.EXAM:
                 ret = R.drawable.month_day_square_exam;
                 break;
-            case 2:
+            case MonthDaySquare.HOLIDAY:
                 ret = R.drawable.month_day_square_holiday;
                 break;
         }

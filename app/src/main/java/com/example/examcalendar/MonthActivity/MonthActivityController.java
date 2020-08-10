@@ -145,9 +145,8 @@ public class MonthActivityController extends Activity{
                 type = MonthDaySquare.HOLIDAY;
             }
 
-            int examFontSize = preferences.getInt("fontSizeExamTextView", R.integer.examTextSizeMonthGrid);
             String dayToDrawStr = String.valueOf(dayToDrawPreviousMonth);
-            MonthDaySquare ds = new MonthDaySquare(this, examList, dayToDrawStr, type, month, year, examFontSize, false);
+            MonthDaySquare ds = new MonthDaySquare(this, examList, dayToDrawStr, type, month, year, false, false);
 
             //Adding a click listener to de MonthDaySquare to open the popupMenu
             //setDaySquareListener(ds, dayToRepresent);
@@ -207,10 +206,8 @@ public class MonthActivityController extends Activity{
             }
 
             String dayToDrawStr = String.valueOf(dayToDrawCurrentMonth);
-            //MonthDaySquare ds = new MonthDaySquare(this, exam.toString(), dayToDraw, type);
-            int examFontSize = preferences.getInt("fontSizeExamTextView", R.integer.examTextSizeMonthGrid);
 
-            MonthDaySquare ds = new MonthDaySquare(this, examList, dayToDrawStr, type, month+1, year, examFontSize, isToday);
+            MonthDaySquare ds = new MonthDaySquare(this, examList, dayToDrawStr, type, month+1, year, isToday, true);
             dayViews.add(ds);
 
             dayToDrawCurrentMonth++;
@@ -247,9 +244,8 @@ public class MonthActivityController extends Activity{
                 type = MonthDaySquare.HOLIDAY;
             }
 
-            int examFontSize = preferences.getInt("fontSizeExamTextView", R.integer.examTextSizeMonthGrid);
             String dayToDrawStr = String.valueOf(dayToDrawNextMonth);
-            MonthDaySquare ds = new MonthDaySquare(this, examList, dayToDrawStr, type, month+2, year, examFontSize, false);
+            MonthDaySquare ds = new MonthDaySquare(this, examList, dayToDrawStr, type, month+2, year, false, false);
 
             //Adding a click listener to de MonthDaySquare to open the popupMenu
             //setDaySquareListener(ds, dayToRepresent);
