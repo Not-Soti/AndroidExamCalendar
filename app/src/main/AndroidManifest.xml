@@ -26,6 +26,7 @@
         <activity android:name=".ConfigurationActivity.ConfigurationActivityController"/>
         <activity android:name=".WeekActivity.WeekActivityController"/>
         <activity android:name=".ConfigurationActivity.ConfigColorActivity"/>
+        <activity android:name=".DialogsCRUDHolidays.ActivityAddHoliday"/>
 
     </application>
 

@@ -38,8 +38,7 @@ public class MonthActivityController extends Activity{
             "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"};
 
     private static int year, month;
-    //private int representedDays; //number of days that should be represented
-    //private int dayOfStart; //1st day of the month
+
 
     @Override
     protected void onCreate(Bundle savedIntenceState) {
@@ -244,77 +243,10 @@ public class MonthActivityController extends Activity{
             dayToDrawNextMonth++;
         }//for next month
 
-
-
         dayGridAdapter = new MonthDayGridAdapter(this, dayViews);
         dayGridView.setAdapter(dayGridAdapter);
 
-
-        /*
-        //Days to paint since its from Monday to Friday
-        representedDays = ((numberOfDays + dayOfStart) - (2 * numberOfWeeks));
-
-        //Creates the list of days to display and
-        //inflates the days grid view
-        ArrayList<MonthDaySquare> dayViews = new ArrayList<>(representedDays);
-        int dayToRepresent = 0;
-        for (int i = 1; (i <=representedDays+dayOfStart) && (dayToRepresent < numberOfDays); i++) { //From 1 to n
-            //The numbers skip 2 positions when it's Saturday or Sunday if i is in position of Friday
-            dayToRepresent++;
-            if(i<dayOfStart) dayToRepresent=0; //to avoid weeks where 1st day is not a Monday
-            if(dayOfStart==7 && i==6) dayToRepresent=2; //control when it starts on sunday
-
-            int type = MonthDaySquare.NORMAL;
-
-            int auxMonth = month+1;
-            String printingDateAux = new String(year+"-"+auxMonth+"-"+dayToRepresent);
-            SimpleDateFormat oldFormat = new SimpleDateFormat("yyyy-M-d");
-            SimpleDateFormat newFormat = new SimpleDateFormat("yyyy-MM-dd");
-            String printingDate = null;
-            try{
-                printingDate = newFormat.format(oldFormat.parse(printingDateAux));
-            } catch (ParseException e){
-                e.printStackTrace();
-            }
-
-            //Checks if the printing date is today
-            String today = newFormat.format(new Date());
-            boolean isToday = today.equals(printingDate);
-
-            //Checks if the day has any exam
-            ArrayList<String> examList = model.searchExam(printingDate);
-            //If there adre exams sets the day type to exam
-            if(!examList.isEmpty()) type = MonthDaySquare.EXAM;
-
-            //Checks if the day is holiday! :D
-            boolean isHoliday = model.searchHolidays(printingDate);
-            //If it's holiday, sets de dat type to it
-            if(isHoliday){
-                type = MonthDaySquare.HOLIDAY;
-            }
-
-            String dayToDraw = dayToRepresent == 0 ? "" : String.valueOf(dayToRepresent);
-            //MonthDaySquare ds = new MonthDaySquare(this, exam.toString(), dayToDraw, type);
-            int examFontSize = preferences.getInt("fontSizeExamTextView", R.integer.examTextSizeMonthGrid);
-
-            MonthDaySquare ds = new MonthDaySquare(this, examList, dayToDraw, type, month, year, examFontSize, isToday);
-
-            //Adding a click listener to de MonthDaySquare to open the popupMenu
-            //setDaySquareListener(ds, dayToRepresent);
-            dayViews.add(ds);
-
-            //Skip counting saturdays and sundays
-            if((i%5 == 0) && (i>=5)){
-                dayToRepresent +=2;
-            }
-        }//for
-        dayGridAdapter = new MonthDayGridAdapter(this, dayViews);
-        dayGridView.setAdapter(dayGridAdapter);
-
-
-         */
     }
-
 
 
     /*

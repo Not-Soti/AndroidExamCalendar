@@ -62,45 +62,6 @@
 
         </LinearLayout>
 
-        <!--
-        <LinearLayout
-            android:id="@+id/examButtonsLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/MonthInfoLayout"
-            android:layout_marginTop="1dp"
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/bAddExam"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Add\nexam" />
-
-            <Button
-                android:id="@+id/bDeleteExam"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Delete\nExam" />
-
-            <Button
-                android:id="@+id/bAddHoliday"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Add\nholiday" />
-
-            <Button
-                android:id="@+id/bDeleteHoliday"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Delete\nHoliday" />
-        </LinearLayout>
-    -->
-
         <!-- Moved from below examButtonsLayout to below MonthInfoLayout-->
         <LinearLayout
             android:id="@+id/MonthAct_CalendarLinearLayout"
@@ -109,29 +70,6 @@
             android:layout_below="@+id/MonthAct_InfoLayout"
             android:layout_marginTop="1dp"
             android:orientation="horizontal">
-
-            <!--
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/textView19"
-                    android:layout_width="@dimen/weekSquaresWidth"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:text="Semana" />
-
-                <GridView
-                    android:id="@+id/WeeksGridView"
-                    android:layout_width="@dimen/weekSquaresWidth"
-                    android:layout_height="match_parent"
-                    android:numColumns="1">
-                </GridView>
-
-            </LinearLayout>
-            -->
 
             <LinearLayout
                 android:layout_width="match_parent"

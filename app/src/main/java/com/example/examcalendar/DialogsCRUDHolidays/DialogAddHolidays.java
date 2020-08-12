@@ -26,6 +26,7 @@ public class DialogAddHolidays extends Activity {
     private DialogHolidayModel model;
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -156,9 +157,6 @@ public class DialogAddHolidays extends Activity {
         }
 
         model.addHolidays(startDate, endDate);
-        /*TODO model.addHolidaysNotOverlap(startDate, endDate); para no sobreescribir varios periodos de vacaciones
-            Ej: existen del 15 al 28 y se quieren añadir del 10 al 17 -> que se añada solo del 10 al 14
-         */
 
         //Go back to MonthActivity
         startActivity(new Intent(this, MonthActivityController.class));

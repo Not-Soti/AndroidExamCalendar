@@ -20,6 +20,7 @@ import androidx.annotation.Nullable;
 import androidx.core.graphics.ColorUtils;
 
 import com.example.examcalendar.DialogsCRUDExams.DialogAddExam;
+import com.example.examcalendar.DialogsCRUDHolidays.ActivityAddHoliday;
 import com.example.examcalendar.DialogsCRUDHolidays.DialogAddHolidays;
 import com.example.examcalendar.DialogsCRUDExams.DialogDeleteExam;
 import com.example.examcalendar.DialogsCRUDHolidays.DialogDeleteHolidays;
@@ -88,6 +89,8 @@ public class MonthDaySquare extends LinearLayout {
     private void initializeViews(Context context) {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         inflater.inflate(R.layout.day_square, this);
+
+
 
         examNameLinearLayout = this.findViewById(R.id.LinearLayoutExamNames);
         dayTextView = this.findViewById(R.id.DayText);
@@ -209,7 +212,8 @@ public class MonthDaySquare extends LinearLayout {
                         auxContext.startActivity(i);
                         return true;
                     case R.id.addHolidaysPopupMenu:
-                        i = new Intent(auxContext, DialogAddHolidays.class);
+                        //i = new Intent(auxContext, DialogAddHolidays.class);
+                        i = new Intent(auxContext, ActivityAddHoliday.class);
                         i.putExtra("day", dayStr);
                         i.putExtra("month", Integer.toString(month));
                         i.putExtra("year", Integer.toString(year));
@@ -249,14 +253,6 @@ public class MonthDaySquare extends LinearLayout {
         return ret;
     }
 
-    /*
-    @Override
-    protected void onDraw(Canvas canvas){
-        super.onDraw(canvas);
-        float textSize = getResources().getDimension(R.dimen.examTextSizeMonthGrid);
-        examNameTextView.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize);
-    }
-    */
 
 
     public TextView getDayTextView() {
