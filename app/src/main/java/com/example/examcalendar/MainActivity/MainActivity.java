@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.example.examcalendar.ConfigurationActivity.ConfigurationActivityController;
+import com.example.examcalendar.HelpClasses.CommonActivityThings;
 import com.example.examcalendar.MonthActivity.MonthActivityController;
 import com.example.examcalendar.R;
 import com.example.examcalendar.WeekActivity.WeekActivityController;
@@ -24,6 +25,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //Set the bg color
+        CommonActivityThings.paintBackground(this);
     }
 
     @Override

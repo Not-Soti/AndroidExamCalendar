@@ -1,4 +1,4 @@
-package com.example.examcalendar.DialogsCRUDExams;
+package com.example.examcalendar.DialogsCRUDHolidays;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -11,6 +11,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.examcalendar.DialogsCRUDExams.DialogExamModel;
+import com.example.examcalendar.HelpClasses.CommonActivityThings;
 import com.example.examcalendar.MonthActivity.MonthActivityController;
 import com.example.examcalendar.R;
 
@@ -22,14 +24,14 @@ public class DialogDeleteHolidays extends Activity {
     private Button accept;
     private EditText startDayEditText, endDayEditText, startMonthEditText, endMonthEditText, startYearEditText, endYearEditText;
 
-    DialogModel model;
+    private DialogHolidayModel model;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.dialog_delete_holiday);
 
-        model = new DialogModel(this);
+        model = new DialogHolidayModel(this);
         Bundle bundle = getIntent().getExtras(); //Get info from previous Activity
 
         accept = (Button) findViewById(R.id.buttonDeleteHoliday);
@@ -39,6 +41,9 @@ public class DialogDeleteHolidays extends Activity {
         endMonthEditText = (EditText) findViewById(R.id.textDelHolidayEndMonth);
         startYearEditText = (EditText) findViewById(R.id.textDelHolidayStartYear);
         endYearEditText = (EditText) findViewById(R.id.textDelHolidayEndYear);
+
+        //Paint bg Color
+        CommonActivityThings.paintBackground(this);
 
         String dayAux = bundle.getString("day");
         if(dayAux!=null){

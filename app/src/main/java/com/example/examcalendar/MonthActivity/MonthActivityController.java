@@ -2,28 +2,20 @@ package com.example.examcalendar.MonthActivity;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.graphics.Color;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.example.examcalendar.DialogsCRUDExams.DialogAddExam;
-import com.example.examcalendar.DialogsCRUDExams.DialogAddHolidays;
-import com.example.examcalendar.DialogsCRUDExams.DialogDeleteExam;
-import com.example.examcalendar.DialogsCRUDExams.DialogDeleteHolidays;
 import com.example.examcalendar.HelpClasses.AutoGridView;
+import com.example.examcalendar.HelpClasses.CommonActivityThings;
 import com.example.examcalendar.MainActivity.MainActivity;
 import com.example.examcalendar.R;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.YearMonth;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -68,6 +60,9 @@ public class MonthActivityController extends Activity{
         Log.d(TAG, "month " + month);
         //dayOfStart = getDayOfWeek(year, month); //The 1st day of the month is monday, tuesday...
 
+        //Paint the bgColor
+        CommonActivityThings.paintBackground(this);
+
         drawUI();
 
         //Set listeners
@@ -90,11 +85,6 @@ public class MonthActivityController extends Activity{
      * Method that draws the GUI
      */
     private void drawUI(){
-        //Setting background color to the activity
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
-        int bgColor = preferences.getInt("bgColorActivity", Color.WHITE);
-        View root = globalLayout.getRootView();
-        root.setBackgroundColor(bgColor);
 
         monthTextView.setText(MONTH_NAMES[month]);
         yearTextView.setText(String.valueOf(year));

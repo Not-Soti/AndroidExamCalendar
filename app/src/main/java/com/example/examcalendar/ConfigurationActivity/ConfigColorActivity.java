@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 
+import com.example.examcalendar.HelpClasses.CommonActivityThings;
 import com.example.examcalendar.MainActivity.MainActivity;
 import com.example.examcalendar.MonthActivity.MonthDaySquare;
 import com.example.examcalendar.R;
@@ -100,6 +101,9 @@ public class ConfigColorActivity extends Activity {
                 startActivity(i);
             }
         });
+
+        //Paint bg Color
+        CommonActivityThings.paintBackground(this);
     }
 
     private void openColorPicker(final int defColor, final int type, final SharedPreferences preferences) {

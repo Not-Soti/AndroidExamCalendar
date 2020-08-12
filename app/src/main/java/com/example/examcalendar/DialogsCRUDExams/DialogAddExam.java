@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.example.examcalendar.HelpClasses.CommonActivityThings;
 import com.example.examcalendar.MonthActivity.MonthActivityController;
 import com.example.examcalendar.R;
 
@@ -19,14 +20,14 @@ public class DialogAddExam extends Activity {
     private EditText dayEditText,monthEditText,yearEditText,nameEditText;
 
 
-    DialogModel model;
+    DialogExamModel model;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.dialog_add_exam);
 
-        model = new DialogModel(this);
+        model = new DialogExamModel(this);
         Bundle bundle = getIntent().getExtras(); //Get info from previous Activity
 
         accept = (Button) findViewById(R.id.buttonAcceptAddExam);
@@ -34,6 +35,9 @@ public class DialogAddExam extends Activity {
         monthEditText = (EditText) findViewById(R.id.textAddExamMonth);
         yearEditText = (EditText) findViewById(R.id.textAddExamYear);
         nameEditText = (EditText) findViewById(R.id.textAddExamName);
+
+        //Paint bg Color
+        CommonActivityThings.paintBackground(this);
 
         String dayAux = bundle.getString("day");
         if(dayAux!=null){

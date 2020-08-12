@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 
+import com.example.examcalendar.HelpClasses.CommonActivityThings;
 import com.example.examcalendar.MonthActivity.MonthActivityController;
 import com.example.examcalendar.R;
 
@@ -27,7 +28,7 @@ public class DialogDeleteExam extends Activity {
     private ListView examListView;
     private static String examToDelete; //used to get the exam selected from the ListView
 
-    DialogModel model;
+    DialogExamModel model;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -35,7 +36,7 @@ public class DialogDeleteExam extends Activity {
         setContentView(R.layout.dialog_delete_exam);
 
         examToDelete = new String();
-        model = new DialogModel(this);
+        model = new DialogExamModel(this);
         Bundle bundle = getIntent().getExtras(); //Get info from previous Activity
 
         accept = findViewById(R.id.buttonAcceptDeleteExam);
@@ -44,6 +45,9 @@ public class DialogDeleteExam extends Activity {
         yearEditText = findViewById(R.id.textDeleteExamYear);
         //nameEditText = (EditText) findViewById(R.id.textDeleteExamName);
         examListView = findViewById(R.id.listDeleteExamNames);
+
+        //Paint bg Color
+        CommonActivityThings.paintBackground(this);
 
         String dayAux = bundle.getString("day");
         if(dayAux!=null){

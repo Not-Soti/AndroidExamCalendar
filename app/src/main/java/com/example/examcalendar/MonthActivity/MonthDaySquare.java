@@ -3,9 +3,7 @@ package com.example.examcalendar.MonthActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Color;
 import android.graphics.Typeface;
-import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.preference.PreferenceManager;
 import android.util.AttributeSet;
@@ -22,9 +20,9 @@ import androidx.annotation.Nullable;
 import androidx.core.graphics.ColorUtils;
 
 import com.example.examcalendar.DialogsCRUDExams.DialogAddExam;
-import com.example.examcalendar.DialogsCRUDExams.DialogAddHolidays;
+import com.example.examcalendar.DialogsCRUDHolidays.DialogAddHolidays;
 import com.example.examcalendar.DialogsCRUDExams.DialogDeleteExam;
-import com.example.examcalendar.DialogsCRUDExams.DialogDeleteHolidays;
+import com.example.examcalendar.DialogsCRUDHolidays.DialogDeleteHolidays;
 import com.example.examcalendar.DialogsCRUDExams.DialogEditExam;
 import com.example.examcalendar.R;
 
