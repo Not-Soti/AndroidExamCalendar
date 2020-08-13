@@ -12,7 +12,6 @@ import android.widget.Toast;
 
 import com.example.examcalendar.HelpClasses.AutoGridView;
 import com.example.examcalendar.HelpClasses.CommonActivityThings;
-import com.example.examcalendar.MainActivity.MainActivity;
 import com.example.examcalendar.MonthActivity.MonthActivityController;
 import com.example.examcalendar.MonthActivity.MonthDaySquare;
 import com.example.examcalendar.R;
@@ -21,8 +20,9 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
-public class ActivityAddHoliday extends Activity {
+public class ActivityDelHoliday extends Activity {
 
+    private String TAG = "ActivityDeleteHolidays";
     private DialogHolidayModel model;
     private Button nextMonthButton, previousMonthButton;
 
@@ -46,17 +46,17 @@ public class ActivityAddHoliday extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_holiday);
+        setContentView(R.layout.activity_delete_holiday);
 
         Bundle bundle = getIntent().getExtras(); //Get info from previous Activity
 
         model = new DialogHolidayModel(this);
-        nextMonthButton = findViewById(R.id.AddHolAct_NextMonthButton);
-        previousMonthButton = findViewById(R.id.AddHolAct_PrevMonthButton);
-        dayGridView = findViewById(R.id.AddHolAct_DaysAutoGridView);
-        monthTextView = findViewById(R.id.AddHolAct_MonthTextView);
-        yearTextView = findViewById(R.id.AddHolAct_YearTextView);
-        acceptButton = findViewById(R.id.AddHolAct_AcceptButton);
+        nextMonthButton = findViewById(R.id.DelHolAct_NextMonthButton);
+        previousMonthButton = findViewById(R.id.DelHolAct_PrevMonthButton);
+        dayGridView = findViewById(R.id.DelHolAct_DaysAutoGridView);
+        monthTextView = findViewById(R.id.DelHolAct_MonthTextView);
+        yearTextView = findViewById(R.id.DelHolAct_YearTextView);
+        acceptButton = findViewById(R.id.DelHolAct_AcceptButton);
 
         printedYear = model.getYear(); //TODO hacer que sean los datos de las pantallas de crud examen/vacaciones
         printedMonth = model.getMonth(); //from 0 to 11
@@ -121,7 +121,7 @@ public class ActivityAddHoliday extends Activity {
                     startDate = endDate;
                     endDate=aux;
                 }
-
+                Log.d(TAG,"Start date " + startDate + " end date " +endDate);
                 //redraw the GUI
                 drawGrid();
             }
@@ -131,11 +131,11 @@ public class ActivityAddHoliday extends Activity {
             @Override
             public void onClick(View view) {
                 if(startDate==null || endDate==null){
-                    Toast.makeText(ActivityAddHoliday.this, "Selecciona un rango de vacaciones", Toast.LENGTH_LONG).show();
+                    Toast.makeText(ActivityDelHoliday.this, "Selecciona un rango de vacaciones", Toast.LENGTH_LONG).show();
                 }else {
-                    model.addHolidays(startDate, endDate);
-                    Toast.makeText(ActivityAddHoliday.this, "¡Vacaciones guardadas!", Toast.LENGTH_LONG).show();
-                    startActivity(new Intent(ActivityAddHoliday.this, MonthActivityController.class));
+                    model.deleteHolidaysSplitRange(startDate,endDate);
+                    Toast.makeText(ActivityDelHoliday.this, "Vacaciones eliminadas (F)", Toast.LENGTH_LONG).show();
+                    startActivity(new Intent(ActivityDelHoliday.this, MonthActivityController.class));
                 }
             }
         });
@@ -185,20 +185,20 @@ public class ActivityAddHoliday extends Activity {
             int squareAction = HolidaySquare.NO_ACTION;
 
             if(startDate.equals(currentDate)){ //checks if this day is the selected starting day
-                squareAction=HolidaySquare.ADD_HOLIDAY;
+                squareAction=HolidaySquare.DEL_HOLIDAY;
             }
             if(endDate!=null) { //checks for the selected range
                 if(model.dateIsBetween(startDate, endDate, currentDate))
-                    squareAction=HolidaySquare.ADD_HOLIDAY;
+                    squareAction=HolidaySquare.DEL_HOLIDAY;
             }
+
             //Checks if the day was already holiday! :D
             boolean holidayExist = false;
             if(model.searchHolidays(currentDate)){
-                holidayExist=true;
+                //squareAction=HolidaySquare.HOLIDAY_EXIST;
+                holidayExist = true;
             }
-
             HolidaySquare ds = new HolidaySquare(this, dayToDrawStr, printedMonth, printedYear, false, squareAction,holidayExist);
-
             //Adding a click listener to de MonthDaySquare to open the popupMenu
             //setDaySquareListener(ds, dayToRepresent);
             dayViews.add(ds);
@@ -239,21 +239,21 @@ public class ActivityAddHoliday extends Activity {
             }
 
             String dayToDrawStr = String.valueOf(dayToDrawCurrentMonth);
-            int squareAction=HolidaySquare.NO_ACTION;
+            int squareAction = HolidaySquare.NO_ACTION;
             if(startDate.equals(currentDate)){ //checks if this day is the selected starting day
-                squareAction=HolidaySquare.ADD_HOLIDAY;
+                squareAction=HolidaySquare.DEL_HOLIDAY;
             }
             if(endDate!=null) {
                 if(model.dateIsBetween(startDate, endDate, currentDate))
-                    squareAction=HolidaySquare.ADD_HOLIDAY;
+                    squareAction=HolidaySquare.DEL_HOLIDAY;
             }
             //Checks if the day was already holiday! :D
             boolean holidayExist = false;
             if(model.searchHolidays(currentDate)){
                 //squareAction=HolidaySquare.HOLIDAY_EXIST;
-                holidayExist=true;
+                holidayExist = true;
             }
-            HolidaySquare ds = new HolidaySquare(this, dayToDrawStr, printedMonth + 1, printedYear, true, squareAction,holidayExist);
+            HolidaySquare ds = new HolidaySquare(this, dayToDrawStr, printedMonth + 1, printedYear, false, squareAction,holidayExist);
             dayViews.add(ds);
 
             dayToDrawCurrentMonth++;
@@ -267,9 +267,8 @@ public class ActivityAddHoliday extends Activity {
         int dayToDrawNextMonth = 1;
         for (int i = 0; (i < daysNextMonth) && (daysNextMonth < nColumns); i++) {
 
-            int type = MonthDaySquare.NORMAL;
             int auxMonth = printedMonth + 2; //remember months goes from 0 to 11 but on model they are 1 to 12
-            String currentDateAux = new String(printedYear + "-" + auxMonth + "-" + dayToDrawNextMonth);
+            String currentDateAux = printedYear + "-" + auxMonth + "-" + dayToDrawNextMonth;
             SimpleDateFormat oldFormat = new SimpleDateFormat("yyyy-M-d");
             SimpleDateFormat newFormat = new SimpleDateFormat("yyyy-MM-dd");
             String currentDate = null;
@@ -282,13 +281,12 @@ public class ActivityAddHoliday extends Activity {
             String dayToDrawStr = String.valueOf(dayToDrawNextMonth);
             int squareAction = HolidaySquare.NO_ACTION;
             if(startDate.equals(currentDate)){ //checks if this day is the selected starting day
-                squareAction=HolidaySquare.ADD_HOLIDAY;
+                squareAction=HolidaySquare.DEL_HOLIDAY;
             }
             if(endDate!=null) {
                 if(model.dateIsBetween(startDate, endDate, currentDate))
-                    squareAction=HolidaySquare.ADD_HOLIDAY;
+                    squareAction=HolidaySquare.DEL_HOLIDAY;
             }
-
             //Checks if the day was already holiday! :D
             boolean holidayExist = false;
             if(model.searchHolidays(currentDate)){
@@ -300,7 +298,6 @@ public class ActivityAddHoliday extends Activity {
             //Adding a click listener to de MonthDaySquare to open the popupMenu
             //setDaySquareListener(ds, dayToRepresent);
             dayViews.add(ds);
-
             dayToDrawNextMonth++;
         }//for next month
 

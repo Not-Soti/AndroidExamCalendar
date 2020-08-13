@@ -3,7 +3,9 @@ package com.example.examcalendar.DialogsCRUDHolidays;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.Paint;
 import android.graphics.Typeface;
 import android.graphics.drawable.GradientDrawable;
 import android.preference.PreferenceManager;
@@ -40,9 +42,15 @@ public class HolidaySquare extends LinearLayout {
     private String dayStr; //Strings to set on the view after inflating
     private int month, year;
 
-    private boolean isSelected;
-
     private boolean isCurrentMonth; //To check if the day displayed is the main displayed month
+
+    //made to check if the square is normal, for adding holydays or delete them
+    public static final int NO_ACTION = 0;
+    public static final int ADD_HOLIDAY = 1;
+    public static final int DEL_HOLIDAY = 2;
+    private int action;
+
+    private boolean isHoliday;
 
     public HolidaySquare(Context context) {
         super(context);
@@ -50,14 +58,15 @@ public class HolidaySquare extends LinearLayout {
         initializeViews(context);
     }
 
-    public HolidaySquare(Context context, String dayStr, int month, int year, boolean isCurrentMonth, boolean isSelected) {
+    public HolidaySquare(Context context, String dayStr, int month, int year, boolean isCurrentMonth, int action, boolean isHoliday) {
         super(context);
         this.context = context;
         this.dayStr = dayStr;
         this.month = month;
         this.year = year;
         this.isCurrentMonth = isCurrentMonth; //chechs if the square is from the current main month
-        this.isSelected = isSelected; //checks if the square is from the selected holiday range
+        this.action = action; //checks if the square is from the selected holiday range
+        this.isHoliday=isHoliday;
 
         initializeViews(context);
     }
@@ -100,13 +109,35 @@ public class HolidaySquare extends LinearLayout {
             dayColor = (dayColor & 0x00FFFFFF) |0x40000000;
             dayTextView.setTextColor(dayColor);
         }
-        if(isSelected){ //checks if the day is from the selected holiday range
+        if(action==ADD_HOLIDAY){ //checks if the day is from the selected holiday range
             bgColor = preferences.getInt("bgColorHolidayDay", Color.RED);
+        }
+        if(isHoliday){ //checks if the day is from the selected holiday range
+            bgColor = preferences.getInt("bgColorHolidayDay", Color.RED);
+        }
+        if(action == HolidaySquare.DEL_HOLIDAY){
+            //Drawing a cross needs to be made on the onDraw method
         }
         ((GradientDrawable) this.getBackground()).setColor(bgColor);
 
     }
 
+
+    @Override
+    protected void onDraw(Canvas canvas) {
+        super.onDraw(canvas);
+
+        //TODO MOVER LAS COSAS DEL METODO DE ARRIBA AQUI
+
+        //If we are deleting holidays, draw a cross in the square
+        if(this.action==DEL_HOLIDAY) {
+            Paint paint = new Paint();
+            paint.setColor(Color.BLACK);
+            paint.setStrokeWidth(5);
+            canvas.drawLine(0, 0, getWidth(), getHeight(), paint);
+            canvas.drawLine(0, getHeight(), getWidth(), 0, paint);
+        }
+    }
 
     public TextView getDayTextView() {
         return dayTextView;
@@ -122,8 +153,8 @@ public class HolidaySquare extends LinearLayout {
         return this.year;
     }
 
-    public boolean isSelected(){
-        return this.isSelected;
+    public int getAction(){
+        return this.action;
     }
 
 }

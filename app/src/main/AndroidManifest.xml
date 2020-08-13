@@ -21,12 +21,10 @@
         <activity android:name=".DialogsCRUDExams.DialogAddExam"/>
         <activity android:name=".DialogsCRUDExams.DialogEditExam"/>
         <activity android:name=".DialogsCRUDExams.DialogDeleteExam"/>
-        <activity android:name=".DialogsCRUDHolidays.DialogAddHolidays"/>
-        <activity android:name=".DialogsCRUDHolidays.DialogDeleteHolidays"/>
         <activity android:name=".ConfigurationActivity.ConfigurationActivityController"/>
-        <activity android:name=".WeekActivity.WeekActivityController"/>
         <activity android:name=".ConfigurationActivity.ConfigColorActivity"/>
         <activity android:name=".DialogsCRUDHolidays.ActivityAddHoliday"/>
+        <activity android:name=".DialogsCRUDHolidays.ActivityDelHoliday"/>
 
     </application>
 

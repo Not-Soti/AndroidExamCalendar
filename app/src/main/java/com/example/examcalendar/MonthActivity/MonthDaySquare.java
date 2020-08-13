@@ -21,6 +21,7 @@ import androidx.core.graphics.ColorUtils;
 
 import com.example.examcalendar.DialogsCRUDExams.DialogAddExam;
 import com.example.examcalendar.DialogsCRUDHolidays.ActivityAddHoliday;
+import com.example.examcalendar.DialogsCRUDHolidays.ActivityDelHoliday;
 import com.example.examcalendar.DialogsCRUDHolidays.DialogAddHolidays;
 import com.example.examcalendar.DialogsCRUDExams.DialogDeleteExam;
 import com.example.examcalendar.DialogsCRUDHolidays.DialogDeleteHolidays;
@@ -220,7 +221,8 @@ public class MonthDaySquare extends LinearLayout {
                         auxContext.startActivity(i);
                         return true;
                     case R.id.deleteHolidaysPopupMenu:
-                        i = new Intent(auxContext, DialogDeleteHolidays.class);
+                        //i = new Intent(auxContext, DialogDeleteHolidays.class);
+                        i = new Intent(auxContext, ActivityDelHoliday.class);
                         i.putExtra("day", dayStr);
                         i.putExtra("month", Integer.toString(month));
                         i.putExtra("year", Integer.toString(year));
