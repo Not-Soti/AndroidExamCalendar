@@ -58,8 +58,14 @@ public class ActivityDelHoliday extends Activity {
         yearTextView = findViewById(R.id.DelHolAct_YearTextView);
         acceptButton = findViewById(R.id.DelHolAct_AcceptButton);
 
-        printedYear = model.getYear(); //TODO hacer que sean los datos de las pantallas de crud examen/vacaciones
-        printedMonth = model.getMonth(); //from 0 to 11
+        //Getting month and year to print
+        try {
+            printedYear = Integer.valueOf(bundle.getString("year"));
+            printedMonth = Integer.valueOf(bundle.getString("month"))-1;
+        }catch (NullPointerException e){
+            printedYear = model.getYear(); //TODO hacer que sean los datos de las pantallas de crud examen/vacaciones
+            printedMonth = model.getMonth(); //from 0 to 11
+        }
 
 
         //Getting the starting range date
@@ -134,8 +140,11 @@ public class ActivityDelHoliday extends Activity {
                     Toast.makeText(ActivityDelHoliday.this, "Selecciona un rango de vacaciones", Toast.LENGTH_LONG).show();
                 }else {
                     model.deleteHolidaysSplitRange(startDate,endDate);
+                    Intent i = new Intent(ActivityDelHoliday.this, MonthActivityController.class);
+                    i.putExtra("month", startHolidayMonth);
+                    i.putExtra("year", startHolidayYear);
                     Toast.makeText(ActivityDelHoliday.this, "Vacaciones eliminadas (F)", Toast.LENGTH_LONG).show();
-                    startActivity(new Intent(ActivityDelHoliday.this, MonthActivityController.class));
+                    startActivity(i);
                 }
             }
         });
@@ -307,7 +316,10 @@ public class ActivityDelHoliday extends Activity {
 
     @Override
     public void onBackPressed(){
-        startActivity(new Intent(this, MonthActivityController.class));
+        Intent i = new Intent(ActivityDelHoliday.this, MonthActivityController.class);
+        i.putExtra("month", startHolidayMonth);
+        i.putExtra("year", startHolidayYear);
+        startActivity(i);
     }
 
 

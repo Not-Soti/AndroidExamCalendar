@@ -4,6 +4,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <TextView
+        android:id="@+id/textView15"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Borrar vacaciones"
+        android:gravity="center"
+        android:textSize="24dp"/>
+
     <!-- Moved from below examButtonsLayout to below MonthInfoLayout-->
     <LinearLayout
         android:id="@+id/DelHolAct_InfoLayout"

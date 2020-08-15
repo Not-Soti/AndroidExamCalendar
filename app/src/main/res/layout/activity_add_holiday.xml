@@ -4,7 +4,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <!-- Moved from below examButtonsLayout to below MonthInfoLayout-->
+    <TextView
+        android:id="@+id/textView15"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Añadir vacaciones"
+        android:gravity="center"
+        android:textSize="24dp"/>
+
     <LinearLayout
         android:id="@+id/AddHolAct_InfoLayout"
         android:layout_width="match_parent"
@@ -120,9 +127,10 @@
                 android:stretchMode="columnWidth" />
         </LinearLayout>
     </LinearLayout>
+
     <Button
         android:id="@+id/AddHolAct_AcceptButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/accept"/>
+        android:text="@string/accept" />
 </LinearLayout>

@@ -15,6 +15,7 @@ import com.example.examcalendar.HelpClasses.CommonActivityThings;
 import com.example.examcalendar.MainActivity.MainActivity;
 import com.example.examcalendar.MonthActivity.MonthActivityController;
 import com.example.examcalendar.MonthActivity.MonthDaySquare;
+import com.example.examcalendar.MonthActivity.SwipeRelativeLayoutMonthActivity;
 import com.example.examcalendar.R;
 
 import java.text.ParseException;
@@ -58,9 +59,15 @@ public class ActivityAddHoliday extends Activity {
         yearTextView = findViewById(R.id.AddHolAct_YearTextView);
         acceptButton = findViewById(R.id.AddHolAct_AcceptButton);
 
-        printedYear = model.getYear(); //TODO hacer que sean los datos de las pantallas de crud examen/vacaciones
-        printedMonth = model.getMonth(); //from 0 to 11
 
+        //Getting month and year to print
+        try {
+            printedYear = Integer.valueOf(bundle.getString("year"));
+            printedMonth = Integer.valueOf(bundle.getString("month"))-1;
+        }catch (NullPointerException e){
+            printedYear = model.getYear(); //TODO hacer que sean los datos de las pantallas de crud examen/vacaciones
+            printedMonth = model.getMonth(); //from 0 to 11
+        }
 
         //Getting the starting range date
         startHolidayDay = bundle.getString("day");
@@ -134,8 +141,11 @@ public class ActivityAddHoliday extends Activity {
                     Toast.makeText(ActivityAddHoliday.this, "Selecciona un rango de vacaciones", Toast.LENGTH_LONG).show();
                 }else {
                     model.addHolidays(startDate, endDate);
+                    Intent i = new Intent(ActivityAddHoliday.this, MonthActivityController.class);
+                    i.putExtra("month", startHolidayMonth);
+                    i.putExtra("year", startHolidayYear);
                     Toast.makeText(ActivityAddHoliday.this, "¡Vacaciones guardadas!", Toast.LENGTH_LONG).show();
-                    startActivity(new Intent(ActivityAddHoliday.this, MonthActivityController.class));
+                    startActivity(i);
                 }
             }
         });
@@ -310,7 +320,11 @@ public class ActivityAddHoliday extends Activity {
 
     @Override
     public void onBackPressed(){
-        startActivity(new Intent(this, MonthActivityController.class));
+        Intent i = new Intent(ActivityAddHoliday.this, MonthActivityController.class);
+        i.putExtra("month", startHolidayMonth);
+        i.putExtra("year", startHolidayYear);
+        startActivity(i);
+        startActivity(i);
     }
 
 

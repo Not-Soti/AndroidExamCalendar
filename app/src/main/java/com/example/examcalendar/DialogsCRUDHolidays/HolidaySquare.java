@@ -48,6 +48,7 @@ public class HolidaySquare extends LinearLayout {
     public static final int NO_ACTION = 0;
     public static final int ADD_HOLIDAY = 1;
     public static final int DEL_HOLIDAY = 2;
+    public static final int FIRST_CHOSEN = 4;
     private int action;
 
     private boolean isHoliday;
@@ -96,6 +97,14 @@ public class HolidaySquare extends LinearLayout {
         //Sets the background as defined by /res/drawable/month_week_square
         this.setBackgroundResource(R.drawable.month_day_square_normal);
 
+    }
+
+
+    @Override
+    protected void onDraw(Canvas canvas) {
+        super.onDraw(canvas);
+
+        //TODO MOVER LAS COSAS DEL METODO DE ARRIBA AQUI
 
         //Getting de BG color from the user settings
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
@@ -110,24 +119,22 @@ public class HolidaySquare extends LinearLayout {
             dayTextView.setTextColor(dayColor);
         }
         if(action==ADD_HOLIDAY){ //checks if the day is from the selected holiday range
-            bgColor = preferences.getInt("bgColorHolidayDay", Color.RED);
+            int borderColor = preferences.getInt("bgColorHolidayDay", Color.RED);
+            Paint paint = new Paint();
+            paint.setStyle(Paint.Style.STROKE);
+            paint.setColor(borderColor);
+            paint.setStrokeWidth(10);
+
+            //Paint diagonal lines to days selected
+            canvas.drawLine(0, getHeight()/2, getWidth()/2, 0, paint);
+            canvas.drawLine(0,getHeight(), getWidth(), 0, paint);
+            canvas.drawLine(getWidth()/2, getHeight(), getWidth(), getHeight()/2, paint);
+            canvas.drawRect(0,0,getWidth(),getHeight(),paint);
+            dayTextView.setTypeface(dayTextView.getTypeface(), Typeface.BOLD);
         }
         if(isHoliday){ //checks if the day is from the selected holiday range
             bgColor = preferences.getInt("bgColorHolidayDay", Color.RED);
         }
-        if(action == HolidaySquare.DEL_HOLIDAY){
-            //Drawing a cross needs to be made on the onDraw method
-        }
-        ((GradientDrawable) this.getBackground()).setColor(bgColor);
-
-    }
-
-
-    @Override
-    protected void onDraw(Canvas canvas) {
-        super.onDraw(canvas);
-
-        //TODO MOVER LAS COSAS DEL METODO DE ARRIBA AQUI
 
         //If we are deleting holidays, draw a cross in the square
         if(this.action==DEL_HOLIDAY) {
@@ -137,6 +144,7 @@ public class HolidaySquare extends LinearLayout {
             canvas.drawLine(0, 0, getWidth(), getHeight(), paint);
             canvas.drawLine(0, getHeight(), getWidth(), 0, paint);
         }
+        ((GradientDrawable) this.getBackground()).setColor(bgColor);
     }
 
     public TextView getDayTextView() {

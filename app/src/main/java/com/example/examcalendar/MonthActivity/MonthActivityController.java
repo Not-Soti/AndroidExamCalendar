@@ -54,8 +54,16 @@ public class MonthActivityController extends Activity{
         prevMonthButton = (Button) findViewById(R.id.MonthAct_PrevMonthButton);
         globalLayout = findViewById(R.id.MonthAct_GlobalLayout);
 
-        year = getYear(); //TODO hacer que sean los datos de las pantallas de crud examen/vacaciones
-        month = getMonth(); //from 0 to 11
+        //Getting month and year to print
+        Bundle bundle = getIntent().getExtras();
+        try {
+            year = Integer.valueOf(bundle.getString("year"));
+            month = Integer.valueOf(bundle.getString("month"))-1;
+        }catch (NullPointerException e){
+            year = getYear(); //TODO hacer que sean los datos de las pantallas de crud examen/vacaciones
+            month = getMonth(); //from 0 to 11
+        }
+
         Log.d(TAG, "month " + month);
         //dayOfStart = getDayOfWeek(year, month); //The 1st day of the month is monday, tuesday...
 
