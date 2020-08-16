@@ -1,4 +1,4 @@
-package com.example.examcalendar.MonthActivity;
+package com.example.examcalendar.HelpClasses;
 
 import android.app.Activity;
 import android.content.Context;
@@ -8,40 +8,43 @@ import android.view.ViewConfiguration;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import com.example.examcalendar.HelpClasses.MonthGridOperations;
 import com.example.examcalendar.MonthActivity.MonthActivityController;
+
+import java.time.Month;
 
 /**
  * Class made to override the interceptTouchEvent on the MonthActivity
  * so it swipes left and right but gives other events to it's child views
  */
-public class SwipeRelativeLayoutMonthActivity extends RelativeLayout {
+public class SwipeSidesRelativeLayout extends RelativeLayout {
     private int mTouchSlop;
     private Context context;
     private float firstX, firstY; //needed to determine the first touch when swapping
 
 
-    public SwipeRelativeLayoutMonthActivity(Context context) {
+    public SwipeSidesRelativeLayout(Context context) {
         super(context);
         this.context = context;
         ViewConfiguration vc = ViewConfiguration.get(context);
         mTouchSlop = vc.getScaledTouchSlop();
     }
 
-    public SwipeRelativeLayoutMonthActivity(Context context, AttributeSet attrs) {
+    public SwipeSidesRelativeLayout(Context context, AttributeSet attrs) {
         super(context, attrs);
         this.context = context;
         ViewConfiguration vc = ViewConfiguration.get(context);
         mTouchSlop = vc.getScaledTouchSlop();
     }
 
-    public SwipeRelativeLayoutMonthActivity(Context context, AttributeSet attrs, int defStyleAttr) {
+    public SwipeSidesRelativeLayout(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         this.context = context;
         ViewConfiguration vc = ViewConfiguration.get(context);
         mTouchSlop = vc.getScaledTouchSlop();
     }
 
-    public SwipeRelativeLayoutMonthActivity(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+    public SwipeSidesRelativeLayout(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
         this.context = context;
         ViewConfiguration vc = ViewConfiguration.get(context);
@@ -131,14 +134,18 @@ public class SwipeRelativeLayoutMonthActivity extends RelativeLayout {
                 //otherwise it was from left to right
                 if (Math.abs(xDiff) > Math.abs(yDiff)) { //the swipe was horizontal and not vertical
                     if ((xDiff > 0) & (Math.abs(xDiff) > mTouchSlop)) {
-                        MonthActivityController act = (MonthActivityController) context;
-                        swipeDone = true;
-                        act.previousMonthPressed();
+                        if(context instanceof MonthGridOperations) {
+                            MonthGridOperations act = (MonthGridOperations) context;
+                            swipeDone = true;
+                            act.drawPreviousMonth();
+                        }
                     }
                     if ((xDiff < 0) & (Math.abs(xDiff) > mTouchSlop)) {
-                        MonthActivityController act = (MonthActivityController) context;
-                        swipeDone = true;
-                        act.nextMonthPressed();
+                        if(context instanceof MonthGridOperations) {
+                            MonthGridOperations act = (MonthGridOperations) context;
+                            swipeDone = true;
+                            act.drawNextMonth();
+                        }
                     }
                 }
                 break;

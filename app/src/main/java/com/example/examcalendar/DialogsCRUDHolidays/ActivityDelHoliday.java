@@ -12,15 +12,17 @@ import android.widget.Toast;
 
 import com.example.examcalendar.HelpClasses.AutoGridView;
 import com.example.examcalendar.HelpClasses.CommonActivityThings;
+import com.example.examcalendar.HelpClasses.MonthGridOperations;
 import com.example.examcalendar.MonthActivity.MonthActivityController;
 import com.example.examcalendar.MonthActivity.MonthDaySquare;
 import com.example.examcalendar.R;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.Month;
 import java.util.ArrayList;
 
-public class ActivityDelHoliday extends Activity {
+public class ActivityDelHoliday extends Activity implements MonthGridOperations {
 
     private String TAG = "ActivityDeleteHolidays";
     private DialogHolidayModel model;
@@ -343,4 +345,13 @@ public class ActivityDelHoliday extends Activity {
         drawGrid();
     }
 
+    @Override
+    public void drawNextMonth() {
+        this.nextMonthPressed();
+    }
+
+    @Override
+    public void drawPreviousMonth() {
+        this.previousMonthPressed();
+    }
 }

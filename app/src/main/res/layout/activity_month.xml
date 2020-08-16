@@ -12,7 +12,7 @@
     android:orientation="vertical">
 
     <view
-        class="com.example.examcalendar.MonthActivity.SwipeRelativeLayoutMonthActivity"
+        class="com.example.examcalendar.HelpClasses.SwipeSidesRelativeLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 

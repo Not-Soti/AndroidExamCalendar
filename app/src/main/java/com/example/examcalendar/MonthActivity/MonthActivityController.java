@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.example.examcalendar.HelpClasses.AutoGridView;
 import com.example.examcalendar.HelpClasses.CommonActivityThings;
+import com.example.examcalendar.HelpClasses.MonthGridOperations;
 import com.example.examcalendar.MainActivity.MainActivity;
 import com.example.examcalendar.R;
 
@@ -21,7 +22,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
-public class MonthActivityController extends Activity{
+public class MonthActivityController extends Activity implements MonthGridOperations {
 
     private static final String TAG = "MonthActivityController";
 
@@ -335,5 +336,15 @@ public class MonthActivityController extends Activity{
         if(day==0)//If it's Sunday then it's the 7th day
             day=7;
         return day;
+    }
+
+    @Override
+    public void drawNextMonth() {
+        this.nextMonthPressed();
+    }
+
+    @Override
+    public void drawPreviousMonth() {
+        this.previousMonthPressed();
     }
 }

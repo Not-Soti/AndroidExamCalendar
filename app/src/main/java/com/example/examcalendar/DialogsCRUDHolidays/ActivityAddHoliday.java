@@ -3,7 +3,6 @@ package com.example.examcalendar.DialogsCRUDHolidays;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -12,17 +11,16 @@ import android.widget.Toast;
 
 import com.example.examcalendar.HelpClasses.AutoGridView;
 import com.example.examcalendar.HelpClasses.CommonActivityThings;
-import com.example.examcalendar.MainActivity.MainActivity;
+import com.example.examcalendar.HelpClasses.MonthGridOperations;
 import com.example.examcalendar.MonthActivity.MonthActivityController;
 import com.example.examcalendar.MonthActivity.MonthDaySquare;
-import com.example.examcalendar.MonthActivity.SwipeRelativeLayoutMonthActivity;
 import com.example.examcalendar.R;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
-public class ActivityAddHoliday extends Activity {
+public class ActivityAddHoliday extends Activity implements MonthGridOperations {
 
     private DialogHolidayModel model;
     private Button nextMonthButton, previousMonthButton;
@@ -348,4 +346,13 @@ public class ActivityAddHoliday extends Activity {
         drawGrid();
     }
 
+    @Override
+    public void drawNextMonth() {
+        this.nextMonthPressed();
+    }
+
+    @Override
+    public void drawPreviousMonth() {
+        this.previousMonthPressed();
+    }
 }
