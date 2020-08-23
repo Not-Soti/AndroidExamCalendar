@@ -264,7 +264,7 @@ public class ActivityDelHoliday extends Activity implements MonthGridOperations 
                 //squareAction=HolidaySquare.HOLIDAY_EXIST;
                 holidayExist = true;
             }
-            HolidaySquare ds = new HolidaySquare(this, dayToDrawStr, printedMonth + 1, printedYear, false, squareAction,holidayExist);
+            HolidaySquare ds = new HolidaySquare(this, dayToDrawStr, printedMonth + 1, printedYear, true, squareAction,holidayExist);
             dayViews.add(ds);
 
             dayToDrawCurrentMonth++;

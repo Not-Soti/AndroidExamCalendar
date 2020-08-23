@@ -157,6 +157,13 @@ public class MonthDaySquare extends LinearLayout {
             }
         }
 
+        //set dayTextView general color
+        if(dmActive){
+            dayTextView.setTextColor(getResources().getColor(R.color.todayDayDark));
+        }else {
+            dayTextView.setTextColor(getResources().getColor(R.color.todayDay));
+        }
+
         //Make today color more intense
         if(isToday){
             float[] colorHSL = new float[3];
@@ -164,13 +171,26 @@ public class MonthDaySquare extends LinearLayout {
             colorHSL[2] *= 0.8f; //adding brightness to the color
             bgColor = ColorUtils.HSLToColor(colorHSL);
             dayTextView.setTypeface(dayTextView.getTypeface(), Typeface.BOLD);
-            dayTextView.setTextColor(getResources().getColor(R.color.todayDay));
+            if(dmActive){
+                dayTextView.setTextColor(getResources().getColor(R.color.todayDayDark));
+            }else {
+                dayTextView.setTextColor(getResources().getColor(R.color.todayDay));
+            }
         }
         if(!isCurrentMonth){
             //Make the color more transparent from the normal color
-            bgColor = preferences.getInt("bgColorNormalDay", getResources().getColor(R.color.NormalBg));
+            if(dmActive){
+                bgColor = preferences.getInt("bgColorNormalDay", getResources().getColor(R.color.PDarkNormalBg));
+            }else {
+                bgColor = preferences.getInt("bgColorNormalDay", getResources().getColor(R.color.NormalBg));
+            }
             bgColor = (bgColor & 0x00FFFFFF) |0x40000000; //First byte is the transparecy, using 25% of current
-            int dayColor = (getResources().getColor(R.color.todayDay));
+            int dayColor;
+            if(dmActive){
+                dayColor = getResources().getColor(R.color.todayDayDark);
+            }else{
+                dayColor = getResources().getColor(R.color.todayDay);
+            }
             dayColor = (dayColor & 0x00FFFFFF) |0x40000000;
             dayTextView.setTextColor(dayColor);
         }
@@ -269,10 +289,7 @@ public class MonthDaySquare extends LinearLayout {
 
 
 
-    public TextView getDayTextView() {
-        return dayTextView;
-    }
+    public TextView getDayTextView() { return dayTextView;}
     public LinearLayout getExamNameLinearLayout(){return examNameLinearLayout;}
-
 
 }

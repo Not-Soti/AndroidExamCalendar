@@ -15,6 +15,7 @@
     <color name="HolidayTx">#470076</color>
     <color name="ExamTx">#005208</color>
     <color name="todayDay">#000000</color>
+
     <color name="todayDayBg">#bababa</color>
 
     <!-- Color palettes -->
@@ -35,4 +36,5 @@
     <color name="PDarkExamBg">#1f4068</color>
     <color name="PDarkHolidayBg">#543864</color>
     <color name="PDarkActivityBg">#0f1124</color>
+    <color name="todayDayDark">#F4F4F4</color>
 </resources>
