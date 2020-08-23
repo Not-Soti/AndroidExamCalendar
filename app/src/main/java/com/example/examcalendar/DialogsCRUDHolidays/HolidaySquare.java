@@ -110,8 +110,9 @@ public class HolidaySquare extends LinearLayout {
         int bgColor;
         int dayColor;
         if(dmActive){
-            bgColor = preferences.getInt("bgColorNormalDay", getResources().getColor(R.color.PDarkNormalBg));
-            dayColor = getResources().getColor(R.color.todayDayDark);
+            //bgColor = preferences.getInt("bgColorNormalDay", getResources().getColor(R.color.PDarkNormalBg));
+            bgColor = getResources().getColor(R.color.PDarkNormalBg);
+            dayColor = getResources().getColor(R.color.PDarkTodayDay);
         }else {
             bgColor = preferences.getInt("bgColorNormalDay", getResources().getColor(R.color.NormalBg));
             dayColor = getResources().getColor(R.color.todayDay);
@@ -126,7 +127,8 @@ public class HolidaySquare extends LinearLayout {
         if (action == ADD_HOLIDAY) { //checks if the day is from the selected holiday range
             int markColor;
             if(dmActive){
-                bgColor = preferences.getInt("bgColorNormalDayDark", getResources().getColor(R.color.PDarkNormalBg));
+                //bgColor = preferences.getInt("bgColorNormalDayDark", getResources().getColor(R.color.PDarkNormalBg));
+                bgColor = getResources().getColor(R.color.PDarkNormalBg);
                 markColor = preferences.getInt("bgColorHolidayDayDark", Color.RED);
             }else {
                 bgColor = preferences.getInt("bgColorNormalDay", getResources().getColor(R.color.NormalBg));
@@ -148,14 +150,16 @@ public class HolidaySquare extends LinearLayout {
         } else if (this.action == DEL_HOLIDAY) {
 
             if(dmActive){
-                bgColor = preferences.getInt("bgColorNormalDayDark", Color.RED);
+                //bgColor = preferences.getInt("bgColorNormalDayDark", Color.RED);
+                bgColor = getResources().getColor(R.color.PDarkNormalBg);
             }else {
                 bgColor = preferences.getInt("bgColorNormalDay", getResources().getColor(R.color.NormalBg));
             }
             //If we are deleting holidays, draw a cross in the square
             Paint paint = new Paint();
             if(dmActive){
-                paint.setColor(preferences.getInt("todayDayDark", Color.WHITE));
+                //paint.setColor(preferences.getInt("PDarkTodayDay", Color.WHITE));
+                paint.setColor(getResources().getColor(R.color.PDarkTodayDay));
             }else {
                 paint.setColor(Color.BLACK);
             }
@@ -165,14 +169,16 @@ public class HolidaySquare extends LinearLayout {
             canvas.drawLine(0, getHeight(), getWidth(), 0, paint);
         } else if (this.action == NO_ACTION){
             if(dmActive){
-                bgColor = preferences.getInt("bgColorNormalDayDark", Color.RED);
+                //bgColor = preferences.getInt("bgColorNormalDayDark", Color.RED);
+                bgColor = getResources().getColor(R.color.PDarkNormalBg);
             }else {
                 bgColor = preferences.getInt("bgColorNormalDay", getResources().getColor(R.color.NormalBg));
             }
         }
         if (isHoliday) { //checks if the day is from the selected holiday range
             if(dmActive){
-                bgColor = preferences.getInt("bgColorHolidayDayDark", Color.RED);
+                //bgColor = preferences.getInt("bgColorHolidayDayDark", Color.RED);
+                bgColor = getResources().getColor(R.color.PDarkHolidayBg);
             }else {
                 bgColor = preferences.getInt("bgColorHolidayDay", Color.RED);
             }

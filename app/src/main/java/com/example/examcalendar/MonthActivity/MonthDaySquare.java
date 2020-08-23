@@ -139,19 +139,22 @@ public class MonthDaySquare extends LinearLayout {
 
         if(type == MonthDaySquare.EXAM) {
             if(dmActive){
-                bgColor = preferences.getInt("bgColorExamDayDark", getResources().getColor(R.color.ExamBg));
+                //bgColor = preferences.getInt("bgColorExamDayDark", getResources().getColor(R.color.ExamBg));
+                bgColor = getResources().getColor(R.color.PDarkExamBg);
             }else {
                 bgColor = preferences.getInt("bgColorExamDay", getResources().getColor(R.color.ExamBg));
             }
         }else if(type == MonthDaySquare.HOLIDAY){
             if(dmActive){
-                bgColor = preferences.getInt("bgColorHolidayDayDark", getResources().getColor(R.color.HolidayBg));
+                //bgColor = preferences.getInt("bgColorHolidayDayDark", getResources().getColor(R.color.HolidayBg));
+                bgColor = getResources().getColor(R.color.PDarkHolidayBg);
             }else {
                 bgColor = preferences.getInt("bgColorHolidayDay", getResources().getColor(R.color.HolidayBg));
             }
         }else if(type == MonthDaySquare.NORMAL){
             if(dmActive){
-                bgColor = preferences.getInt("bgColorNormalDayDark", getResources().getColor(R.color.NormalBg));
+                //bgColor = preferences.getInt("bgColorNormalDayDark", getResources().getColor(R.color.NormalBg));
+                bgColor = getResources().getColor(R.color.PDarkNormalBg);
             }else {
                 bgColor = preferences.getInt("bgColorNormalDay", getResources().getColor(R.color.NormalBg));
             }
@@ -159,7 +162,7 @@ public class MonthDaySquare extends LinearLayout {
 
         //set dayTextView general color
         if(dmActive){
-            dayTextView.setTextColor(getResources().getColor(R.color.todayDayDark));
+            dayTextView.setTextColor(getResources().getColor(R.color.PDarkTodayDay));
         }else {
             dayTextView.setTextColor(getResources().getColor(R.color.todayDay));
         }
@@ -172,7 +175,7 @@ public class MonthDaySquare extends LinearLayout {
             bgColor = ColorUtils.HSLToColor(colorHSL);
             dayTextView.setTypeface(dayTextView.getTypeface(), Typeface.BOLD);
             if(dmActive){
-                dayTextView.setTextColor(getResources().getColor(R.color.todayDayDark));
+                dayTextView.setTextColor(getResources().getColor(R.color.PDarkTodayDay));
             }else {
                 dayTextView.setTextColor(getResources().getColor(R.color.todayDay));
             }
@@ -180,14 +183,14 @@ public class MonthDaySquare extends LinearLayout {
         if(!isCurrentMonth){
             //Make the color more transparent from the normal color
             if(dmActive){
-                bgColor = preferences.getInt("bgColorNormalDay", getResources().getColor(R.color.PDarkNormalBg));
+                bgColor = getResources().getColor(R.color.PDarkNormalBg);
             }else {
                 bgColor = preferences.getInt("bgColorNormalDay", getResources().getColor(R.color.NormalBg));
             }
             bgColor = (bgColor & 0x00FFFFFF) |0x40000000; //First byte is the transparecy, using 25% of current
             int dayColor;
             if(dmActive){
-                dayColor = getResources().getColor(R.color.todayDayDark);
+                dayColor = getResources().getColor(R.color.PDarkTodayDay);
             }else{
                 dayColor = getResources().getColor(R.color.todayDay);
             }

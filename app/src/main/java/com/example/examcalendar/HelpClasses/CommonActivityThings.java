@@ -4,9 +4,14 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.preference.PreferenceManager;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import com.example.examcalendar.R;
@@ -33,29 +38,43 @@ public class CommonActivityThings {
         }
         rootLayout.setBackgroundColor(bgColor);
 
-            paintTextViews(rootLayout, dmActive);
+        paintTextViews(rootLayout, dmActive, act);
     }
 
     /**
      * Recursive method that gets a view, and search for TextViews on its childs to
      * change the text color
+     *
      * @param parent
      */
-    public static void paintTextViews(View parent, boolean dmActive) {
+    public static void paintTextViews(View parent, boolean dmActive, Activity act) {
         if (parent instanceof ViewGroup) {
             int childs = ((ViewGroup) parent).getChildCount();
             for (int i = 0; i < childs; i++) {
-                paintTextViews(((ViewGroup) parent).getChildAt(i), dmActive);
+                paintTextViews(((ViewGroup) parent).getChildAt(i), dmActive, act);
             }
         }
 
+        //Change color of textViews
         if (parent instanceof TextView) {
-            if(dmActive) {
-                ((TextView) parent).setTextColor(Color.WHITE);
-            }else{
-                ((TextView) parent).setTextColor(Color.BLACK);
+
+            //Change color of button background since button extends textView
+            //Only on basic buttons
+            if ((parent instanceof Button) && !(parent instanceof CompoundButton)) {
+                if (dmActive) {
+                    //((Button) parent).setBackgroundColor(act.getResources().getColor(R.color.PDarkButtonBg));
+                    ((Button) parent).getBackground().setColorFilter(act.getResources().getColor(R.color.PDarkButtonBg), PorterDuff.Mode.MULTIPLY);
+                }
+            } else { //it's a text view
+                if (dmActive) {
+                    ((TextView) parent).setTextColor(Color.WHITE);
+                } else {
+                    ((TextView) parent).setTextColor(Color.BLACK);
+                }
             }
         }
+
     }
 }
+
 

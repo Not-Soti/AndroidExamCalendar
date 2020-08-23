@@ -36,6 +36,6 @@
     <color name="PDarkExamBg">#1f4068</color>
     <color name="PDarkHolidayBg">#543864</color>
     <color name="PDarkActivityBg">#0f1124</color>
-    <color name="todayDayDark">#F4F4F4</color>
+    <color name="PDarkTodayDay">#F4F4F4</color>
     <color name="PDarkButtonBg">#543864</color>
 </resources>

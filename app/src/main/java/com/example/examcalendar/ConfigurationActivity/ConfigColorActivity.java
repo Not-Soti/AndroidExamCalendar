@@ -244,7 +244,7 @@ public class ConfigColorActivity extends Activity {
         editor.putBoolean("DarkModeActive", b);
         editor.apply();
         activateColorPicketButtons(!b);
-        CommonActivityThings.paintBackground(ConfigColorActivity.this);
+        this.recreate();//repaint the activity
     }
 
     /**
@@ -257,5 +257,6 @@ public class ConfigColorActivity extends Activity {
         colorPickerHolidayButton.setVisibility(visibility);
         customizeColorsTextView.setVisibility(visibility);
     }
+
 }
 
