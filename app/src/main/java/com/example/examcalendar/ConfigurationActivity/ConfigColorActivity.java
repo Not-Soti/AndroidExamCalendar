@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.ImageButton;
 import android.widget.Switch;
+import android.widget.TextView;
 
 import com.example.examcalendar.HelpClasses.CommonActivityThings;
 import com.example.examcalendar.MainActivity.MainActivity;
@@ -21,9 +22,11 @@ import yuku.ambilwarna.AmbilWarnaDialog;
 public class ConfigColorActivity extends Activity {
     private Button configAcceptButton, colorPickerExamButton, colorPickerHolidayButton, colorPickerNormalButton;
     private ImageButton palette1ImageButton, palette2ImageButton;
+    private TextView customizeColorsTextView;
     private Switch darkModeSwitch;
     private int prevColorNormal, prevColorExam, prevColorHoliday, prevColorActivity; //used to save colors setted when the activity starts
     private final static int PALETTE_NUMBER_1 = 1, PALETTE_NUMBER_2 = 2, PALETTE_DARK = 0;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +42,8 @@ public class ConfigColorActivity extends Activity {
 
         palette1ImageButton = findViewById(R.id.ColorAct_Palette1ImageButton);
         palette2ImageButton = findViewById(R.id.ColorAct_Palette2ImageButton);
+
+        customizeColorsTextView = findViewById(R.id.ColorAct_CustomizeColorTextView);
 
         darkModeSwitch = findViewById(R.id.ColorAct_DarkModeSwitch);
 
@@ -61,16 +66,21 @@ public class ConfigColorActivity extends Activity {
         boolean darkModeActivated = preferences.getBoolean("DarkModeActive", false);
         darkModeSwitch.setChecked(darkModeActivated);
 
+
         //Palette chooser buttons
         palette1ImageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                swapDarkMode(false);
+                darkModeSwitch.setChecked(false);
                 setColorFromPalette(1);
             }
         });
         palette2ImageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                swapDarkMode(false);
+                darkModeSwitch.setChecked(false);
                 setColorFromPalette(2);
             }
         });
@@ -95,6 +105,8 @@ public class ConfigColorActivity extends Activity {
             }
         });
 
+        activateColorPicketButtons(!darkModeActivated); //Deactivate if dark mode is active
+
         //Accept button
         configAcceptButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -107,32 +119,7 @@ public class ConfigColorActivity extends Activity {
         darkModeSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if(b){
-                    SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(ConfigColorActivity.this);
-                    SharedPreferences.Editor editor = preferences.edit();
-                    /*
-                    int normalDark = getResources().getColor(R.color.PDarkNormalBg);
-                    int examDark = getResources().getColor(R.color.PDarkExamBg);
-                    int holidayDark = getResources().getColor(R.color.PDarkHolidayBg);
-                    int bgActivityDark = getResources().getColor(R.color.PDarkActivityBg);
-
-                    editor.putInt("bgColorNormalDayDark", normalDark);
-                    editor.putInt("bgColorExamDayDark", examDark);
-                    editor.putInt("bgColorHolidayDayDark", holidayDark);
-                    editor.putInt("bgColorActivityDark", bgActivityDark);
-
-                     */
-                    editor.putBoolean("DarkModeActive", true);
-                    editor.apply();
-                    CommonActivityThings.paintBackground(ConfigColorActivity.this);
-                }
-                else{
-                    SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(ConfigColorActivity.this);
-                    SharedPreferences.Editor editor = preferences.edit();
-                    editor.putBoolean("DarkModeActive", false);
-                    editor.apply();
-                    CommonActivityThings.paintBackground(ConfigColorActivity.this);
-                }
+                swapDarkMode(b);
             }
         });
 
@@ -250,4 +237,25 @@ public class ConfigColorActivity extends Activity {
         colorPickerHolidayButton.setBackgroundColor(holidayColor);
         editor.apply();
     }
+
+    private void swapDarkMode(boolean b) {
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(ConfigColorActivity.this);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putBoolean("DarkModeActive", b);
+        editor.apply();
+        activateColorPicketButtons(!b);
+        CommonActivityThings.paintBackground(ConfigColorActivity.this);
+    }
+
+    /**
+     * Method used to activate or deactivate color picker buttons
+     */
+    private void activateColorPicketButtons(boolean b){
+        int visibility = b ? View.VISIBLE : View.INVISIBLE;
+        colorPickerNormalButton.setVisibility(visibility);
+        colorPickerExamButton.setVisibility(visibility);
+        colorPickerHolidayButton.setVisibility(visibility);
+        customizeColorsTextView.setVisibility(visibility);
+    }
 }
+

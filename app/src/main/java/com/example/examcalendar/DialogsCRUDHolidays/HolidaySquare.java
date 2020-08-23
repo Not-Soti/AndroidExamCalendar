@@ -103,41 +103,36 @@ public class HolidaySquare extends LinearLayout {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
-        //TODO MOVER LAS COSAS DEL METODO DE ARRIBA AQUI
-
         //Getting de BG color from the user settings
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
-        int bgColor = 0xFFFFFF;
-
         boolean dmActive = preferences.getBoolean("DarkModeActive", false); //checks if dark mode is active
 
+        int bgColor;
         int dayColor;
-        //set dayTextView general color
         if(dmActive){
+            bgColor = preferences.getInt("bgColorNormalDay", getResources().getColor(R.color.PDarkNormalBg));
             dayColor = getResources().getColor(R.color.todayDayDark);
         }else {
+            bgColor = preferences.getInt("bgColorNormalDay", getResources().getColor(R.color.NormalBg));
             dayColor = getResources().getColor(R.color.todayDay);
         }
 
+
         if (!isCurrentMonth) {
             //Make the color more transparent from the normal color
-            if(dmActive){
-                bgColor = preferences.getInt("bgColorNormalDay", getResources().getColor(R.color.PDarkNormalBg));
-            }else {
-                bgColor = preferences.getInt("bgColorNormalDay", getResources().getColor(R.color.NormalBg));
-            }
             bgColor = (bgColor & 0x00FFFFFF) | 0x40000000; //First byte is the transparecy, using 25% of current
             dayColor = (dayColor & 0x00FFFFFF) | 0x40000000;
         }
         if (action == ADD_HOLIDAY) { //checks if the day is from the selected holiday range
             int markColor;
             if(dmActive){
-                bgColor = preferences.getInt("bgColorNormalDay", getResources().getColor(R.color.PDarkNormalBg));
+                bgColor = preferences.getInt("bgColorNormalDayDark", getResources().getColor(R.color.PDarkNormalBg));
                 markColor = preferences.getInt("bgColorHolidayDayDark", Color.RED);
             }else {
                 bgColor = preferences.getInt("bgColorNormalDay", getResources().getColor(R.color.NormalBg));
                 markColor = preferences.getInt("bgColorHolidayDay", Color.RED);
             }
+
             Paint paint = new Paint();
             paint.setStyle(Paint.Style.STROKE);
             paint.setColor(markColor);
@@ -151,6 +146,7 @@ public class HolidaySquare extends LinearLayout {
             //dayTextView.setTypeface(dayTextView.getTypeface(), Typeface.BOLD);
 
         } else if (this.action == DEL_HOLIDAY) {
+
             if(dmActive){
                 bgColor = preferences.getInt("bgColorNormalDayDark", Color.RED);
             }else {
