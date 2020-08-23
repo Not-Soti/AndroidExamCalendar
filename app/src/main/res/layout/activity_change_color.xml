@@ -73,6 +73,7 @@
             </LinearLayout>
         </TableRow>
 
+        <!--
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -97,11 +98,24 @@
                     android:gravity="center"
                     android:text="Paleta 3" />
             </LinearLayout>
-
         </TableRow>
-
+        -->
     </TableLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout3"
+        android:layout_marginBottom="100dp">
+
+        <Switch
+            android:id="@+id/ColorAct_DarkModeSwitch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Activar modo noche:" />
+
+    </LinearLayout>
     <LinearLayout
         android:id="@+id/linearLayout3"
         android:layout_width="0dp"

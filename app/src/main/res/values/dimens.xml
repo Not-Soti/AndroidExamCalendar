@@ -18,8 +18,10 @@
     <dimen name="dayTextSizeMonthGrid">12sp</dimen>
     -->
 
-    <dimen name="dialogMarginLeft">5dp</dimen>
+    <dimen name="distanceTopInfo">3dp</dimen>
+    <dimen name="distanceInfoGrid">30dp</dimen>
 
+    <dimen name="dialogMarginLeft">5dp</dimen>
     <dimen name="monthGridCornerRound">3dp</dimen>
 
     <!-- Configuration activity -->

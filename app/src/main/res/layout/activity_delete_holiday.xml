@@ -12,6 +12,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/distanceTopInfo"
             android:orientation="vertical">
 
             <TextView
@@ -28,7 +29,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
-                android:layout_marginTop="0dp"
+                android:layout_marginTop="@dimen/distanceTopInfo"
                 android:orientation="horizontal">
 
                 <Button
@@ -72,9 +73,9 @@
             <LinearLayout
                 android:id="@+id/DelHolAct_CalendarLinearLayout"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_below="@+id/MonthAct_InfoLayout"
-                android:layout_marginTop="1dp"
+                android:layout_marginTop="@dimen/distanceInfoGrid"
                 android:orientation="horizontal">
 
                 <LinearLayout
@@ -133,10 +134,15 @@
                         android:id="@+id/DelHolAct_DaysAutoGridView"
                         class="com.example.examcalendar.HelpClasses.AutoGridView"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:numColumns="@integer/columnsOnDayGrid"
                         android:stretchMode="columnWidth" />
                 </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
                 <Button
                     android:id="@+id/DelHolAct_AcceptButton"

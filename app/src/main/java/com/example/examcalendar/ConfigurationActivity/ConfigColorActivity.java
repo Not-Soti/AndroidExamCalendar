@@ -7,7 +7,9 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.ImageButton;
+import android.widget.Switch;
 
 import com.example.examcalendar.HelpClasses.CommonActivityThings;
 import com.example.examcalendar.MainActivity.MainActivity;
@@ -18,8 +20,10 @@ import yuku.ambilwarna.AmbilWarnaDialog;
 
 public class ConfigColorActivity extends Activity {
     private Button configAcceptButton, colorPickerExamButton, colorPickerHolidayButton, colorPickerNormalButton;
-    private ImageButton palette1ImageButton, palette2ImageButton, palette3ImageButton;
-    int prevColorNormal, prevColorExam, prevColorHoliday, prevColorActivity; //used to save colors setted when the activity starts
+    private ImageButton palette1ImageButton, palette2ImageButton;
+    private Switch darkModeSwitch;
+    private int prevColorNormal, prevColorExam, prevColorHoliday, prevColorActivity; //used to save colors setted when the activity starts
+    private final static int PALETTE_NUMBER_1 = 1, PALETTE_NUMBER_2 = 2, PALETTE_DARK = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +39,8 @@ public class ConfigColorActivity extends Activity {
 
         palette1ImageButton = findViewById(R.id.ColorAct_Palette1ImageButton);
         palette2ImageButton = findViewById(R.id.ColorAct_Palette2ImageButton);
-        palette3ImageButton = findViewById(R.id.ColorAct_Palette3ImageButton);
+
+        darkModeSwitch = findViewById(R.id.ColorAct_DarkModeSwitch);
 
 
         //Setting color from preferences
@@ -53,6 +58,9 @@ public class ConfigColorActivity extends Activity {
         colorPickerHolidayButton.setBackgroundColor(colorHolidayBg);
         colorPickerNormalButton.setBackgroundColor(colorNormalBg);
 
+        boolean darkModeActivated = preferences.getBoolean("DarkModeActive", false);
+        darkModeSwitch.setChecked(darkModeActivated);
+
         //Palette chooser buttons
         palette1ImageButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -64,12 +72,6 @@ public class ConfigColorActivity extends Activity {
             @Override
             public void onClick(View view) {
                 setColorFromPalette(2);
-            }
-        });
-        palette3ImageButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                setColorFromPalette(3);
             }
         });
 
@@ -99,6 +101,38 @@ public class ConfigColorActivity extends Activity {
             public void onClick(View view) {
                 Intent i = new Intent(ConfigColorActivity.this, ConfigurationActivityController.class);
                 startActivity(i);
+            }
+        });
+
+        darkModeSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if(b){
+                    SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(ConfigColorActivity.this);
+                    SharedPreferences.Editor editor = preferences.edit();
+                    /*
+                    int normalDark = getResources().getColor(R.color.PDarkNormalBg);
+                    int examDark = getResources().getColor(R.color.PDarkExamBg);
+                    int holidayDark = getResources().getColor(R.color.PDarkHolidayBg);
+                    int bgActivityDark = getResources().getColor(R.color.PDarkActivityBg);
+
+                    editor.putInt("bgColorNormalDayDark", normalDark);
+                    editor.putInt("bgColorExamDayDark", examDark);
+                    editor.putInt("bgColorHolidayDayDark", holidayDark);
+                    editor.putInt("bgColorActivityDark", bgActivityDark);
+
+                     */
+                    editor.putBoolean("DarkModeActive", true);
+                    editor.apply();
+                    CommonActivityThings.paintBackground(ConfigColorActivity.this);
+                }
+                else{
+                    SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(ConfigColorActivity.this);
+                    SharedPreferences.Editor editor = preferences.edit();
+                    editor.putBoolean("DarkModeActive", false);
+                    editor.apply();
+                    CommonActivityThings.paintBackground(ConfigColorActivity.this);
+                }
             }
         });
 
@@ -150,6 +184,7 @@ public class ConfigColorActivity extends Activity {
     private int getColorFromPreferences(int type) {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
         int color = 0;
+
         switch (type) {
             case 10: //Getting the background color for the activity
                 color = preferences.getInt("bgColorActivity", 0xFFFFFF); //white if it doesn't exist
@@ -192,23 +227,17 @@ public class ConfigColorActivity extends Activity {
         int holidayColor = prevColorHoliday;
         int bgActivityColor = prevColorActivity;
         switch (type) {
-            case 1: //palette 1 chosen
+            case PALETTE_NUMBER_1: //palette 1 chosen
                 normalColor = getResources().getColor(R.color.P1NormalBg);
                 examColor = getResources().getColor(R.color.P1ExamBg);
                 holidayColor = getResources().getColor(R.color.P1HolidayBg);
                 bgActivityColor = getResources().getColor(R.color.P1ActivityBg);
                 break;
-            case 2:
+            case PALETTE_NUMBER_2:
                 normalColor = getResources().getColor(R.color.P2NormalBg);
                 examColor = getResources().getColor(R.color.P2ExamBg);
                 holidayColor = getResources().getColor(R.color.P2HolidayBg);
                 bgActivityColor = getResources().getColor(R.color.P2ActivityBg);
-                break;
-            case 3:
-                normalColor = getResources().getColor(R.color.P3NormalBg);
-                examColor = getResources().getColor(R.color.P3ExamBg);
-                holidayColor = getResources().getColor(R.color.P3HolidayBg);
-                bgActivityColor = getResources().getColor(R.color.P3ActivityBg);
                 break;
         }
         editor.putInt("bgColorNormalDay", normalColor);

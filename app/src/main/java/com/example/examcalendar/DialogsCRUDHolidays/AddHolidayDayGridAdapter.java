@@ -49,13 +49,12 @@ public class AddHolidayDayGridAdapter extends BaseAdapter {
         HolidaySquare ds = (HolidaySquare) getItem(i);
         view = ds;
 
+        /*Used on previous versions
         //Disable if the day is 0, which means it has not to be represented
         String day = ds.getDayTextView().getText().toString();
         if (day.isEmpty()){
             view.setVisibility(View.INVISIBLE);
-            //ds.setEnabled(false);
-            //ds.setBackgroundResource(0);
-        }
+        }*/
 
         return view;
     }

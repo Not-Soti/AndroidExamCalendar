@@ -22,9 +22,7 @@ import androidx.core.graphics.ColorUtils;
 import com.example.examcalendar.DialogsCRUDExams.DialogAddExam;
 import com.example.examcalendar.DialogsCRUDHolidays.ActivityAddHoliday;
 import com.example.examcalendar.DialogsCRUDHolidays.ActivityDelHoliday;
-import com.example.examcalendar.DialogsCRUDHolidays.DialogAddHolidays;
 import com.example.examcalendar.DialogsCRUDExams.DialogDeleteExam;
-import com.example.examcalendar.DialogsCRUDHolidays.DialogDeleteHolidays;
 import com.example.examcalendar.DialogsCRUDExams.DialogEditExam;
 import com.example.examcalendar.R;
 
@@ -137,12 +135,26 @@ public class MonthDaySquare extends LinearLayout {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
         int bgColor = 0xFFFFFF;
 
+        boolean dmActive = preferences.getBoolean("DarkModeActive", false); //checks if dark mode is active
+
         if(type == MonthDaySquare.EXAM) {
-            bgColor = preferences.getInt("bgColorExamDay", getResources().getColor(R.color.ExamBg));
+            if(dmActive){
+                bgColor = preferences.getInt("bgColorExamDayDark", getResources().getColor(R.color.ExamBg));
+            }else {
+                bgColor = preferences.getInt("bgColorExamDay", getResources().getColor(R.color.ExamBg));
+            }
         }else if(type == MonthDaySquare.HOLIDAY){
-            bgColor = preferences.getInt("bgColorHolidayDay", getResources().getColor(R.color.HolidayBg));
+            if(dmActive){
+                bgColor = preferences.getInt("bgColorHolidayDayDark", getResources().getColor(R.color.HolidayBg));
+            }else {
+                bgColor = preferences.getInt("bgColorHolidayDay", getResources().getColor(R.color.HolidayBg));
+            }
         }else if(type == MonthDaySquare.NORMAL){
-            bgColor = preferences.getInt("bgColorNormalDay", getResources().getColor(R.color.NormalBg));
+            if(dmActive){
+                bgColor = preferences.getInt("bgColorNormalDayDark", getResources().getColor(R.color.NormalBg));
+            }else {
+                bgColor = preferences.getInt("bgColorNormalDay", getResources().getColor(R.color.NormalBg));
+            }
         }
 
         //Make today color more intense

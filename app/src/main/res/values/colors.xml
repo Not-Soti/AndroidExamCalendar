@@ -30,9 +30,9 @@
     <color name="P2HolidayBg">#afcfff</color>
     <color name="P2ActivityBg">#FFFFFF</color>
 
-    <!-- Platette 3 -->
-    <color name="P3NormalBg">#162447</color>
-    <color name="P3ExamBg">#1f4068</color>
-    <color name="P3HolidayBg">#543864</color>
-    <color name="P3ActivityBg">#0f1124</color>
+    <!-- Palette Dark -->
+    <color name="PDarkNormalBg">#162447</color>
+    <color name="PDarkExamBg">#1f4068</color>
+    <color name="PDarkHolidayBg">#543864</color>
+    <color name="PDarkActivityBg">#0f1124</color>
 </resources>
