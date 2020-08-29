@@ -18,9 +18,12 @@
         </activity>
 
         <activity android:name=".MonthActivity.MonthActivityController"/>
-        <activity android:name=".DialogsCRUDExams.DialogAddExam"/>
-        <activity android:name=".DialogsCRUDExams.DialogEditExam"/>
-        <activity android:name=".DialogsCRUDExams.DialogDeleteExam"/>
+        <activity android:name=".DialogsCRUDExams.DialogAddExam"
+            android:theme="@android:style/Theme.Holo.Dialog" /> <!-- Make activity appear like it's a dialog -->
+        <activity android:name=".DialogsCRUDExams.DialogEditExam"
+            android:theme="@android:style/Theme.Holo.Dialog" />
+        <activity android:name=".DialogsCRUDExams.DialogDeleteExam"
+            android:theme="@android:style/Theme.Holo.Dialog" />
         <activity android:name=".ConfigurationActivity.ConfigurationActivityController"/>
         <activity android:name=".ConfigurationActivity.ConfigColorActivity"/>
         <activity android:name=".DialogsCRUDHolidays.ActivityAddHoliday"/>

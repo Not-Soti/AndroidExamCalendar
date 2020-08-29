@@ -9,6 +9,8 @@ import android.util.Log;
 import com.example.examcalendar.DataBase.DBHelper;
 import com.example.examcalendar.DataBase.DBStructure;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 
@@ -141,5 +143,20 @@ public class DialogExamModel {
                 selectionArgs);
     }
 
-
+    /**
+     * Method used to get a formatted date following the pattern passed as parameter
+     */
+    public String getFormattedDate(String dayAux, String monthAux, String yearAux, String pattern){
+        //String date on yyyy-MM-dd format
+        String examDateAux = new String(yearAux+"-"+monthAux+"-"+dayAux);
+        SimpleDateFormat oldFormat = new SimpleDateFormat("yyyy-M-d");
+        SimpleDateFormat newFormat = new SimpleDateFormat(pattern);
+        String examDate = null;
+        try{
+            examDate = newFormat.format(oldFormat.parse(examDateAux));
+        } catch (ParseException e){
+            e.printStackTrace();
+        }
+        return examDate;
+    }
 }

@@ -2,31 +2,31 @@ package com.example.examcalendar.DialogsCRUDExams;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextUtils;
-import android.text.TextWatcher;
+import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 
+import com.example.examcalendar.DialogsCRUDHolidays.ActivityAddHoliday;
 import com.example.examcalendar.HelpClasses.CommonActivityThings;
 import com.example.examcalendar.MonthActivity.MonthActivityController;
 import com.example.examcalendar.R;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.List;
 
 public class DialogDeleteExam extends Activity {
     private Button accept;
-    private EditText dayEditText,monthEditText,yearEditText,nameEditText;
+    //private EditText dayEditText,monthEditText,yearEditText,nameEditText;
     private ListView examListView;
     private static String examToDelete; //used to get the exam selected from the ListView
+    private TextView dateTextView;
+    private String day, month, year;
 
     DialogExamModel model;
 
@@ -40,21 +40,23 @@ public class DialogDeleteExam extends Activity {
         Bundle bundle = getIntent().getExtras(); //Get info from previous Activity
 
         accept = findViewById(R.id.buttonAcceptDeleteExam);
-        dayEditText = findViewById(R.id.textDeleteExamDay);
-        monthEditText =  findViewById(R.id.textDeleteExamMonth);
-        yearEditText = findViewById(R.id.textDeleteExamYear);
+        //dayEditText = findViewById(R.id.textDeleteExamDay);
+        //monthEditText =  findViewById(R.id.textDeleteExamMonth);
+       // yearEditText = findViewById(R.id.textDeleteExamYear);
         //nameEditText = (EditText) findViewById(R.id.textDeleteExamName);
+        dateTextView = findViewById(R.id.DelExamDia_DateTextView);
         examListView = findViewById(R.id.listDeleteExamNames);
+
+        this.setTitle("Eliminar examen");
+
+        day = bundle.getString("day");
+        month = bundle.getString("month");
+        year = bundle.getString("year");
 
         //Paint bg Color
         CommonActivityThings.paintBackground(this);
 
-        String dayAux = bundle.getString("day");
-        if(dayAux!=null){
-            dayEditText.setText(dayAux);
-        }
-        monthEditText.setText(bundle.getString("month"));
-        yearEditText.setText(bundle.getString("year"));
+        dateTextView.setText(model.getFormattedDate(day,month,year, "dd-MM-yyyy"));
         this.setExamNamesOnList();
 
         examListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -82,6 +84,7 @@ public class DialogDeleteExam extends Activity {
             }
         });
 
+        /*
         //Change the date related fields listeners to search exams and
         //set them on the ListView whenever the date is changed
         EditText[] views = {dayEditText, monthEditText, yearEditText};
@@ -98,52 +101,31 @@ public class DialogDeleteExam extends Activity {
                     setExamNamesOnList();
                 }
             });
-        }
+        }*/
     }
 
     private void setExamNamesOnList(){
         //Getting existing exams
-        List<String> exams = model.getExistingExams(getAndFormatDate());
+        List<String> exams = model.getExistingExams(model.getFormattedDate(day,month,year,"yyyy-MM-dd"));
+
+        //get if darkMode is active
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        boolean dmActive = preferences.getBoolean("DarkModeActive", false);
+
+        ArrayAdapter<String> adapter;
         //Adding them to the ListView
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, exams);
+        if(dmActive){
+            adapter = new ArrayAdapter<>(this, R.layout.listitemlayout_darkmode, exams);
+        }else {
+            adapter = new ArrayAdapter<>(this, R.layout.listitemlayout_lightmode, exams);
+        }
         examListView.setAdapter(adapter);
     }
 
-    /**
-     * Method used to compound the date from the view fields in a yyyy-MM-dd format
-     * @return
-     */
-    private String getAndFormatDate(){
-        String date = new String();
-
-        //Get the values
-        String day = dayEditText.getText().toString();
-        int monthAux = Integer.parseInt(monthEditText.getText().toString());
-        String month = String.valueOf(monthAux);
-        String year = yearEditText.getText().toString();
-
-        //String date onf yyyy-MM-dd format
-        String examDateAux = new String(year+"-"+month+"-"+day);
-        SimpleDateFormat oldFormat = new SimpleDateFormat("yyyy-M-d");
-        SimpleDateFormat newFormat = new SimpleDateFormat("yyyy-MM-dd");
-        try{
-            date = newFormat.format(oldFormat.parse(examDateAux));
-        } catch (ParseException e){
-            e.printStackTrace();
-        }
-
-        return date;
-    }
-
     protected void deleteExam(){
-        //Get the values
-        String day = dayEditText.getText().toString();
-        int monthAux = Integer.parseInt(monthEditText.getText().toString());
-        String month = String.valueOf(monthAux);
-        String year = yearEditText.getText().toString();
-        //String name = nameEditText.getText().toString();
         String name = examToDelete;
 
+        /*
         //Checking for empty fields
         if(TextUtils.isEmpty(day)){
             dayEditText.setError("Introduce un día"); return;
@@ -154,15 +136,14 @@ public class DialogDeleteExam extends Activity {
         if(TextUtils.isEmpty(year)){
             yearEditText.setError("Introduce un año"); return;
         }
-        /*
-        if(TextUtils.isEmpty(name)){
-            nameEditText.setError("Introduce un nombre"); return;
-        }
         */
-        String examDate = getAndFormatDate();
+        String examDate = model.getFormattedDate(day,month,year,"yyyy-MM-dd");
         model.deleteExam(name, examDate);
 
         //Volver a la actividad anterior
-        startActivity(new Intent(this, MonthActivityController.class));
+        Intent i = new Intent(this, MonthActivityController.class);
+        i.putExtra("month", month);
+        i.putExtra("year", year);
+        startActivity(i);
     }
 }

@@ -14,7 +14,8 @@
     <string name="MonthAct_Next">Siguiente</string>
 
     <!-- Exam and holiday CRUD dialogs -->
-    <string name="DialogsCRUD_Name">Nombre</string>
+    <string name="DialogsCRUD_Date">Fecha:</string>
+    <string name="DialogsCRUD_Name">Nombre:</string>
     <string name="DialogsCRUD_Day">Día</string>
     <string name="DialogsCRUD_Month">Mes</string>
     <string name="DialogsCRUD_Year">Año</string>

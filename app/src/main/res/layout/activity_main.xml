@@ -21,9 +21,6 @@
             android:onClick="startMonthActivity"
             android:text="@string/MainAct_Calendar" />
 
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/spaceBetweenMain" />
 <!--
         <Button
             android:id="@+id/bWeek"

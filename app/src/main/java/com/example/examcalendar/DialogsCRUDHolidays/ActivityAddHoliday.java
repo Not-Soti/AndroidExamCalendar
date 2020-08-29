@@ -322,7 +322,6 @@ public class ActivityAddHoliday extends Activity implements MonthGridOperations 
         i.putExtra("month", startHolidayMonth);
         i.putExtra("year", startHolidayYear);
         startActivity(i);
-        startActivity(i);
     }
 
 

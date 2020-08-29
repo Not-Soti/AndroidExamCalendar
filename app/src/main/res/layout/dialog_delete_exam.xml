@@ -4,10 +4,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_gravity="center"
-    android:layout_marginTop="5dp"
-    android:layout_marginBottom="5dp"
-    android:layout_marginLeft="55dp"
-    android:layout_marginRight="55dp"
+    android:paddingStart="55dp"
+    android:paddingEnd="55dp"
+    android:paddingTop="20dp"
+    android:paddingBottom="20dp"
     android:orientation="horizontal"
     android:gravity="center">
 
@@ -17,43 +17,20 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/textView8"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/DialogsCRUD_Day" />
-
-        <EditText
-            android:id="@+id/textDeleteExamDay"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="number" />
-
-        <TextView
-            android:id="@+id/textView9"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/DialogsCRUD_Month" />
-
-        <EditText
-            android:id="@+id/textDeleteExamMonth"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="number" />
-
-        <TextView
             android:id="@+id/textView10"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/DialogsCRUD_Year" />
+            android:text="@string/DialogsCRUD_Date" />
 
-        <EditText
-            android:id="@+id/textDeleteExamYear"
+        <TextView
+            android:id="@+id/DelExamDia_DateTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="number" />
+            android:text="TextView"
+            android:textColor="@color/black"/>
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="20dp" />
 
         <TextView
             android:id="@+id/textView11"
@@ -65,6 +42,10 @@
             android:id="@+id/listDeleteExamNames"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="30dp" />
 
         <Button
             android:id="@+id/buttonAcceptDeleteExam"

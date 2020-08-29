@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CompoundButton;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.examcalendar.R;
@@ -52,17 +53,16 @@ public class CommonActivityThings {
             int childs = ((ViewGroup) parent).getChildCount();
             for (int i = 0; i < childs; i++) {
                 paintTextViews(((ViewGroup) parent).getChildAt(i), dmActive, act);
+
             }
         }
 
         //Change color of textViews
         if (parent instanceof TextView) {
-
-            //Change color of button background since button extends textView
-            //Only on basic buttons
             if ((parent instanceof Button) && !(parent instanceof CompoundButton)) {
+                //Change color of button background since button extends textView
+                //Only on basic buttons, excluding the switch for example
                 if (dmActive) {
-                    //((Button) parent).setBackgroundColor(act.getResources().getColor(R.color.PDarkButtonBg));
                     ((Button) parent).getBackground().setColorFilter(act.getResources().getColor(R.color.PDarkButtonBg), PorterDuff.Mode.MULTIPLY);
                 }
             } else { //it's a text view
@@ -74,6 +74,10 @@ public class CommonActivityThings {
             }
         }
 
+        /**
+         * List of deleting and editing exams are recolored in the DialogDeleteExam and
+         * DialogEditExam respectively
+         */
     }
 }
 
