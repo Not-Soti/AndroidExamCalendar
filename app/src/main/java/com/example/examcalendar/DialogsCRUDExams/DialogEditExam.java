@@ -157,8 +157,8 @@ public class DialogEditExam extends Activity {
 
         //Go back to MonthActivity
         Intent i = new Intent(this, MonthActivityController.class);
-        i.putExtra("month", month);
-        i.putExtra("year", year);
+        i.putExtra("month", newMonth);
+        i.putExtra("year", newYear);
         startActivity(i);
     }
 }

@@ -2,78 +2,28 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:gravity="center"
     android:orientation="vertical">
 
 
+    <Switch
+        android:id="@+id/ConfigAct_MonthGridColumnSwitch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="¿Representar fines de semana? (Experimental)" />
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="20dp" />
 
     <Button
         android:id="@+id/ConfigAct_ChoosheColorButton"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/ConfigAct_Change_colors_button"/>
-    <!--
-    <RelativeLayout
-        android:id="@+id/ConfigAct_FontSizeLinearLayout"
+        android:text="@string/ConfigAct_Change_colors_button" />
+
+    <Space
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <TextView
-            android:id="@+id/textView15"
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/ConfigurationActivity_FontSizeComponentsHeight"
-            android:layout_alignParentStart="true"
-            android:layout_marginStart="5dp"
-            android:gravity="center"
-            android:text="Tamaño de la letra:" />
-
-        <TextView
-            android:id="@+id/ConfigAct_FontSizeNumberTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/ConfigurationActivity_FontSizeComponentsHeight"
-            android:layout_marginStart="5dp"
-            android:layout_toEndOf="@+id/textView15"
-            android:gravity="center"
-            android:text="20"
-            />
-
-        <LinearLayout
-            android:id="@+id/ConfigAct_FontSizeButtonsLinearLayout"
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/ConfigurationActivity_FontSizeComponentsHeight"
-            android:layout_marginStart="2dp"
-            android:layout_toEndOf="@+id/ConfigAct_FontSizeNumberTextView"
-            android:orientation="vertical">
-
-            <Button
-                android:id="@+id/ConfigAct_BiggerFontButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="+" />
-
-            <Button
-                android:id="@+id/ConfigAct_SmallerFontButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="-" />
-
-        </LinearLayout>
-
-        <TextView
-            android:id="@+id/ConfigAct_FontSizeExampleTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/ConfigurationActivity_FontSizeComponentsHeight"
-            android:layout_alignParentEnd="true"
-            android:layout_marginStart="5dp"
-            android:layout_marginEnd="50dp"
-            android:layout_toEndOf="@+id/ConfigAct_FontSizeButtonsLinearLayout"
-            android:background="@color/ExamBg"
-            android:gravity="center"
-            android:text="Ejemplo: HOLA"
-            android:textColor="#000000"/>
-    </RelativeLayout>
-    -->
+        android:layout_height="50dp" />
     <Button
         android:id="@+id/ConfigAct_ConfigAcceptButton"
         android:layout_width="match_parent"

@@ -84,7 +84,7 @@
                     android:orientation="vertical">
 
                     <LinearLayout
-                        android:id="@+id/DelHolAct_DayNamesGridLayout"
+                        android:id="@+id/DelHolAct_DayNamesLinearLayout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
 

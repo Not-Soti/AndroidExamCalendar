@@ -2,11 +2,16 @@ package com.example.examcalendar.DialogsCRUDHolidays;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -14,12 +19,10 @@ import com.example.examcalendar.HelpClasses.AutoGridView;
 import com.example.examcalendar.HelpClasses.CommonActivityThings;
 import com.example.examcalendar.HelpClasses.MonthGridOperations;
 import com.example.examcalendar.MonthActivity.MonthActivityController;
-import com.example.examcalendar.MonthActivity.MonthDaySquare;
 import com.example.examcalendar.R;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.Month;
 import java.util.ArrayList;
 
 public class ActivityDelHoliday extends Activity implements MonthGridOperations {
@@ -32,6 +35,9 @@ public class ActivityDelHoliday extends Activity implements MonthGridOperations 
     private AddHolidayDayGridAdapter dayGridAdapter;
     private TextView monthTextView, yearTextView;
     private Button acceptButton;
+
+    private static int nColumns;
+    private LinearLayout dayNamesLinearLayout;
 
     private static final String[] MONTH_NAMES = {"Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
             "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"};
@@ -59,6 +65,7 @@ public class ActivityDelHoliday extends Activity implements MonthGridOperations 
         monthTextView = findViewById(R.id.DelHolAct_MonthTextView);
         yearTextView = findViewById(R.id.DelHolAct_YearTextView);
         acceptButton = findViewById(R.id.DelHolAct_AcceptButton);
+        dayNamesLinearLayout = findViewById(R.id.DelHolAct_DayNamesLinearLayout);
 
         //Getting month and year to print
         try {
@@ -82,6 +89,29 @@ public class ActivityDelHoliday extends Activity implements MonthGridOperations 
             startDate = newFormat.format(oldFormat.parse(dateAux));
         } catch (ParseException e) {
             e.printStackTrace();
+        }
+
+        //Getting the number of columns to display
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        nColumns = preferences.getInt("nColumsMonthGrid", getResources().getInteger(R.integer.columnsOnDayGrid));
+        dayGridView.setNumColumns(nColumns);
+
+        //Adding Sat and Sun TextViews to the activity
+        if(nColumns==7){
+            LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
+                    ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, 1);
+
+            TextView textViewSaturday = new TextView(this);
+            textViewSaturday.setGravity(Gravity.CENTER);
+            textViewSaturday.setLayoutParams(lp);
+            textViewSaturday.setText("S");
+            dayNamesLinearLayout.addView(textViewSaturday);
+
+            TextView textViewSunday = new TextView(this);
+            textViewSunday.setGravity(Gravity.CENTER);
+            textViewSunday.setLayoutParams(lp);
+            textViewSunday.setText("D");
+            dayNamesLinearLayout.addView(textViewSunday);
         }
 
         //Paint the bgColor
@@ -160,7 +190,6 @@ public class ActivityDelHoliday extends Activity implements MonthGridOperations 
 
         monthTextView.setText(MONTH_NAMES[printedMonth]);
         yearTextView.setText(String.valueOf(printedYear));
-        int nColumns = this.getResources().getInteger(R.integer.MonthCols); //Colums to draw
 
         //Number of days and weeks in current month
         int dayOfStart = model.getDayOfWeek(printedYear, printedMonth); //The 1st day of the month is monday, tuesday...
@@ -179,7 +208,7 @@ public class ActivityDelHoliday extends Activity implements MonthGridOperations 
         int daysPreviousMonth = model.getDays(printedYear, printedMonth - 1);
         int dayToDrawPreviousMonth = daysPreviousMonth - (dayOfStart - 2); //number of the monday from te previous month
 
-        while ((posGrid < dayOfStart - 1) && (posGrid < 5)) {
+        while ((posGrid < dayOfStart - 1) && (posGrid < nColumns)) {
             int auxMonth = printedMonth; //remember months goes from 0 to 11 but on model they are 1 to 12
             String currentDateAux = printedYear + "-" + auxMonth + "-" + dayToDrawPreviousMonth;
             SimpleDateFormat oldFormat = new SimpleDateFormat("yyyy-M-d");
@@ -221,22 +250,22 @@ public class ActivityDelHoliday extends Activity implements MonthGridOperations 
 
         //Drawing days from current month
         int dayToDrawCurrentMonth = 1;
-        //while(posGrid < numberOfDaysCurrentMonth){
         while (dayToDrawCurrentMonth <= numberOfDaysCurrentMonth) {
 
             //if it's monday and its not the 1st day, add days not represented (5 here since I dont
             //want weekends now)
-            if ((dayToDrawCurrentMonth == 1) && (dayOfStart == 6)) {
-                dayToDrawCurrentMonth += 2;
-            } else if ((dayToDrawCurrentMonth == 1) && (dayOfStart == 7)) {
-                dayToDrawCurrentMonth += 1;
-            } else if ((posGrid % 5 == 0) && (posGrid >= 5)) {
-                dayToDrawCurrentMonth += (7 - nColumns); //Todo noviembre no funciona
+            if(nColumns ==5) {
+                if ((dayToDrawCurrentMonth == 1) && (dayOfStart == 6)) {
+                    dayToDrawCurrentMonth += 2;
+                } else if ((dayToDrawCurrentMonth == 1) && (dayOfStart == 7)) {
+                    dayToDrawCurrentMonth += 1;
+                } else if ((posGrid % nColumns == 0) && (posGrid >= nColumns)) {
+                    dayToDrawCurrentMonth += (7 - nColumns);
+                }
             }
 
             //Break if its going to paint a day ou tof range
             if (dayToDrawCurrentMonth > numberOfDaysCurrentMonth) break;
-            //TODO mejorar esto
 
             int auxMonth = printedMonth + 1;
             String currentDateAux = printedYear + "-" + auxMonth + "-" + dayToDrawCurrentMonth;
