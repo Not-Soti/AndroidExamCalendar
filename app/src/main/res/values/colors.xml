@@ -9,7 +9,7 @@
 
     <color name="WeekSquare">#FFB2A2</color>
 
-    <color name="NormalBg">#FFFFFF</color>
+    <color name="NormalBg">#F6F6F6</color>
     <color name="HolidayBg">#9600FA</color>
     <color name="ExamBg">#7CFF89</color>
     <color name="NormalTx">#000000</color>
